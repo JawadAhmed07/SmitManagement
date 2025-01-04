@@ -1,13 +1,13 @@
 'use client'
-import React, { useEffect, useState } from "react";
 import { auth } from "@/auth/utils/authutils";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
-import { Separator } from "@/components/ui/separator";
+// import { Separator } from "@/components/ui/separator";
 import { Badge } from "@/components/ui/badge";
 import { GraduationCap, Calendar, Edit, Save } from 'lucide-react';
+import { useEffect, useState } from "react";
 
 
 const courses = [

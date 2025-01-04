@@ -7,7 +7,7 @@ const Home = () => {
 
         <div className="text-center lg:w-2/3 w-full">
           <h1 className="title-font sm:text-4xl font-mono text-3xl mb-4 font-extrabold text-gray-900">
-            Saylani Management System
+            Saylani Management System Helloe World
           </h1>
           <p className="mb-8 leading-relaxed">
             Meggings kinfolk echo park stumptown DIY, kale chips beard jianbing
@@ -17,9 +17,9 @@ const Home = () => {
             fingerstache pitchfork.
           </p>
           <div className="flex justify-center">
-            <a href="login">
+            <a href="/login">
               <Button className="inline-flex  border-0 py-5 px-8 focus:outline-none rounded text-lg">
-                Start Now
+                Explore Courses
               </Button>
 
             </a>
@@ -27,6 +27,7 @@ const Home = () => {
           </div>
         </div>
       </div>
+      {/* <Hero /> */}
     </section>
 
   );

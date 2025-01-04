@@ -1,6 +1,5 @@
-
-// eslint-disable-next-line react/prop-types
-const Sidebar = ({ setActiveTab }) => {
+/* eslint-disable react/prop-types */
+function Sidebar({ setActiveTab }) {
   return (
     <div className="fixed top-0 left-0 h-full w-64 bg-white shadow-md p-4">
       <h2 className="text-xl font-semibold mb-6">Admin Panel</h2>
@@ -26,6 +25,6 @@ const Sidebar = ({ setActiveTab }) => {
       </nav>
     </div>
   );
-};
+}
 
 export default Sidebar;

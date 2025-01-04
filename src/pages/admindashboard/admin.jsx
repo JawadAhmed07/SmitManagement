@@ -9,6 +9,7 @@ const AdminDashboard = () => {
   const [activeTab, setActiveTab] = useState("teachers");
   const [isModalOpen, setIsModalOpen] = useState(false);
 
+
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
 
@@ -16,6 +17,7 @@ const AdminDashboard = () => {
     <div className="flex">
       {/* Fixed Sidebar */}
       <Sidebar setActiveTab={setActiveTab} />
+
 
       {/* Main Content */}
       <div className="flex-1 bg-gray-100 p-6 ml-64">

@@ -1,3 +1,4 @@
+import React from 'react'
 import { Button } from "@/components/ui/button"
 import {
     Card,
@@ -19,7 +20,7 @@ import {
 
 function Login() {
     return (
-        <div className=''>
+        <div className='flex my-40 p-3 justify-around'>
             <Tabs defaultValue="account" className="w-[400px]">
                 <TabsList className="grid w-full grid-cols-2">
                     <TabsTrigger value="account">Login</TabsTrigger>

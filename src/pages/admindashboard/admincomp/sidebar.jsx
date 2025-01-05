@@ -1,8 +1,10 @@
+import { CardTitle } from "@/components/ui/card";
+
 /* eslint-disable react/prop-types */
 function Sidebar({ setActiveTab }) {
   return (
-    <div className="fixed top-0 left-0 h-full w-64 bg-green-300 shadow-md p-4">
-      <h2 className="text-xl font-semibold mb-6">Admin Panel</h2>
+    <div className="fixed top-0 left-0 h-full w-64 bg-gray-300 shadow-md p-4">
+      <CardTitle className="text-xl font-semibold mb-6">Admin Panel</CardTitle>
       <nav className="space-y-4">
         <button
           className="w-full text-left px-4 py-2 text-gray-700 hover:bg-gray-200 rounded"

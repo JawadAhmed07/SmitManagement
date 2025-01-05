@@ -20,10 +20,9 @@ import {
 
 function Login() {
     return (
-        <div className='login'>
-            <a href="/select"> Select Role</a>
+        <div className=''>
             <Tabs defaultValue="account" className="w-[400px]">
-                <TabsList className="grid w-full  grid-cols-2">
+                <TabsList className="grid w-full grid-cols-2">
                     <TabsTrigger value="account">Login</TabsTrigger>
                     <TabsTrigger value="password">Signup</TabsTrigger>
                 </TabsList>

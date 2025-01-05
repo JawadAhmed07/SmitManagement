@@ -3,6 +3,7 @@ const TeacherCards = () => {
   const teachers = [
     { name: "John Doe", email: "john.doe@example.com" },
     { name: "Jane Smith", email: "jane.smith@example.com" },
+    { name: "Jawad Ahmed", email: "Jawadahmed@example.com" },
   ];
 
   return (

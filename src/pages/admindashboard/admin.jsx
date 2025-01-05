@@ -14,7 +14,7 @@ const AdminDashboard = () => {
   const closeModal = () => setIsModalOpen(false);
 
   return (
-    <div className="flex">
+    <div className="flex bg-blue-400">
       {/* Fixed Sidebar */}
       <Sidebar setActiveTab={setActiveTab} />
 

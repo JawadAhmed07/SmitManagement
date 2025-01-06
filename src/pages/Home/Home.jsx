@@ -19,7 +19,13 @@ const Home = () => {
           <div className="flex justify-center">
             <a href="/login">
               <Button className="inline-flex  border-0 py-5 px-8 focus:outline-none rounded text-lg">
-                Explore Courses
+               Login
+              </Button>
+
+            </a>
+            <a href="/Admindashboard">
+              <Button className="inline-flex mx-3  border-0 py-5 px-8 focus:outline-none rounded text-lg">
+                Admin Dashboard
               </Button>
 
             </a>

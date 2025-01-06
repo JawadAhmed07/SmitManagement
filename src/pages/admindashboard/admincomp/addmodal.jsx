@@ -1,4 +1,5 @@
 /* eslint-disable react/prop-types */
+import { AddCourseForm } from "@/components/AddCourseCard";
 import { Dialog, DialogContent, DialogHeader, DialogFooter, DialogTitle } from "@/components/ui/dialog";
 
 const AddModal = ({ activeTab, closeModal }) => {
@@ -40,21 +41,13 @@ const AddModal = ({ activeTab, closeModal }) => {
                         </>
                     )}
                     {activeTab === "courses" && (
-                        <>
-                            <input
-                                type="text"
-                                placeholder="Course Title"
-                                className="w-full px-4 py-2 border rounded"
-                            />
-                            <textarea
-                                placeholder="Course Description"
-                                className="w-full px-4 py-2 border rounded"
-                            />
-                        </>
+                        
+                          <AddCourseForm/>
+                       
                     )}
                 </div>
 
-                <DialogFooter>
+                {/* <DialogFooter>
                     <button
                         onClick={closeModal}
                         className="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600"
@@ -64,7 +57,7 @@ const AddModal = ({ activeTab, closeModal }) => {
                     <button className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
                         Add
                     </button>
-                </DialogFooter>
+                </DialogFooter> */}
             </DialogContent>
         </Dialog>
     );

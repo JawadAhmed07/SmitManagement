@@ -1,9 +1,9 @@
 import Sidebar from "./admincomp/Sidebar";
 import TeacherCards from "./admincomp/TeacherCards";
 import StudentCards from "./admincomp/StudentCards";
-import CourseCards from "./admincomp/CourseCards";
 import AddModal from "./admincomp/addmodal";
 import { useState } from "react";
+import CoursePage from "./admincomp/coursepage";
 
 const AdminDashboard = () => {
   const [activeTab, setActiveTab] = useState("teachers");
@@ -33,7 +33,7 @@ const AdminDashboard = () => {
         </div>
         {activeTab === "teachers" && <TeacherCards />}
         {activeTab === "students" && <StudentCards />}
-        {activeTab === "courses" && <CourseCards />}
+        {activeTab === "courses" && <CoursePage />}
       </div>
 
       {/* Modal */}

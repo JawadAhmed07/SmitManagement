@@ -16,7 +16,7 @@ function Sidebar() {
         <div className={`bg-gray-800 text-white h-screen ${isOpen ? 'w-64' : 'w-20'} transition-all duration-300 ease-in-out`}>
             <div className="flex justify-between items-center p-4">
                 {isOpen && <h1 className="text-2xl font-bold">Admin</h1>}
-                <button onClick={() => setIsOpen(!isOpen)} className="p-2">
+                <button onClick={() => setIsOpen(!isOpen)} className="p-2 bg-black">
                     {isOpen ? <X size={24} /> : <Menu size={24} />}
                 </button>
             </div>

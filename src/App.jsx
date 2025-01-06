@@ -1,23 +1,33 @@
-// import reactLogo from './assets/react.svg'
-// import viteLogo from '/vite.svg'
+import { BrowserRouter, Routes, Route, Navigate } from "react-router"; // Use only BrowserRouter
 import "./App.css";
-import { Routes, Route } from "react-router";
+
+// Pages
 import Home from "./pages/Home/Home";
 import Login from "./pages/login_signup/login";
 import RoleCards from "./pages/select/select";
-import Admindashboard from "./pages/admindashboard/admin";
+import DashboardLayout from "./layouts/dashboardlayout";
+import TeacherPage from "./pagess/teacherpage";
+import CoursePage from "./pagess/course";
+import TrainerPage from "./pagess/trainerpage";
 
 function App() {
   return (
-    <>
-          {/* <Header /> */}
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/select" element={<RoleCards />} />
-            <Route path="/Admindashboard" element={<Admindashboard />} />
-          </Routes>
-    </>
+    <BrowserRouter>
+      <Routes>
+        {/* Main Routes */}
+        <Route path="/" element={<Home />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/select" element={<RoleCards />} />
+
+        {/* Admin Dashboard */}
+        <Route path="/admin" element={<DashboardLayout />}>
+          <Route index element={<Navigate to="/admin/teachers" replace />} />
+          <Route path="teachers" element={<TeacherPage />} />
+          <Route path="courses" element={<CoursePage />} />
+          <Route path="trainers" element={<TrainerPage />} />
+        </Route>
+      </Routes>
+    </BrowserRouter>
   );
 }
 

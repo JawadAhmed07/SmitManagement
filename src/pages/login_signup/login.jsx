@@ -16,9 +16,10 @@ import Cookies from "js-cookie";
 import axios from "axios";
 import { AppRoutes } from "../../Constant/constant";
 import { AuthContext } from "../../context/Auth.context";
-
+import { useNavigate } from "react-router";
 export default function Login() {
   const [isLoading, setLoading] = useState(false);
+  const navigate = useNavigate();
   const { setUser } = useContext(AuthContext);
 
   const handleLogin = (e) => {
@@ -35,27 +36,31 @@ export default function Login() {
         Cookies.set("token", res?.data?.data?.token);
         setUser(res?.data?.data?.user);
         console.log(res.data);
+        // Navigate to dashboard if login is successful
+        navigate("/admin");
       })
       .catch((err) => {
         setLoading(false);
         console.log(err);
       });
-  };
-
-  //for signup
-  const handleSignup = (e) => {
-    e.preventDefault();
-    setLoading(true);
-    const obj = {
-      fullName: e.target[0].value,
-      email: e.target[1].value,
-      password: e.target[2].value,
     };
-    axios
+    
+    //for signup
+    const handleSignup = (e) => {
+      e.preventDefault();
+      setLoading(true);
+      const obj = {
+        fullName: e.target[0].value,
+        email: e.target[1].value,
+        password: e.target[2].value,
+      };
+      axios
       .post(AppRoutes.register, obj)
       .then((res) => {
         setLoading(false);
         console.log("Signup successful:", res.data);
+        // Navigate to dashboard if login is successful
+        navigate("/login");
       })
       .catch((err) => {
         setLoading(false);
@@ -63,6 +68,7 @@ export default function Login() {
       });
   };
 
+ 
   return (
     <div className="login">
       <a href="/select"> Select Role</a>

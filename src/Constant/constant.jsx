@@ -6,7 +6,7 @@ export const BASE_URL = devUrl;
 export const AppRoutes = {
   login: BASE_URL + "api/v1/user/login",
   register: BASE_URL + "api/v1/user/register",
-  getMyInfo: BASE_URL + "api/v1/user/",
+  getMyInfo: BASE_URL + "api/v1/user/profile",
   //   getCourses: BASE_URL + "course",
   //   getStudents: BASE_URL + "students",
   //   addCourse: BASE_URL + "course",

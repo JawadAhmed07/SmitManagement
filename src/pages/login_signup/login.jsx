@@ -64,8 +64,8 @@ export default function Login() {
   };
 
   return (
-    <div className="login">
-      <a href="/select"> Select Role</a>
+    <div className="login flex justify-center my-24 p-2">
+      {/* <a href="/select"> Select Role</a> */}
       <Tabs defaultValue="account" className="w-[400px]">
         <TabsList className="grid w-full  grid-cols-2">
           <TabsTrigger value="account">Login</TabsTrigger>

@@ -8,7 +8,7 @@ import RoleCards from "./pages/select/select";
 import DashboardLayout from "./layouts/dashboardlayout";
 import TeacherPage from "./pagess/teacherpage";
 import CoursePage from "./pagess/course";
-import TrainerPage from "./pagess/trainerpage";
+import TrainerPage from "./pagess/Studentspage";
 
 function App() {
   return (
@@ -24,7 +24,7 @@ function App() {
           <Route index element={<Navigate to="/admin/teachers" replace />} />
           <Route path="teachers" element={<TeacherPage />} />
           <Route path="courses" element={<CoursePage />} />
-          <Route path="trainers" element={<TrainerPage />} />
+          <Route path="students" element={<TrainerPage />} />
         </Route>
       </Routes>
     </BrowserRouter>

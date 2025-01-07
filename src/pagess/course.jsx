@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
-import { AddCourseForm } from "@/components/AddCourseCard";
-import { CourseCard } from "@/components/CourseCard";
+import { AddCourseForm } from "@/components/CoursesComponents/AddCourseCard";
+import { CourseCard } from "@/components/CoursesComponents/CourseCard";
+import { CourseCardSkeleton } from "@/components/CoursesComponents/CourseCardSkeleton";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -11,11 +12,10 @@ import {
 } from "@/components/ui/dialog";
 
 export default function CoursePage() {
-  const [courses, setCourses] = useState([]); // State to store fetched courses
-  const [loading, setLoading] = useState(true); // State for loading status
-  const [error, setError] = useState(null); // State for error handling
+  const [courses, setCourses] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-  // Fetch courses from the API
   useEffect(() => {
     const fetchCourses = async () => {
       try {
@@ -37,10 +37,9 @@ export default function CoursePage() {
 
   return (
     <div className="container mx-auto p-4">
-      <div className="flex justify-between">
-        <h1 className="text-2xl font-bold mb-4">Featured Courses</h1>
+      <div className="flex justify-between items-center mb-8">
+        <h1 className="text-3xl font-bold">Featured Courses</h1>
 
-        {/* Shadcn Dialog */}
         <Dialog>
           <DialogTrigger asChild>
             <Button>Add Course</Button>
@@ -54,20 +53,28 @@ export default function CoursePage() {
         </Dialog>
       </div>
 
-      {/* Display loading, error, or courses */}
-      {loading ? (
-        <p>Loading courses...</p>
-      ) : error ? (
-        <p className="text-red-500">Error: {error} </p>
-      ) : courses.length > 0 ? (
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-          {courses.map((course) => (
-            <CourseCard key={course._id} course={course} />
-          ))}
+      {error ? (
+        <div className="text-center py-10">
+          <p className="text-red-500 text-xl">Error: {error}</p>
+          <Button onClick={() => window.location.reload()} className="mt-4">
+            Try Again
+          </Button>
         </div>
       ) : (
-        <p>No courses available.</p>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          {loading
+            ? Array(6).fill(0).map((_, index) => (
+                <CourseCardSkeleton key={index} />
+              ))
+            : courses.length > 0
+            ? courses.map((course) => (
+                <CourseCard key={course._id} course={course} />
+              ))
+            : <p className="col-span-full text-center text-xl text-gray-500 py-10">No courses available.</p>
+          }
+        </div>
       )}
     </div>
   );
 }
+

@@ -56,7 +56,7 @@ export function AddCourseForm() {
         });
 
         // Navigate to courses page
-        router('/Admindashboard');
+        router('/admin/courses');
       } else {
         setState({ message: result.message, errors: result.errors || {} });
 

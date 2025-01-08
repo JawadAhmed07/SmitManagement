@@ -1,21 +1,14 @@
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
-import {
-    Dialog,
-    DialogTrigger,
-    DialogContent,
-    DialogHeader,
-    DialogTitle,
-} from "@/components/ui/dialog";
-
+import { Dialog, DialogTrigger, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { TrainerCardSkeleton } from "@/components/TrainerComponents/TrainerCardSkeleton";
+import { AddTrainerForm } from "@/components/TrainerComponents/AddTrainerForm";
 import TrainerCard from "@/components/TrainerComponents/TrainerCard";
-import { AddTrainerForm } from "@/components/StudentComponents/AddTrainerForm";
 
 function TeacherPage() {
     const [trainers, setTrainers] = useState([]);
     const [loading, setLoading] = useState(true);
-    
+
     // Fetch trainers from API
     useEffect(() => {
         const fetchTrainers = async () => {
@@ -34,8 +27,6 @@ function TeacherPage() {
         fetchTrainers();
     }, []);
 
-    // Validate form data
-   
     return (
         <div className="container mx-auto p-4">
             <div className="flex justify-between items-center mb-6">
@@ -62,9 +53,9 @@ function TeacherPage() {
                     : trainers.map((trainer, index) => (
                         <TrainerCard
                             key={index}
-                            courseName={trainer.courseName}
-                            batchName={trainer.batchName}
-                            studentName={trainer.studentName}
+                            trainerName={trainer.trainerName}
+                            email={trainer.email}
+                            age={trainer.age}
                             avatarUrl={trainer.avatarUrl}
                         />
                     ))}

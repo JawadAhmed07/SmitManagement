@@ -9,15 +9,15 @@ import { useToast } from '@/hooks/use-toast';
 
 export function AddTrainerForm() {
   const [formData, setFormData] = useState({
-    courseName: '',
-    batchName: '',
-    studentName: '',
+    trainerName: '',
+    email: '',
+    password: '',
+    age: '',
     avatarUrl: ''
   });
   
   const [formErrors, setFormErrors] = useState({});
   const { toast } = useToast();
-//   const router = useRouter();
   
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -26,9 +26,10 @@ export function AddTrainerForm() {
 
   const validateForm = () => {
     let errors = {};
-    if (!formData.courseName) errors.courseName = "Course name is required";
-    if (!formData.batchName) errors.batchName = "Batch name is required";
-    if (!formData.studentName) errors.studentName = "Student name is required";
+    if (!formData.trainerName) errors.trainerName = "Trainer name is required";
+    if (!formData.email) errors.email = "Email is required";
+    if (!formData.password) errors.password = "Password is required";
+    if (!formData.age) errors.age = "Age is required";
     return errors;
   };
 
@@ -41,7 +42,7 @@ export function AddTrainerForm() {
       setFormErrors(errors);
       return;
     }
-    
+
     try {
       const response = await fetch('http://localhost:4000/api/v1/trainer/', {
         method: 'POST',
@@ -64,15 +65,14 @@ export function AddTrainerForm() {
 
       // Reset form and close the dialog (if applicable)
       setFormData({
-        courseName: '',
-        batchName: '',
-        studentName: '',
+        trainerName: '',
+        email: '',
+        password: '',
+        age: '',
         avatarUrl: ''
       });
       setFormErrors({});
 
-      // Optionally, navigate away or close the form dialog
-      // router.push('/some-other-page'); // Uncomment if you want to navigate after success
     } catch (error) {
       toast({
         title: 'Error!',
@@ -83,46 +83,61 @@ export function AddTrainerForm() {
   };
 
   return (
-    <Card className="w-full  mx-auto">
+    <Card className="w-full mx-auto">
       <form onSubmit={handleSubmit}>
         <CardContent className="space-y-4 p-4">
           <div className="space-y-2">
-            <Label htmlFor="courseName">Course Name</Label>
+            <Label htmlFor="trainerName">Trainer Name</Label>
             <Input
-              id="courseName"
-              name="courseName"
-              value={formData.courseName}
+              id="trainerName"
+              name="trainerName"
+              value={formData.trainerName}
               onChange={handleInputChange}
               required
             />
-            {formErrors.courseName && (
-              <p className="text-sm text-destructive">{formErrors.courseName}</p>
+            {formErrors.trainerName && (
+              <p className="text-sm text-destructive">{formErrors.trainerName}</p>
             )}
           </div>
           <div className="space-y-2">
-            <Label htmlFor="batchName">Batch Name</Label>
+            <Label htmlFor="email">Email</Label>
             <Input
-              id="batchName"
-              name="batchName"
-              value={formData.batchName}
+              id="email"
+              name="email"
+              value={formData.email}
               onChange={handleInputChange}
               required
             />
-            {formErrors.batchName && (
-              <p className="text-sm text-destructive">{formErrors.batchName}</p>
+            {formErrors.email && (
+              <p className="text-sm text-destructive">{formErrors.email}</p>
             )}
           </div>
           <div className="space-y-2">
-            <Label htmlFor="studentName">Trainer Name</Label>
+            <Label htmlFor="password">Password</Label>
             <Input
-              id="studentName"
-              name="studentName"
-              value={formData.studentName}
+              id="password"
+              name="password"
+              type="password"
+              value={formData.password}
               onChange={handleInputChange}
               required
             />
-            {formErrors.studentName && (
-              <p className="text-sm text-destructive">{formErrors.studentName}</p>
+            {formErrors.password && (
+              <p className="text-sm text-destructive">{formErrors.password}</p>
+            )}
+          </div>
+          <div className="space-y-2">
+            <Label htmlFor="age">Age</Label>
+            <Input
+              id="age"
+              name="age"
+              type="number"
+              value={formData.age}
+              onChange={handleInputChange}
+              required
+            />
+            {formErrors.age && (
+              <p className="text-sm text-destructive">{formErrors.age}</p>
             )}
           </div>
           <div className="space-y-2">
@@ -142,4 +157,5 @@ export function AddTrainerForm() {
     </Card>
   );
 }
+
 

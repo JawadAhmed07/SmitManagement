@@ -9,6 +9,11 @@ import TeacherPage from "./pagess/teacherpage";
 import CoursePage from "./pagess/course";
 import TrainerPage from "./pagess/Studentspage";
 import DashboardLayout from "./layouts/dashboardlayout";
+import {
+  ProtectedRoute,
+  AuthenticatedUser,
+  AdminRoute,
+} from "./components/RouterAuthentication/ProtectedRoutes";
 import Assignmnets from "./pagess/Assignmnets";
 
 function App() {
@@ -17,11 +22,25 @@ function App() {
       <Routes>
         {/* Main Routes */}
         <Route path="/" element={<Home />} />
-        <Route path="/login" element={<Login />} />
+        <Route
+          path="/login"
+          element={
+            <AuthenticatedUser>
+              <Login />
+            </AuthenticatedUser>
+          }
+        />
         <Route path="/select" element={<RoleCards />} />
-
-        {/* Admin Dashboard */}
-        <Route path="/admin" element={<DashboardLayout />}>
+         {/* Protected Routes (For Logged-In Users Only) */}
+        <Route
+          path="/admin"
+          element={
+            <ProtectedRoute>
+              <DashboardLayout />
+            </ProtectedRoute>
+          }
+        >
+          {/* Admin Sub-Routes */}
           <Route index element={<Navigate to="/admin/teachers" replace />} />
           <Route path="teachers" element={<TeacherPage />} />
           <Route path="courses" element={<CoursePage />} />

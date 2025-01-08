@@ -17,61 +17,76 @@ import axios from "axios";
 import { AppRoutes } from "../../Constant/constant";
 import { AuthContext } from "../../context/Auth.context";
 import { useNavigate } from "react-router";
+import LoadingSpinner from "../../components/LoderComponents/loading";
+
 export default function Login() {
   const [isLoading, setLoading] = useState(false);
+  const [error, setError] = useState("");
   const navigate = useNavigate();
   const { setUser } = useContext(AuthContext);
-
-  const handleLogin = (e) => {
+  
+  //for login
+  const handleLogin = async (e) => {
     e.preventDefault();
     setLoading(true);
+    setError("");
     const obj = {
       email: e.target[0].value,
       password: e.target[1].value,
     };
-    axios
-      .post(AppRoutes.login, obj)
-      .then((res) => {
-        setLoading(false);
-        Cookies.set("token", res?.data?.data?.token);
-        setUser(res?.data?.data?.user);
-        console.log(res.data);
-        // Navigate to dashboard if login is successful
-        navigate("/admin");
-      })
-      .catch((err) => {
-        setLoading(false);
-        console.log(err);
-      });
-    };
+
+    if (!obj.email || !obj.password) {
+      setLoading(false);
+      setError("Please fill in all fields.");
+      return;
+    }
+
+    try {
+      const res = await axios.post(AppRoutes.login, obj);
+      Cookies.set("token", res?.data?.data?.token);
+      setUser(res?.data?.data?.user);
+      navigate("/admin");
+    } catch (err) {
+      setError("Invalid email or password.");
+      console.log(err);
+    } finally {
+      setLoading(false);
+    }
+  };
     
     //for signup
-    const handleSignup = (e) => {
-      e.preventDefault();
-      setLoading(true);
-      const obj = {
-        fullName: e.target[0].value,
-        email: e.target[1].value,
-        password: e.target[2].value,
+      const handleSignup = async (e) => {
+        e.preventDefault();
+        setLoading(true);
+        setError("");
+        const obj = {
+          fullName: e.target[0].value,
+          email: e.target[1].value,
+          password: e.target[2].value,
+        };
+
+        if (!obj.fullName || !obj.email || !obj.password) {
+          setLoading(false);
+          setError("Please fill in all fields.");
+          return;
+        }
+
+        try {
+          const res = await axios.post(AppRoutes.register, obj);
+          navigate("/admin");
+        } catch (err) {
+          setError("Signup failed. Please try again.");
+          console.log(err);
+        } finally {
+          setLoading(false);
+        }
       };
-      axios
-      .post(AppRoutes.register, obj)
-      .then((res) => {
-        setLoading(false);
-        console.log("Signup successful:", res.data);
-        // Navigate to dashboard if login is successful
-        navigate("/login");
-      })
-      .catch((err) => {
-        setLoading(false);
-        console.log("Signup error:", err);
-      });
-  };
 
  
   return (
     <div className="login flex justify-center my-24 p-2">
       {/* <a href="/select"> Select Role</a> */}
+      {isLoading && <LoadingSpinner />}
       <Tabs defaultValue="account" className="w-[400px]">
         <TabsList className="grid w-full  grid-cols-2">
           <TabsTrigger value="account">Login</TabsTrigger>
@@ -85,6 +100,7 @@ export default function Login() {
             </CardHeader>
             <form onSubmit={handleLogin}>
               <CardContent className="space-y-2">
+                {error && <p className="text-red-500 text-sm">{error}</p>}
                 <div className="space-y-1">
                   <Label htmlFor="email">Email</Label>
                   <Input id="email" defaultValue="" />
@@ -110,9 +126,10 @@ export default function Login() {
             </CardHeader>
             <form onSubmit={handleSignup}>
               <CardContent className="space-y-2">
+                {error && <p className="text-red-500 text-sm">{error}</p>}
                 <div className="space-y-1">
-                  <Label htmlFor="FullName">FullName</Label>
-                  <Input id="FullName" type="text" />
+                  <Label htmlFor="fullName">FullName</Label>
+                  <Input id="fullName" type="text" />
                 </div>
                 <div className="space-y-1">
                   <Label htmlFor="email">Email</Label>

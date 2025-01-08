@@ -1,6 +1,5 @@
 import { Link, useLocation } from "react-router";
-import { MdAssignment } from "react-icons/md";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import {
   Menu,
   X,
@@ -14,6 +13,10 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { AppRoutes } from "@/Constant/constant";
 import axios from "axios";
+import Cookies from "js-cookie";
+import { AuthContext } from "@/context/Auth.context";
+import { useNavigate } from "react-router";
+
 
 const menuItems = [
   { icon: Users, name: "Teachers", path: "/admin/teachers" },
@@ -25,7 +28,11 @@ const menuItems = [
 function Sidebar() {
   const [isOpen, setIsOpen] = useState(true);
   const location = useLocation();
-const [isLoading, setLoading] = useState(false)
+  const [isLoading, setLoading] = useState(false)
+  const { setUser } = useContext(AuthContext);
+  const navigate = useNavigate();
+
+  
   const user = {
     name: "John Doe",
     email: "john@example.com",
@@ -46,7 +53,7 @@ const [isLoading, setLoading] = useState(false)
         Cookies.remove("token"); // Remove token
         setUser(null); // Clear user context
         console.log("Logout successful");
-        navigate("/"); // Redirect to login page
+        navigate("/login"); // Redirect to login page
       })
       .catch((err) => {
         setLoading(false);

@@ -4,6 +4,7 @@ import { Badge } from "@/components/ui/badge";
 import { EnrollmentDialog } from "./CourseEnrollDialog";
 
 export function CourseCard({ course }) {
+  // console.log("courses", course)
   return (
     <Card className="w-full max-w-sm overflow-hidden">
       <CardHeader className="p-0">
@@ -45,7 +46,7 @@ export function CourseCard({ course }) {
       </CardContent>
       <CardFooter className="bg-gray-50 p-4 flex justify-between items-center">
         <div className="text-sm text-gray-600">
-          Trainer: <span className="font-semibold">{course.trainer?.name || "Unknown"}</span>
+          Trainer: <span className="font-semibold">{course?.trainerName || "Unknown"}</span>
         </div>
         <EnrollmentDialog courseName={course.title} />
       </CardFooter>

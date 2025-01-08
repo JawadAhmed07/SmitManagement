@@ -1,4 +1,5 @@
 import { Link, useLocation } from "react-router";
+import { MdAssignment } from "react-icons/md";
 import { useState } from "react";
 import {
   Menu,
@@ -12,11 +13,13 @@ import {
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { AppRoutes } from "@/Constant/constant";
+import axios from "axios";
 
 const menuItems = [
   { icon: Users, name: "Teachers", path: "/admin/teachers" },
   { icon: BookOpen, name: "Courses", path: "/admin/courses" },
   { icon: Dumbbell, name: "Students", path: "/admin/Students" },
+  { icon: MdAssignment, name: "Assigments", path: "/admin/asignments" },
 ];
 
 function Sidebar() {
@@ -86,7 +89,7 @@ const [isLoading, setLoading] = useState(false)
         </div>
 
         <div
-          className={`mt-80 p-4 ${isOpen ? "border-t border-gray-700" : ""}`}
+          className={`mt-72 p-4 ${isOpen ? "border-t border-gray-700" : ""}`}
         >
           <div className="flex items-center">
             <Avatar>

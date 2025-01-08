@@ -9,6 +9,7 @@ import TeacherPage from "./pagess/teacherpage";
 import CoursePage from "./pagess/course";
 import TrainerPage from "./pagess/Studentspage";
 import DashboardLayout from "./layouts/dashboardlayout";
+import Assignmnets from "./pagess/Assignmnets";
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
           <Route path="teachers" element={<TeacherPage />} />
           <Route path="courses" element={<CoursePage />} />
           <Route path="students" element={<TrainerPage />} />
+          <Route path="asignments" element={<Assignmnets />} />
         </Route>
       </Routes>
     </BrowserRouter>

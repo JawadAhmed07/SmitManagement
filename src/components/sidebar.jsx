@@ -22,7 +22,7 @@ const menuItems = [
 function Sidebar() {
   const [isOpen, setIsOpen] = useState(true);
   const location = useLocation();
-
+const [isLoading, setLoading] = useState(false)
   const user = {
     name: "John Doe",
     email: "john@example.com",

@@ -5,10 +5,10 @@ import "./App.css";
 import Home from "./pages/Home/Home";
 import Login from "./pages/login_signup/login";
 import RoleCards from "./pages/select/select";
-import DashboardLayout from "./layouts/dashboardlayout";
 import TeacherPage from "./pagess/teacherpage";
 import CoursePage from "./pagess/course";
 import TrainerPage from "./pagess/Studentspage";
+import DashboardLayout from "./layouts/dashboardlayout";
 
 function App() {
   return (

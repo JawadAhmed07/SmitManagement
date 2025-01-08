@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import { AddCourseForm } from "@/components/CoursesComponents/AddCourseCard";
 import { Button } from "@/components/ui/button";
 import {
     Dialog,
@@ -9,46 +8,24 @@ import {
     DialogTitle,
 } from "@/components/ui/dialog";
 
-import TrainerCard from "@/components/TrainerComponents/TrainerCard";
 import { TrainerCardSkeleton } from "@/components/TrainerComponents/TrainerCardSkeleton";
-
-// This is mock data. In a real application, you'd fetch this from an API.
-const mockTrainers = [
-  {
-    courseName: "Blockchain Development",
-    batchName: "2024",
-    studentName: "Ayesha Malik",
-    avatarUrl: "https://github.com/shadcn.png"
-  },
-  {
-    courseName: "Data Science",
-    batchName: "2023",
-    studentName: "Omar Hassan",
-    avatarUrl: "https://github.com/shadcn.png"
-  },
-  {
-    courseName: "Internet of Things (IoT)",
-    batchName: "2024",
-    studentName: "Fatima Zahra",
-    avatarUrl: "https://github.com/shadcn.png"
-  }
-];
+import TrainerCard from "@/components/TrainerComponents/TrainerCard";
+import { AddTrainerForm } from "@/components/StudentComponents/AddTrainerForm";
 
 function TeacherPage() {
     const [trainers, setTrainers] = useState([]);
     const [loading, setLoading] = useState(true);
-
+    
+    // Fetch trainers from API
     useEffect(() => {
-        // Simulate API call
         const fetchTrainers = async () => {
             setLoading(true);
             try {
-                // In a real application, replace this with an actual API call
-                await new Promise(resolve => setTimeout(resolve, 1500)); // Simulate network delay
-                setTrainers(mockTrainers);
+                const response = await fetch("http://localhost:4000/api/v1/trainer/available");
+                const data = await response.json();
+                setTrainers(data);
             } catch (error) {
                 console.error("Error fetching trainers:", error);
-                // Handle error state here
             } finally {
                 setLoading(false);
             }
@@ -57,6 +34,8 @@ function TeacherPage() {
         fetchTrainers();
     }, []);
 
+    // Validate form data
+   
     return (
         <div className="container mx-auto p-4">
             <div className="flex justify-between items-center mb-6">
@@ -64,22 +43,22 @@ function TeacherPage() {
 
                 <Dialog>
                     <DialogTrigger asChild>
-                        <Button>Add Teacher</Button>
+                        <Button>Add Trainer</Button>
                     </DialogTrigger>
                     <DialogContent className="max-w-xl">
                         <DialogHeader>
-                            <DialogTitle>Add a New Teacher</DialogTitle>
+                            <DialogTitle>Add a New Trainer</DialogTitle>
                         </DialogHeader>
-                        <AddCourseForm />
+                        <AddTrainerForm />
                     </DialogContent>
                 </Dialog>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 {loading
-                    ? Array(3).fill(0).map((_, index) => (
-                        <TrainerCardSkeleton key={index} />
-                      ))
+                    ? Array(3)
+                        .fill(0)
+                        .map((_, index) => <TrainerCardSkeleton key={index} />)
                     : trainers.map((trainer, index) => (
                         <TrainerCard
                             key={index}
@@ -88,12 +67,10 @@ function TeacherPage() {
                             studentName={trainer.studentName}
                             avatarUrl={trainer.avatarUrl}
                         />
-                      ))
-                }
+                    ))}
             </div>
         </div>
-    )
+    );
 }
 
 export default TeacherPage;
-

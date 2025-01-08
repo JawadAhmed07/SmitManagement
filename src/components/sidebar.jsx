@@ -22,7 +22,7 @@ const menuItems = [
   { icon: Users, name: "Teachers", path: "/admin/teachers" },
   { icon: BookOpen, name: "Courses", path: "/admin/courses" },
   { icon: Dumbbell, name: "Students", path: "/admin/Students" },
-  { icon: MdAssignment, name: "Assigments", path: "/admin/asignments" },
+  // { icon: MdAssignment, name: "Assigments", path: "/admin/asignments" },
 ];
 
 function Sidebar() {

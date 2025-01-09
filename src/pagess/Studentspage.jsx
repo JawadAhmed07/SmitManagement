@@ -23,7 +23,7 @@ import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar"
 import { StudentsSkeleton } from "@/components/StudentComponents/StudentSkeleton";
 
 const mockStudents = [
-    { id: "1", avatar: "/placeholder.svg?height=32&width=32", name: "Alice Johnson", email: "alice@example.com", batch: "2023", section: "A" },
+    { id: "1", avatar: "/placeholder.svg?height=32&width=32", name: "Alicee Johnson", email: "alice@example.com", batch: "2023", section: "A" },
     { id: "2", avatar: "/placeholder.svg?height=32&width=32", name: "Bob Smith", email: "bob@example.com", batch: "2023", section: "B" },
     { id: "3", avatar: "/placeholder.svg?height=32&width=32", name: "Charlie Brown", email: "charlie@example.com", batch: "2022", section: "A" },
     { id: "4", avatar: "/placeholder.svg?height=32&width=32", name: "Diana Ross", email: "diana@example.com", batch: "2022", section: "C" },

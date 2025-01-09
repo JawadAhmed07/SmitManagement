@@ -12,12 +12,9 @@ import DashboardLayout from "./layouts/dashboardlayout";
 import {
   ProtectedRoute,
   AuthenticatedUser,
-  AdminRoute,
+  // AdminRoute,
 } from "./components/RouterAuthentication/ProtectedRoutes";
-<<<<<<< Updated upstream
 import Assignmnets from "./pagess/Assignmnets";
-=======
->>>>>>> Stashed changes
 
 function App() {
   return (

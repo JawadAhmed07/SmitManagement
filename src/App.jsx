@@ -1,5 +1,10 @@
-import { BrowserRouter, Routes, Route, Navigate } from "react-router"; // Use only BrowserRouter
+import { BrowserRouter, Routes, Route, Navigate } from "react-router";
 import "./App.css";
+import axios from "axios";
+
+// Configure Axios defaults
+axios.defaults.baseURL = "http://localhost:4000/api/v1/"; // Replace with your backend URL
+axios.defaults.withCredentials = true; // Enable cookies for cross-origin requests
 
 // Pages
 import Home from "./pages/Home/Home";
@@ -9,46 +14,75 @@ import TeacherPage from "./pagess/teacherpage";
 import CoursePage from "./pagess/course";
 import TrainerPage from "./pagess/Studentspage";
 import DashboardLayout from "./layouts/dashboardlayout";
-import {
-  ProtectedRoute,
-  AuthenticatedUser,
-  AdminRoute,
-} from "./components/RouterAuthentication/ProtectedRoutes";
 import Assignmnets from "./pagess/Assignmnets";
-=======
->>>>>>> Stashed changes
+
+// Route Guards
+// import {
+//   ProtectedRoute,
+//   RoleBasedRoute,
+// } from "./components/RouterAuthentication/ProtectedRoutes";
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
-        {/* Main Routes */}
+        {/* Public Routes */}
         <Route path="/" element={<Home />} />
+        <Route path="/login" element={<Login />} />
         <Route
-          path="/login"
+          path="/select"
           element={
-            <AuthenticatedUser>
-              <Login />
-            </AuthenticatedUser>
+              <RoleCards />
           }
         />
-        <Route path="/select" element={<RoleCards />} />
-         {/* Protected Routes (For Logged-In Users Only) */}
+
+        {/* Protected Routes for Admin/Trainer */}
         <Route
           path="/admin"
           element={
-            // <ProtectedRoute>
+            // <RoleBasedRoute>
               <DashboardLayout />
-            // </ProtectedRoute>
+            // </RoleBasedRoute>
           }
         >
           {/* Admin Sub-Routes */}
           <Route index element={<Navigate to="/admin/teachers" replace />} />
-          <Route path="teachers" element={<TeacherPage />} />
-          <Route path="courses" element={<CoursePage />} />
-          <Route path="students" element={<TrainerPage />} />
-          <Route path="asignments" element={<Assignmnets />} />
+          <Route
+            path="teachers"
+            element={
+              // <RoleBasedRoute>
+                <TeacherPage />
+              // </RoleBasedRoute>
+            }
+          />
+          <Route
+            path="courses"
+            element={
+              // <RoleBasedRoute>
+                <CoursePage />
+              // </RoleBasedRoute>
+            }
+          />
+          <Route
+            path="students"
+            element={
+              // <RoleBasedRoute>
+                <TrainerPage />
+              // </RoleBasedRoute>
+            }
+          />
+          <Route
+            path="assignments"
+            element={
+              // <RoleBasedRoute>
+                <Assignmnets />
+              // </RoleBasedRoute>
+            }
+          />
         </Route>
+
+        {/* Fallback Route */}
+        <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </BrowserRouter>
   );

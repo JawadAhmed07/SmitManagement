@@ -8,31 +8,40 @@ export const AuthContext = createContext();
 
 export default function AuthContextProvider({ children }) {
   const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    if (!user) {
-      const token = Cookies.get("token");
-      if (token) {
-        getUser();
-      }
-    }
-  }, [user]);
-
-  const getUser = () => {
-    axios
-      .get(AppRoutes.getMyInfo, {
+  const getUser = async () => {
+    try {
+      const res = await axios.get(AppRoutes.getMyInfo, {
         headers: {
           Authorization: `Bearer ${Cookies.get("token")}`,
         },
-      })
-      .then((res) => {
-        console.log("response from get my info API=>", res.data);
-        setUser(res.data.data);
-      })
-      .catch((err) => console.log(err));
+      });
+      setUser(res.data.data);
+    } catch (err) {
+      console.error("Error fetching user info:", err);
+      Cookies.remove("token");
+      setUser(null);
+    } finally {
+      setLoading(false);
+    }
   };
+
+  useEffect(() => {
+    const token = Cookies.get("token");
+    if (token && !user) {
+      getUser();
+    } else {
+      setLoading(false); // No token, no need to fetch
+    }
+  }, []);
+
+  if (loading) {
+    return <div>Loading...</div>; // Optional loader while fetching data
+  }
+
   return (
-    <AuthContext.Provider value={{ user, setUser}}>
+    <AuthContext.Provider value={{ user, setUser }}>
       {children}
     </AuthContext.Provider>
   );

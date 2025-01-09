@@ -199,7 +199,7 @@ function Sidebar() {
     setLoading(true);
     axios
       .get(
-        AppRoutes.logout,
+        AppRoutes.LogOut,
         {},
         { headers: { Authorization: `Bearer ${Cookies.get("token")}` } }
       )

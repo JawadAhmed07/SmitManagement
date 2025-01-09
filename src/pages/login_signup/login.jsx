@@ -16,7 +16,7 @@ import Cookies from "js-cookie";
 import axios from "axios";
 import { AppRoutes } from "../../Constant/constant";
 import { AuthContext } from "../../context/Auth.context";
-import { useNavigate } from "react-router";
+import { replace, useNavigate } from "react-router";
 import LoadingSpinner from "../../components/LoderComponents/loading";
 
 export default function Login() {
@@ -43,9 +43,11 @@ export default function Login() {
 
     try {
       const res = await axios.post(AppRoutes.login, obj);
+      alert(`Welcome back ${res.data.user?.fullName || "User"}`);
       Cookies.set("token", res?.data?.data?.token);
+      console.log(res.data);
       setUser(res?.data?.data?.user);
-      navigate("/admin");
+      navigate("/admin") ;
     } catch (err) {
       setError("Invalid email or password.");
       console.log(err);

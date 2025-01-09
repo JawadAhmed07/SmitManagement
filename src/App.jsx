@@ -12,7 +12,7 @@ import DashboardLayout from "./layouts/dashboardlayout";
 import {
   ProtectedRoute,
   AuthenticatedUser,
-  AdminRoute,
+  // AdminRoute,
 } from "./components/RouterAuthentication/ProtectedRoutes";
 import Assignmnets from "./pagess/Assignmnets";
 

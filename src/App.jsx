@@ -14,10 +14,7 @@ import {
   AuthenticatedUser,
   AdminRoute,
 } from "./components/RouterAuthentication/ProtectedRoutes";
-<<<<<<< Updated upstream
 import Assignmnets from "./pagess/Assignmnets";
-=======
->>>>>>> Stashed changes
 
 function App() {
   return (

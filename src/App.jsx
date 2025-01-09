@@ -35,9 +35,9 @@ function App() {
         <Route
           path="/admin"
           element={
-            <ProtectedRoute>
+            // <ProtectedRoute>
               <DashboardLayout />
-            </ProtectedRoute>
+            // </ProtectedRoute>
           }
         >
           {/* Admin Sub-Routes */}

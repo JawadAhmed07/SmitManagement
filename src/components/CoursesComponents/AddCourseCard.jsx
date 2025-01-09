@@ -72,6 +72,19 @@ export function AddCourseForm() {
       trainerName: formData.get('trainerName'),
       // thumbnail: formData.get('thumbnail'),
     }
+
+    // const courseData = {
+    //   title: formData.get('title'),
+    //   description: formData.get('description'),
+    //   duration: formData.get('duration'),
+    //   eligibility: eligibilityList,
+    //   trainerName: formData.get('trainerName'),
+    //   trainerId: trainers.find(
+    //     (trainer) => trainer._id === formData.get('trainerName')
+    //   )?.id, // Get trainerId from trainers list
+    // };
+    // console.log("courseData=",courseData)
+   
   
     // Log all form fields
     console.log("Form Data:", {

@@ -17,10 +17,12 @@ import axios from "axios";
 import Cookies from "js-cookie";
 import { AuthContext } from "@/context/Auth.context";
 import { useNavigate } from "react-router";
+import { GrUserAdmin } from "react-icons/gr";
+
 
 const menuItems = [
   {
-    icon: Dumbbell,
+    icon: GrUserAdmin,
     name: "Admin",
     path: "/dashboard/admin",
     subItems: [

@@ -47,7 +47,7 @@ export default function Login() {
       Cookies.set("token", res?.data?.data?.token);
       console.log(res.data);
       setUser(res?.data?.data?.user);
-      navigate("/admin") ;
+      navigate("/admin/teachers") ;
     } catch (err) {
       setError("Invalid email or password.");
       console.log(err);
@@ -88,7 +88,8 @@ export default function Login() {
   return (
     <div className="login flex justify-center my-24 p-2">
       {/* <a href="/select"> Select Role</a> */}
-      {isLoading && <LoadingSpinner />}
+      {isLoading ? <LoadingSpinner /> 
+      :
       <Tabs defaultValue="account" className="w-[400px]">
         <TabsList className="grid w-full  grid-cols-2">
           <TabsTrigger value="account">Login</TabsTrigger>
@@ -151,6 +152,7 @@ export default function Login() {
           </Card>
         </TabsContent>
       </Tabs>
+      }
     </div>
   );
 }

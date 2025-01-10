@@ -14,10 +14,10 @@ import TeacherPage from "./pagess/teacherpage";
 import CoursePage from "./pagess/course";
 import TrainerPage from "./pagess/Studentspage";
 import DashboardLayout from "./layouts/dashboardlayout";
-// import {
-//   ProtectedRoute,
-//   RoleBasedRoute,
-// } from "./components/RouterAuthentication/ProtectedRoutes";
+import {
+  ProtectedRoute,
+  RoleBasedRoute,
+} from "./components/RouterAuthentication/ProtectedRoutes";
 import Assignmnets from "./pagess/Assignmnets";
 
 function App() {

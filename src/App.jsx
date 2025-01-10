@@ -14,13 +14,10 @@ import TeacherPage from "./pagess/teacherpage";
 import CoursePage from "./pagess/course";
 import TrainerPage from "./pagess/Studentspage";
 import DashboardLayout from "./layouts/dashboardlayout";
-<<<<<<< HEAD
-=======
 import {
   ProtectedRoute,
   RoleBasedRoute,
 } from "./components/RouterAuthentication/ProtectedRoutes";
->>>>>>> ad44015d38f71b22ae6f223457d160a86543ebbf
 import Assignmnets from "./pagess/Assignmnets";
 import Adminpage from "./pagess/Adminpage";
 

@@ -1,6 +1,6 @@
-import { Link, useLocation } from "react-router-dom";
-import { useContext, useState, useEffect } from "react";
-import { Menu, X, ChevronDown, Users, BookOpen, Dumbbell } from "lucide-react";
+// import { Link, useLocation } from "react-router-dom";
+// import { useContext, useState, useEffect } from "react";
+// import { Menu, X, ChevronDown, Users, BookOpen, Dumbbell } from "lucide-react";
  
 // import { Link, useLocation } from "react-router";
 // import { useContext, useState } from "react";
@@ -210,14 +210,11 @@ import { AppRoutes } from "@/Constant/constant";
 import axios from "axios";
 import Cookies from "js-cookie";
 import { AuthContext } from "@/context/Auth.context";
-<<<<<<< HEAD
 import { useNavigate } from "react-router-dom";
-=======
 import { useNavigate } from "react-router";
 import { GrUserAdmin } from "react-icons/gr";
 import { PiStudentBold } from "react-icons/pi";
 
->>>>>>> ad44015d38f71b22ae6f223457d160a86543ebbf
 
 const menuItems = [
   {
@@ -231,28 +228,18 @@ const menuItems = [
   {
     icon: Users,
     name: "Teachers",
-<<<<<<< HEAD
-    path: "/admin/teachers",
-    subItems: [{ name: "Teachers", path: "/admin/teachers" }],
-=======
     path: "/dashboard/teachers",
     subItems: [
       { name: "Teachers", path: "/dashboard/teachers" },
     ],
->>>>>>> ad44015d38f71b22ae6f223457d160a86543ebbf
   },
   {
     icon: BookOpen,
     name: "Courses",
-<<<<<<< HEAD
-    path: "/admin/courses",
-    subItems: [{ name: "Courses", path: "/admin/courses" }],
-=======
     path: "/dashboard/courses",
     subItems: [
       { name: "Courses", path: "/dashboard/courses" },
     ],
->>>>>>> ad44015d38f71b22ae6f223457d160a86543ebbf
   },
   {
     icon: PiStudentBold,
@@ -318,51 +305,6 @@ function Sidebar() {
   };
 
   return (
-<<<<<<< HEAD
-    <div
-      className={`top-0 left-0 px-3 bg-gray-800 text-white h-screen ${
-        isOpen ? "w-64" : "w-20"
-      } transition-all duration-300 ease-in-out`}
-    >
-      <div className="flex justify-between items-center p-4">
-        {isOpen && <h1 className="text-2xl font-bold">Admin</h1>}
-        <button onClick={() => setIsOpen(!isOpen)} className="p-2 bg-gray-700">
-          {isOpen ? <X size={24} /> : <Menu size={24} />}
-        </button>
-      </div>
-
-      <nav>
-        {menuItems.map((item, index) => (
-          <div key={index} className="mb-2">
-            <button
-              onClick={() =>
-                setExpandedMenu(expandedMenu === index ? null : index)
-              }
-              className={`flex items-center w-full text-blue-500 p-4 hover:bg-white ${
-                location.pathname.startsWith(item.path) ? "bg-gray-700" : ""
-              }`}
-            >
-              <item.icon size={24} />
-              {isOpen && <span className="ml-4 flex-1">{item.name}</span>}
-              {isOpen && (
-                <ChevronDown
-                  size={16}
-                  className={`transition-transform ${
-                    expandedMenu === index ? "rotate-180" : ""
-                  }`}
-                />
-              )}
-            </button>
-
-            {expandedMenu === index && isOpen && (
-              <div className="ml-8 mt-2">
-                {item.subItems.map((subItem) => (
-                  <Link
-                    key={subItem.name}
-                    to={subItem.path}
-                    className={`block text-zinc-300 p-2 hover:bg-white ${
-                      location.pathname === subItem.path ? "bg-gray-700" : ""
-=======
     <div className="flex h-screen">
       {/* Sidebar */}
       <div
@@ -395,7 +337,6 @@ function Sidebar() {
                     size={16}
                     className={`transition-transform ${
                       expandedMenu === index ? "rotate-180" : ""
->>>>>>> ad44015d38f71b22ae6f223457d160a86543ebbf
                     }`}
                   />
                 )}
@@ -441,43 +382,6 @@ function Sidebar() {
               </div>
             )}
           </div>
-<<<<<<< HEAD
-        ))}
-      </nav>
-
-      <div className={`mt-72 p-4 ${isOpen ? "border-t border-gray-700" : ""}`}>
-        {isLoading ? (
-          <p>Loading user information...</p>
-        ) : error ? (
-          <p className="text-red-500">{error}</p>
-        ) : userInfo ? (
-          <div className="flex items-center">
-            <Avatar>
-              <AvatarImage src={userInfo.avatar} alt={userInfo.fullName} />
-              <AvatarFallback>
-                {userInfo.fullName
-                  .split(" ")
-                  .map((n) => n[0])
-                  .join("")
-                  .toUpperCase()}
-              </AvatarFallback>
-            </Avatar>
-            {isOpen && (
-              <div className="ml-3">
-                <p className="text-sm font-medium">{userInfo.fullName}</p>
-                <p className="text-xs text-zinc-400">{userInfo.email}</p>
-              </div>
-            )}
-          </div>
-        ) : null}
-        {isOpen && (
-          <div className="mt-4">
-            <Button onClick={handleLogout} disabled={isLoading}>
-              {isLoading ? "Logging out..." : "Logout"}
-            </Button>
-          </div>
-        )}
-=======
           {isOpen && (
             <div className="mt-4">
               <Button onClick={handleLogout} disabled={isLoading}>
@@ -486,7 +390,6 @@ function Sidebar() {
             </div>
           )}
         </div>
->>>>>>> ad44015d38f71b22ae6f223457d160a86543ebbf
       </div>
 
       {/* Right Content */}

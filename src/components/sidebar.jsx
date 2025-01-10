@@ -18,6 +18,7 @@ import Cookies from "js-cookie";
 import { AuthContext } from "@/context/Auth.context";
 import { useNavigate } from "react-router";
 import { GrUserAdmin } from "react-icons/gr";
+import { PiStudentBold } from "react-icons/pi";
 
 
 const menuItems = [
@@ -49,7 +50,7 @@ const menuItems = [
     ],
   },
   {
-    icon: Dumbbell,
+    icon: PiStudentBold,
     name: "Students",
     path: "/dashboard/students",
     subItems: [

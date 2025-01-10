@@ -2,6 +2,13 @@ import { useState, useEffect } from "react";
 import { CourseCard } from "@/components/CoursesComponents/CourseCard";
 import { CourseCardSkeleton } from "@/components/CoursesComponents/CourseCardSkeleton";
 import { Button } from "@/components/ui/button";
+// import {
+//   Dialog,
+//   DialogTrigger,
+//   DialogContent,
+//   DialogHeader,
+//   DialogTitle,
+// } from "@/components/ui/dialog";
 
 export default function CoursePage() {
   const [courses, setCourses] = useState([]);

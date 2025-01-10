@@ -208,10 +208,13 @@ import axios from "axios";
 import Cookies from "js-cookie";
 import { AuthContext } from "@/context/Auth.context";
 import { useNavigate } from "react-router";
+import { GrUserAdmin } from "react-icons/gr";
+import { PiStudentBold } from "react-icons/pi";
+
 
 const menuItems = [
   {
-    icon: Dumbbell,
+    icon: GrUserAdmin,
     name: "Admin",
     path: "/dashboard/admin",
     subItems: [
@@ -235,7 +238,7 @@ const menuItems = [
     ],
   },
   {
-    icon: Dumbbell,
+    icon: PiStudentBold,
     name: "Students",
     path: "/dashboard/students",
     subItems: [

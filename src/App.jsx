@@ -19,6 +19,7 @@ import {
   RoleBasedRoute,
 } from "./components/RouterAuthentication/ProtectedRoutes";
 import Assignmnets from "./pagess/Assignmnets";
+import Adminpage from "./pagess/Adminpage";
 
 function App() {
   return (
@@ -36,15 +37,15 @@ function App() {
 
         {/* Protected Routes for Admin/Trainer */}
         <Route
-          path="/admin"
+          path="/dashboard"
           element={
             <ProtectedRoute>
               <DashboardLayout />
-            </ProtectedRoute>
+             </ProtectedRoute>
           }
         >
           {/* Admin Sub-Routes */}
-          <Route index element={<Navigate to="/admin/teachers" replace />} />
+          <Route index element={<Navigate to="/dashboard/teachers" replace />} />
           <Route
             path="teachers"
             element={
@@ -74,6 +75,14 @@ function App() {
             element={
               // <RoleBasedRoute>
                 <Assignmnets />
+              // </RoleBasedRoute>
+            }
+          />
+          <Route
+            path="admin"
+            element={
+              // <RoleBasedRoute>
+                <Adminpage />
               // </RoleBasedRoute>
             }
           />

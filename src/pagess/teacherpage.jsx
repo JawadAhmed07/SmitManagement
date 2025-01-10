@@ -1,8 +1,5 @@
 import { useState, useEffect } from "react";
-import { Button } from "@/components/ui/button";
-import { Dialog, DialogTrigger, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { TrainerCardSkeleton } from "@/components/TrainerComponents/TrainerCardSkeleton";
-import { AddTrainerForm } from "@/components/TrainerComponents/AddTrainerForm";
 import TrainerCard from "@/components/TrainerComponents/TrainerCard";
 
 function TeacherPage() {
@@ -32,7 +29,7 @@ function TeacherPage() {
             <div className="flex justify-between items-center mb-6">
                 <h1 className="text-3xl font-bold">Teachers</h1>
 
-                <Dialog>
+                {/* <Dialog>
                     <DialogTrigger asChild>
                         <Button>Add Trainer</Button>
                     </DialogTrigger>
@@ -42,7 +39,7 @@ function TeacherPage() {
                         </DialogHeader>
                         <AddTrainerForm />
                     </DialogContent>
-                </Dialog>
+                </Dialog> */}
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">

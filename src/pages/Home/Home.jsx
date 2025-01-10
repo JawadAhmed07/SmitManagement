@@ -21,7 +21,7 @@ const Home = () => {
                 Login
               </Button>
             </a>
-            <a href="/admin">
+            <a href="/dashboard">
               <Button className="inline-flex mx-3  border-0 py-5 px-8 focus:outline-none rounded text-lg">
                 Admin Dashboard
               </Button>

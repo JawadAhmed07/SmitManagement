@@ -1,13 +1,5 @@
 import { useState, useEffect } from "react";
-import { AddCourseForm } from "@/components/CoursesComponents/AddCourseCard";
-import { Button } from "@/components/ui/button";
-import {
-    Dialog,
-    DialogTrigger,
-    DialogContent,
-    DialogHeader,
-    DialogTitle,
-} from "@/components/ui/dialog";
+
 import {
     Table,
     TableBody,
@@ -74,7 +66,7 @@ function StudentPage() {
             <div className="flex justify-between items-center mb-6">
                 <h1 className="text-3xl font-bold">Students</h1>
 
-                <Dialog>
+                {/* <Dialog>
                     <DialogTrigger asChild>
                         <Button>Add Students</Button>
                     </DialogTrigger>
@@ -84,7 +76,7 @@ function StudentPage() {
                         </DialogHeader>
                         <AddCourseForm />
                     </DialogContent>
-                </Dialog>
+                </Dialog> */}
             </div>
             <div className="space-y-4">
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">

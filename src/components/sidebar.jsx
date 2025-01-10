@@ -20,32 +20,42 @@ import { useNavigate } from "react-router";
 
 const menuItems = [
   {
+    icon: Dumbbell,
+    name: "Admin",
+    path: "/dashboard/admin",
+    subItems: [
+      { name: "Admin", path: "/dashboard/admin" },
+      // { name: "Add Student", path: "/admin/students/add" },
+    ],
+  },
+  {
     icon: Users,
     name: "Teachers",
-    path: "/admin/teachers",
+    path: "/dashboard/teachers",
     subItems: [
-      { name: "Teachers", path: "/admin/teachers" },
+      { name: "Teachers", path: "/dashboard/teachers" },
       // { name: "Add Teacher", path: "/admin/teachers/add" },
     ],
   },
   {
     icon: BookOpen,
     name: "Courses",
-    path: "/admin/courses",
+    path: "/dashboard/courses",
     subItems: [
-      { name: "Courses", path: "/admin/courses" },
+      { name: "Courses", path: "/dashboard/courses" },
       // { name: "Add Course", path: "/admin/courses/add" },
     ],
   },
   {
     icon: Dumbbell,
     name: "Students",
-    path: "/admin/students",
+    path: "/dashboard/students",
     subItems: [
-      { name: "Students", path: "/admin/students" },
+      { name: "Students", path: "/dashboard/students" },
       // { name: "Add Student", path: "/admin/students/add" },
     ],
   },
+ 
 ];
 
 function Sidebar() {
@@ -91,7 +101,7 @@ function Sidebar() {
       } transition-all duration-300 ease-in-out`}
     >
       <div className="flex justify-between items-center p-4">
-        {isOpen && <h1 className="text-2xl font-bold">Admin</h1>}
+        {isOpen && <h1 className="text-2xl font-bold">Dashboard</h1>}
         <button
           onClick={() => setIsOpen(!isOpen)}
           className="p-2 bg-gray-700"
@@ -146,7 +156,7 @@ function Sidebar() {
         ))}
       </nav>
 
-      <div className={`mt-72 p-4 ${isOpen ? "border-t border-gray-700" : ""}`}>
+      <div className={`mt-48   p-4 ${isOpen ? "border-t border-gray-700" : ""}`}>
         <div className="flex items-center">
           <Avatar>
             <AvatarImage src={user.avatar} alt={user.name} />

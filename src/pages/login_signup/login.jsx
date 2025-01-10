@@ -52,9 +52,7 @@ export default function Login() {
 
       Cookies.set("token", res?.data?.data?.token);
       setUser(res?.data?.data?.user);
-      setLoading(false);
-      console.log("Login successful, navigating to /admin");
-      navigate("/admin");
+      navigate("/admin/teachers") ;
     } catch (err) {
       console.error(
         "Login error:",
@@ -107,13 +105,10 @@ export default function Login() {
   };
 
   return (
-    <div className="login flex justify-center my-24 p-2 relative">
-      {isLoading && (
-        <div className="absolute inset-0 flex items-center justify-center bg-gray-100 bg-opacity-50 z-50">
-          <LoadingSpinner />
-        </div>
-      )}
-
+    <div className="login flex justify-center my-24 p-2">
+      {/* <a href="/select"> Select Role</a> */}
+      {isLoading ? <LoadingSpinner /> 
+      :
       <Tabs defaultValue="account" className="w-[400px]">
         <TabsList className="grid w-full grid-cols-2">
           <TabsTrigger value="account">Login</TabsTrigger>
@@ -176,6 +171,7 @@ export default function Login() {
           </Card>
         </TabsContent>
       </Tabs>
+      }
     </div>
   );
 }

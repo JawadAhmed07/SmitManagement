@@ -12,7 +12,12 @@ import { Loader2, Plus, X } from 'lucide-react'
 import { useNavigate } from 'react-router'
 
 export function AddCourseForm() {
-  const [state, setState] = useState({ message: null, errors: {} })
+  const [formFields, setFormFields] = useState({
+    title: '',
+    description: '',
+    duration: '',
+    trainerName: '',
+  })
   const [eligibilityList, setEligibilityList] = useState([])
   const [eligibility, setEligibility] = useState('')
   const [trainers, setTrainers] = useState([])
@@ -54,102 +59,87 @@ export function AddCourseForm() {
     }
   }
 
-  const handleRemoveEligibility = (index ) => {
+  const handleRemoveEligibility = (index) => {
     setEligibilityList(eligibilityList.filter((_, i) => i !== index))
+  }
+
+  const handleChange = (e) => {
+    const { name, value } = e.target
+    setFormFields({ ...formFields, [name]: value })
   }
 
   const handleSubmit = async (e) => {
     e.preventDefault()
     setIsLoading(true)
-    
-    // Collect form data using FormData
-    const formData = new FormData(e.currentTarget)
+
+    const selectedTrainer = trainers.find(
+      (trainer) => trainer.trainerName === formFields.trainerName
+    )
+
     const courseData = {
-      title: formData.get('title'),
-      description: formData.get('description'),
-      duration: formData.get('duration'),
+      ...formFields,
       eligibility: eligibilityList,
-      trainerName: formData.get('trainerName'),
-      // thumbnail: formData.get('thumbnail'),
+      trainerId: selectedTrainer ? selectedTrainer._id : null,
     }
 
-    // const courseData = {
-    //   title: formData.get('title'),
-    //   description: formData.get('description'),
-    //   duration: formData.get('duration'),
-    //   eligibility: eligibilityList,
-    //   trainerName: formData.get('trainerName'),
-    //   trainerId: trainers.find(
-    //     (trainer) => trainer._id === formData.get('trainerName')
-    //   )?.id, // Get trainerId from trainers list
-    // };
-    // console.log("courseData=",courseData)
-   
-  
-    // Log all form fields
-    console.log("Form Data:", {
-      title: formData.get('title'),
-      description: formData.get('description'),
-      duration: formData.get('duration'),
-      eligibilityList: eligibilityList,
-      trainerName: formData.get('trainerName'),
-      // thumbnail: formData.get('thumbnail')
-    })
-  
     try {
       const response = await fetch('http://localhost:4000/api/v1/course/', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(courseData),
       })
-  
+
       const result = await response.json()
-  
+
       if (response.ok) {
         toast({
-          title: "Success",
-          description: "Course added successfully!",
-          variant: "default"
+          title: 'Success',
+          description: 'Course added successfully!',
+          variant: 'default',
         })
-        console.log("result", result)
-        router('/admin/courses')
+
+        // Reset the form fields and eligibility list
+        setFormFields({
+          title: '',
+          description: '',
+          duration: '',
+          trainerName: '',
+        })
+        setEligibilityList([])
       } else {
-        setState({ message: result.message, errors: result.errors || {} })
         toast({
-          title: "Error",
-          description: result.message || "Failed to add the course.",
-          variant: "destructive",
+          title: 'Error',
+          description: result.message || 'Failed to add the course.',
+          variant: 'destructive',
         })
       }
     } catch (error) {
       console.error('Error:', error)
       toast({
-        title: "Error",
-        description: "An error occurred. Please try again later.",
-        variant: "destructive",
+        title: 'Error',
+        description: 'An error occurred. Please try again later.',
+        variant: 'destructive',
       })
-      setState({ message: 'An error occurred. Please try again later.', errors: {} })
     } finally {
       setIsLoading(false)
     }
   }
-  
 
   return (
-    <Card className="w-full max-w-2xl mx-auto">
+    <Card className="w-full">
       <form onSubmit={handleSubmit}>
         <CardContent className="space-y-2">
           <div className="space-y-1 py-2">
             <Label htmlFor="title">Course Title</Label>
-            <Input id="title" name="title" required />
+            <Input id="title" name="title" value={formFields.title} onChange={handleChange} required />
           </div>
           <div className="space-y-2">
             <Label htmlFor="description">Description</Label>
-            <Textarea id="description" name="description" required />
+            <Textarea id="description" name="description" value={formFields.description} onChange={handleChange} required />
           </div>
           <div className="space-y-2">
             <Label htmlFor="duration">Duration</Label>
-            <Input id="duration" name="duration" required />
+            <Input id="duration" name="duration" value={formFields.duration} onChange={handleChange} required />
           </div>
           <div className="space-y-2">
             <Label htmlFor="eligibility">Eligibility</Label>
@@ -186,26 +176,19 @@ export function AddCourseForm() {
           </div>
           <div className="space-y-2">
             <Label htmlFor="trainerName">Trainer Name</Label>
-            <Select name="trainerName" required>
+            <Select id="trainerName" name="trainerName" value={formFields.trainerName} onValueChange={(value) => setFormFields({ ...formFields, trainerName: value })} required>
               <SelectTrigger>
                 <SelectValue placeholder="Select Trainer" />
               </SelectTrigger>
               <SelectContent>
-                {trainers.map((trainer) => (
-                  <SelectItem key={trainer.id} value={trainer.trainerName}>
-                    
+                {trainers.map((trainer, index) => (
+                  <SelectItem key={index} value={trainer.trainerName}>
                     {trainer.trainerName}
                   </SelectItem>
-                  
                 ))}
-                
               </SelectContent>
             </Select>
           </div>
-          {/* <div className="space-y-2">
-            <Label htmlFor="thumbnail">Thumbnail URL</Label>
-            <Input id="thumbnail" name="thumbnail" type="url" placeholder="https://example.com/course-thumbnail.jpg" />
-          </div> */}
         </CardContent>
         <CardFooter>
           <Button type="submit" className="w-full" disabled={isLoading}>
@@ -223,4 +206,3 @@ export function AddCourseForm() {
     </Card>
   )
 }
-

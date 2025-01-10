@@ -1,15 +1,14 @@
 import { useState, useEffect } from "react";
-import { AddCourseForm } from "@/components/CoursesComponents/AddCourseCard";
 import { CourseCard } from "@/components/CoursesComponents/CourseCard";
 import { CourseCardSkeleton } from "@/components/CoursesComponents/CourseCardSkeleton";
 import { Button } from "@/components/ui/button";
-import {
-  Dialog,
-  DialogTrigger,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-} from "@/components/ui/dialog";
+// import {
+//   Dialog,
+//   DialogTrigger,
+//   DialogContent,
+//   DialogHeader,
+//   DialogTitle,
+// } from "@/components/ui/dialog";
 
 export default function CoursePage() {
   const [courses, setCourses] = useState([]);
@@ -40,7 +39,7 @@ export default function CoursePage() {
       <div className="flex justify-between items-center mb-8">
         <h1 className="text-3xl font-bold">Featured Courses</h1>
 
-        <Dialog>
+        {/* <Dialog>
           <DialogTrigger asChild>
             <Button>Add Course</Button>
           </DialogTrigger>
@@ -50,7 +49,7 @@ export default function CoursePage() {
             </DialogHeader>
             <AddCourseForm />
           </DialogContent>
-        </Dialog>
+        </Dialog> */}
       </div>
 
       {error ? (

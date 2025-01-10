@@ -14,7 +14,15 @@ import TeacherPage from "./pagess/teacherpage";
 import CoursePage from "./pagess/course";
 import TrainerPage from "./pagess/Studentspage";
 import DashboardLayout from "./layouts/dashboardlayout";
+<<<<<<< HEAD
+=======
+import {
+  ProtectedRoute,
+  RoleBasedRoute,
+} from "./components/RouterAuthentication/ProtectedRoutes";
+>>>>>>> ad44015d38f71b22ae6f223457d160a86543ebbf
 import Assignmnets from "./pagess/Assignmnets";
+import Adminpage from "./pagess/Adminpage";
 
 function App() {
   return (
@@ -25,14 +33,57 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/select" element={<RoleCards />} />
 
-        {/* Dashboard Routes */}
-        <Route path="/admin" element={<DashboardLayout />}>
+        {/* Protected Routes for Admin/Trainer */}
+        <Route
+          path="/dashboard"
+          element={
+            <ProtectedRoute>
+              <DashboardLayout />
+             </ProtectedRoute>
+          }
+        >
           {/* Admin Sub-Routes */}
-          <Route index element={<Navigate to="/admin/teachers" replace />} />
-          <Route path="teachers" element={<TeacherPage />} />
-          <Route path="courses" element={<CoursePage />} />
-          <Route path="students" element={<TrainerPage />} />
-          <Route path="assignments" element={<Assignmnets />} />
+          <Route index element={<Navigate to="/dashboard/teachers" replace />} />
+          <Route
+            path="teachers"
+            element={
+              // <RoleBasedRoute>
+                <TeacherPage />
+              // </RoleBasedRoute>
+            }
+          />
+          <Route
+            path="courses"
+            element={
+              // <RoleBasedRoute>
+                <CoursePage />
+              // </RoleBasedRoute>
+            }
+          />
+          <Route
+            path="students"
+            element={
+              // <RoleBasedRoute>
+                <TrainerPage />
+              // </RoleBasedRoute>
+            }
+          />
+          <Route
+            path="assignments"
+            element={
+              // <RoleBasedRoute>
+                <Assignmnets />
+              // </RoleBasedRoute>
+            }
+          />
+          <Route
+            path="admin"
+            element={
+              // <RoleBasedRoute>
+                <Adminpage />
+              // </RoleBasedRoute>
+            }
+          />
         </Route>
 
         {/* Fallback Route */}

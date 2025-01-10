@@ -14,10 +14,6 @@ import TeacherPage from "./pagess/teacherpage";
 import CoursePage from "./pagess/course";
 import TrainerPage from "./pagess/Studentspage";
 import DashboardLayout from "./layouts/dashboardlayout";
-// import {
-//   ProtectedRoute,
-//   RoleBasedRoute,
-// } from "./components/RouterAuthentication/ProtectedRoutes";
 import Assignmnets from "./pagess/Assignmnets";
 
 function App() {
@@ -27,56 +23,16 @@ function App() {
         {/* Public Routes */}
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
-        <Route
-          path="/select"
-          element={
-              <RoleCards />
-          }
-        />
+        <Route path="/select" element={<RoleCards />} />
 
-        {/* Protected Routes for Admin/Trainer */}
-        <Route
-          path="/admin"
-          element={
-            <ProtectedRoute>
-              <DashboardLayout />
-            </ProtectedRoute>
-          }
-        >
+        {/* Dashboard Routes */}
+        <Route path="/admin" element={<DashboardLayout />}>
           {/* Admin Sub-Routes */}
           <Route index element={<Navigate to="/admin/teachers" replace />} />
-          <Route
-            path="teachers"
-            element={
-              // <RoleBasedRoute>
-                <TeacherPage />
-              // </RoleBasedRoute>
-            }
-          />
-          <Route
-            path="courses"
-            element={
-              // <RoleBasedRoute>
-                <CoursePage />
-              // </RoleBasedRoute>
-            }
-          />
-          <Route
-            path="students"
-            element={
-              // <RoleBasedRoute>
-                <TrainerPage />
-              // </RoleBasedRoute>
-            }
-          />
-          <Route
-            path="assignments"
-            element={
-              // <RoleBasedRoute>
-                <Assignmnets />
-              // </RoleBasedRoute>
-            }
-          />
+          <Route path="teachers" element={<TeacherPage />} />
+          <Route path="courses" element={<CoursePage />} />
+          <Route path="students" element={<TrainerPage />} />
+          <Route path="assignments" element={<Assignmnets />} />
         </Route>
 
         {/* Fallback Route */}

@@ -16,7 +16,7 @@ import Cookies from "js-cookie";
 import axios from "axios";
 import { AppRoutes } from "../../Constant/constant";
 import { AuthContext } from "../../context/Auth.context";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router";
 import LoadingSpinner from "../../components/LoderComponents/loading";
 
 export default function Login() {

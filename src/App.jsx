@@ -31,9 +31,9 @@ function App() {
         <Route
           path="/dashboard"
           element={
-            <ProtectedRoute> Uncomment and add authentication logic
-            <DashboardLayout />
-            </ProtectedRoute>
+            <ProtectedRoute>
+              <DashboardLayout />
+             </ProtectedRoute>
           }
         >
           {/* Admin Sub-Routes */}

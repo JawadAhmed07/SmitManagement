@@ -2,6 +2,7 @@ import { createContext, useEffect, useState } from "react";
 import Cookies from "js-cookie";
 import axios from "axios";
 import { AppRoutes } from "../Constant/constant";
+import LoadingSpinner from "@/components/LoderComponents/loading";
 
 // AuthContext provides user state and methods to interact with user data.
 export const AuthContext = createContext();
@@ -10,7 +11,7 @@ export default function AuthContextProvider({ children }) {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  const getUser = async () => {
+  async function getUser() {
     try {
       const res = await axios.get(AppRoutes.getMyInfo, {
         headers: {
@@ -25,7 +26,7 @@ export default function AuthContextProvider({ children }) {
     } finally {
       setLoading(false);
     }
-  };
+  }
 
   useEffect(() => {
     const token = Cookies.get("token");
@@ -36,8 +37,9 @@ export default function AuthContextProvider({ children }) {
     }
   }, []);
 
+  // Render the loader while fetching data
   if (loading) {
-    return <div>Loading...</div>; // Optional loader while fetching data
+    return <LoadingSpinner />;
   }
 
   return (

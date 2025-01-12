@@ -52,7 +52,7 @@ export default function Login() {
 
       Cookies.set("token", res?.data?.data?.token);
       setUser(res?.data?.data?.user);
-      navigate("/admin/teachers") ;
+      navigate("/dashboard") ;
     } catch (err) {
       console.error(
         "Login error:",
@@ -93,7 +93,7 @@ export default function Login() {
       setUser(res?.data?.data?.user);
       setLoading(false);
       console.log("Signup successful, navigating to /admin");
-      navigate("/admin");
+      navigate("/dashboard");
     } catch (err) {
       console.error(
         "Signup error:",

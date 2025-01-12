@@ -16,10 +16,12 @@ import axios from "axios";
 import Cookies from "js-cookie";
 import { AuthContext } from "@/context/Auth.context";
 import { useNavigate } from "react-router";
+import { PiStudentBold } from "react-icons/pi";
+import { GrUserAdmin } from "react-icons/gr";
 
 const menuItems = [
   {
-    icon: Dumbbell,
+    icon: GrUserAdmin,
     name: "Admin",
     path: "/dashboard/admin",
     subItems: [
@@ -43,11 +45,27 @@ const menuItems = [
     ],
   },
   {
-    icon: Dumbbell,
+    icon: PiStudentBold,
     name: "Students",
     path: "/dashboard/students",
     subItems: [
       { name: "Students", path: "/dashboard/students" },
+    ],
+  },
+  {
+    icon: PiStudentBold,
+    name: "Assignment",
+    path: "/dashboard/assignments",
+    subItems: [
+      { name: "Assignment", path: "/dashboard/assignments" },
+    ],
+  },
+  {
+    icon: PiStudentBold,
+    name: "Course Request",
+    path: "/dashboard/request",
+    subItems: [
+      { name: "Request", path: "/dashboard/request" },
     ],
   },
 ];
@@ -61,9 +79,9 @@ function Sidebar() {
   const navigate = useNavigate();
 
   const user = {
-    name: "John Doe",
-    email: "john@example.com",
-    avatar: "/avatars/john-doe.png",
+    name: "Admin",
+    email: "adminSystem123@mail.com",
+    avatar: "https://img.freepik.com/free-photo/handsome-man-thinking-with-concentration_23-2147805628.jpg?ga=GA1.1.518592586.1717923796&semt=ais_hybrid",
   };
 
   const handleLogout = () => {
@@ -151,7 +169,7 @@ function Sidebar() {
   ))}
 </nav>
 
-  <div className={`mt-48 p-4 ${isOpen ? "border-t border-indigo-600" : ""}`}>
+  <div className={`mt-20 p-4 ${isOpen ? "border-t border-indigo-600" : ""}`}>
     <div className="flex items-center">
       <Avatar>
         <AvatarImage src={user.avatar} alt={user.name} />

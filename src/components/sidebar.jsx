@@ -1,16 +1,21 @@
-import { Link, useLocation } from "react-router";
 import { useContext, useState, useEffect } from "react";
-import { Menu, X, ChevronDown, Users, BookOpen, Dumbbell } from "lucide-react";
+import { useLocation, Link } from "react-router-dom";
+import {
+  Menu,
+  X,
+  ChevronDown,
+  Users,
+  BookOpen,
+  PiStudentBold,
+} from "lucide-react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { AppRoutes } from "@/Constant/constant";
 import axios from "axios";
 import Cookies from "js-cookie";
-import { AuthContextProvider } from "@/context/Auth.context";
 import { useNavigate } from "react-router";
-import { PiStudentBold } from "react-icons/pi";
-import { GrUserAdmin } from "react-icons/gr";
 import LoadingSpinner from "@/components/LoderComponents/loading";
+import { AuthContextProvider } from "@/context/Auth.context"; // Corrected import
 
 const menuItems = [
   {
@@ -41,33 +46,13 @@ const menuItems = [
     icon: PiStudentBold,
     name: "Assignment",
     path: "/dashboard/assignments",
-    subItems: [
-      { name: "Assignment", path: "/dashboard/assignments" },
-    ],
+    subItems: [{ name: "Assignment", path: "/dashboard/assignments" }],
   },
   {
     icon: PiStudentBold,
     name: "Course Request",
     path: "/dashboard/request",
-    subItems: [
-      { name: "Request", path: "/dashboard/request" },
-    ],
-  },
-  {
-    icon: PiStudentBold,
-    name: "Assignment",
-    path: "/dashboard/assignments",
-    subItems: [
-      { name: "Assignment", path: "/dashboard/assignments" },
-    ],
-  },
-  {
-    icon: PiStudentBold,
-    name: "Course Request",
-    path: "/dashboard/request",
-    subItems: [
-      { name: "Request", path: "/dashboard/request" },
-    ],
+    subItems: [{ name: "Request", path: "/dashboard/request" }],
   },
 ];
 
@@ -76,25 +61,25 @@ function Sidebar() {
   const [expandedMenu, setExpandedMenu] = useState(null);
   const location = useLocation();
   const [isLoading, setLoading] = useState(false);
-  const context = useContext(AuthContextProvider);
+  const { user, setUser } = useContext(AuthContextProvider); // Corrected use of context
   const navigate = useNavigate();
 
-  const user = {
-    name: "Admin",
-    email: "adminSystem123@mail.com",
-    avatar: "https://img.freepik.com/free-photo/handsome-man-thinking-with-concentration_23-2147805628.jpg?ga=GA1.1.518592586.1717923796&semt=ais_hybrid",
-  };
+  // Check for user data in context or cookies
+  useEffect(() => {
+    const fetchUserData = async () => {
+      try {
+        const token = Cookies.get("token");
+        if (!token) {
+          navigate("/login");
+          return;
+        }
 
-  const handleLogout = () => {
-    setLoading(true);
-    axios
-      .get(
-        AppRoutes.LogOut,
-        {},
-        { headers: { Authorization: `Bearer ${Cookies.get("token")}` } }
-      )
-      .then(() => {
-        setLoading(false);
+        const response = await axios.get(AppRoutes.getUser, {
+          headers: { Authorization: `Bearer ${token}` },
+        });
+        setUser(response.data.user); // Update global context
+      } catch (err) {
+        console.error("Error fetching user data:", err);
         Cookies.remove("token");
         navigate("/login");
       }

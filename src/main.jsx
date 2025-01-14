@@ -7,8 +7,8 @@ import AuthContextProvider from './context/Auth.context';
 
 
 createRoot(document.getElementById("root")).render(
-    <AuthContextProvider>
-      <App />
-      <Toaster/>
-    </AuthContextProvider>
+  <AuthContextProvider>
+  <App />
+  <Toaster/>
+ </AuthContextProvider>
 );

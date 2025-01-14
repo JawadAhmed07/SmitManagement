@@ -8,11 +8,13 @@ import axios from "axios";
 import Cookies from "js-cookie";
 import { AuthContextProvider } from "@/context/Auth.context";
 import { useNavigate } from "react-router";
+import { PiStudentBold } from "react-icons/pi";
+import { GrUserAdmin } from "react-icons/gr";
 import LoadingSpinner from "@/components/LoderComponents/loading";
 
 const menuItems = [
   {
-    icon: Dumbbell,
+    icon: GrUserAdmin,
     name: "Admin",
     path: "/dashboard/admin",
     subItems: [{ name: "Admin", path: "/dashboard/admin" }],
@@ -30,10 +32,42 @@ const menuItems = [
     subItems: [{ name: "Courses", path: "/dashboard/courses" }],
   },
   {
-    icon: Dumbbell,
+    icon: PiStudentBold,
     name: "Students",
     path: "/dashboard/students",
     subItems: [{ name: "Students", path: "/dashboard/students" }],
+  },
+  {
+    icon: PiStudentBold,
+    name: "Assignment",
+    path: "/dashboard/assignments",
+    subItems: [
+      { name: "Assignment", path: "/dashboard/assignments" },
+    ],
+  },
+  {
+    icon: PiStudentBold,
+    name: "Course Request",
+    path: "/dashboard/request",
+    subItems: [
+      { name: "Request", path: "/dashboard/request" },
+    ],
+  },
+  {
+    icon: PiStudentBold,
+    name: "Assignment",
+    path: "/dashboard/assignments",
+    subItems: [
+      { name: "Assignment", path: "/dashboard/assignments" },
+    ],
+  },
+  {
+    icon: PiStudentBold,
+    name: "Course Request",
+    path: "/dashboard/request",
+    subItems: [
+      { name: "Request", path: "/dashboard/request" },
+    ],
   },
 ];
 
@@ -45,23 +79,22 @@ function Sidebar() {
   const context = useContext(AuthContextProvider);
   const navigate = useNavigate();
 
-  const { user, setUser } = context;
+  const user = {
+    name: "Admin",
+    email: "adminSystem123@mail.com",
+    avatar: "https://img.freepik.com/free-photo/handsome-man-thinking-with-concentration_23-2147805628.jpg?ga=GA1.1.518592586.1717923796&semt=ais_hybrid",
+  };
 
-  useEffect(() => {
-    const fetchUserData = async () => {
-      try {
-        const token = Cookies.get("token");
-        if (!token) {
-          navigate("/login");
-          return;
-        }
-
-        const response = await axios.get(AppRoutes.getUser, {
-          headers: { Authorization: `Bearer ${token}` },
-        });
-        setUser(response.data.user); // Update global context
-      } catch (err) {
-        console.error("Error fetching user data:", err);
+  const handleLogout = () => {
+    setLoading(true);
+    axios
+      .get(
+        AppRoutes.LogOut,
+        {},
+        { headers: { Authorization: `Bearer ${Cookies.get("token")}` } }
+      )
+      .then(() => {
+        setLoading(false);
         Cookies.remove("token");
         navigate("/login");
       }

@@ -53,7 +53,7 @@ export default function Login() {
 
       Cookies.set("token", res?.data?.data?.token);
       setUser(res?.data?.data?.user);
-      navigate("/dashboard");
+      navigate("/dashboard") ;
     } catch (err) {
       console.error(
         "Login error:",

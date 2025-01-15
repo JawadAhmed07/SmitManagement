@@ -8,7 +8,7 @@ import {AuthContextProvider} from "@/context/Auth.context.jsx";
 
 createRoot(document.getElementById("root")).render(
   <AuthContextProvider>
-  <App />
-  <Toaster/>
- </AuthContextProvider>
+    <App />
+    <Toaster />
+  </AuthContextProvider>
 );

@@ -20,7 +20,7 @@ import { VscGitPullRequestGoToChanges } from "react-icons/vsc";
 import AuthContext from "@/context/Auth.context";
 import { PiStudent } from "react-icons/pi";
 
-
+  
 const menuItems = [
   {
     icon: GrUserAdmin,
@@ -79,7 +79,7 @@ function Sidebar() {
   const [isLoading, setLoading] = useState(false);
   const { setUser } = useContext(AuthContext);
   const navigate = useNavigate();
-
+// console.log("user ",setUser)
   const user = {
     name: "Admin",
     email: "adminSystem123@mail.com",

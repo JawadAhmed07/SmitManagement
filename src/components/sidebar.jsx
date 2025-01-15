@@ -18,6 +18,9 @@ import { AuthContext } from "@/context/Auth.context";
 import { useNavigate } from "react-router";
 import { PiStudentBold } from "react-icons/pi";
 import { GrUserAdmin } from "react-icons/gr";
+import { MdOutlineAssignment } from "react-icons/md";
+import { VscGitPullRequestGoToChanges } from "react-icons/vsc";
+
 
 const menuItems = [
   {
@@ -53,7 +56,7 @@ const menuItems = [
     ],
   },
   {
-    icon: PiStudentBold,
+    icon: MdOutlineAssignment,
     name: "Assignment",
     path: "/dashboard/assignments",
     subItems: [
@@ -61,7 +64,7 @@ const menuItems = [
     ],
   },
   {
-    icon: PiStudentBold,
+    icon: VscGitPullRequestGoToChanges,
     name: "Course Request",
     path: "/dashboard/request",
     subItems: [

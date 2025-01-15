@@ -15,7 +15,7 @@ import { useContext, useState } from "react";
 import Cookies from "js-cookie";
 import axios from "axios";
 import { AppRoutes } from "../../Constant/constant";
-import { AuthContext } from "../../context/Auth.context";
+import {AuthContext, useAuth } from "@/context/Auth.context";
 import { useNavigate } from "react-router";
 import LoadingSpinner from "../../components/LoderComponents/loading";
 
@@ -23,7 +23,8 @@ export default function Login() {
   const [isLoading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const navigate = useNavigate();
-  const { setUser } = useContext(AuthContext);
+  const { user, setUser } = useAuth();
+
 
   // Handle login
   const handleLogin = async (e) => {
@@ -95,11 +96,10 @@ export default function Login() {
       console.log("Signup successful, navigating to /admin");
       navigate("/dashboard");
     } catch (err) {
-      console.error(
-        "Signup error:",
-        err.response ? err.response.data : err.message
-      );
-      setError("Signup failed. Please try again.");
+      const errorMessage =
+        err.response?.data?.message || "Signup failed. Please try again.";
+      console.error("Signup error:", errorMessage);
+      setError(errorMessage);
       setLoading(false);
     }
   };
@@ -107,71 +107,72 @@ export default function Login() {
   return (
     <div className="login flex justify-center my-24 p-2">
       {/* <a href="/select"> Select Role</a> */}
-      {isLoading ? <LoadingSpinner /> 
-      :
-      <Tabs defaultValue="account" className="w-[400px]">
-        <TabsList className="grid w-full grid-cols-2">
-          <TabsTrigger value="account">Login</TabsTrigger>
-          <TabsTrigger value="password">Signup</TabsTrigger>
-        </TabsList>
-        <TabsContent value="account">
-          <Card>
-            <CardHeader>
-              <CardTitle>Login</CardTitle>
-              <CardDescription>Login to your account</CardDescription>
-            </CardHeader>
-            <form onSubmit={handleLogin}>
-              <CardContent className="space-y-2">
-                {error && <p className="text-red-500 text-sm">{error}</p>}
-                <div className="space-y-1">
-                  <Label htmlFor="email">Email</Label>
-                  <Input id="email" name="email" />
-                </div>
-                <div className="space-y-1">
-                  <Label htmlFor="password">Password</Label>
-                  <Input id="password" name="password" type="password" />
-                </div>
-              </CardContent>
-              <CardFooter>
-                <Button type="submit" className="w-40" disabled={isLoading}>
-                  {isLoading ? "Logging in..." : "Login"}
-                </Button>
-              </CardFooter>
-            </form>
-          </Card>
-        </TabsContent>
-        <TabsContent value="password">
-          <Card>
-            <CardHeader>
-              <CardTitle>Signup</CardTitle>
-              <CardDescription>Create an account</CardDescription>
-            </CardHeader>
-            <form onSubmit={handleSignup}>
-              <CardContent className="space-y-2">
-                {error && <p className="text-red-500 text-sm">{error}</p>}
-                <div className="space-y-1">
-                  <Label htmlFor="fullName">Full Name</Label>
-                  <Input id="fullName" name="fullName" />
-                </div>
-                <div className="space-y-1">
-                  <Label htmlFor="email">Email</Label>
-                  <Input id="email" name="email" type="email" />
-                </div>
-                <div className="space-y-1">
-                  <Label htmlFor="new">Password</Label>
-                  <Input id="new" name="new" type="password" />
-                </div>
-              </CardContent>
-              <CardFooter>
-                <Button type="submit" className="w-40" disabled={isLoading}>
-                  {isLoading ? "Signing up..." : "Sign up"}
-                </Button>
-              </CardFooter>
-            </form>
-          </Card>
-        </TabsContent>
-      </Tabs>
-      }
+      {isLoading ? (
+        <LoadingSpinner />
+      ) : (
+        <Tabs defaultValue="account" className="w-[400px]">
+          <TabsList className="grid w-full grid-cols-2">
+            <TabsTrigger value="account">Login</TabsTrigger>
+            <TabsTrigger value="password">Signup</TabsTrigger>
+          </TabsList>
+          <TabsContent value="account">
+            <Card>
+              <CardHeader>
+                <CardTitle>Login</CardTitle>
+                <CardDescription>Login to your account</CardDescription>
+              </CardHeader>
+              <form onSubmit={handleLogin}>
+                <CardContent className="space-y-2">
+                  {error && <p className="text-red-500 text-sm">{error}</p>}
+                  <div className="space-y-1">
+                    <Label htmlFor="email">Email</Label>
+                    <Input id="email" name="email" />
+                  </div>
+                  <div className="space-y-1">
+                    <Label htmlFor="password">Password</Label>
+                    <Input id="password" name="password" type="password" />
+                  </div>
+                </CardContent>
+                <CardFooter>
+                  <Button type="submit" className="w-40" disabled={isLoading}>
+                    {isLoading ? "Logging in..." : "Login"}
+                  </Button>
+                </CardFooter>
+              </form>
+            </Card>
+          </TabsContent>
+          <TabsContent value="password">
+            <Card>
+              <CardHeader>
+                <CardTitle>Signup</CardTitle>
+                <CardDescription>Create an account</CardDescription>
+              </CardHeader>
+              <form onSubmit={handleSignup}>
+                <CardContent className="space-y-2">
+                  {error && <p className="text-red-500 text-sm">{error}</p>}
+                  <div className="space-y-1">
+                    <Label htmlFor="fullName">Full Name</Label>
+                    <Input id="fullName" name="fullName" />
+                  </div>
+                  <div className="space-y-1">
+                    <Label htmlFor="email">Email</Label>
+                    <Input id="email" name="email" type="email" />
+                  </div>
+                  <div className="space-y-1">
+                    <Label htmlFor="new">Password</Label>
+                    <Input id="new" name="new" type="password" />
+                  </div>
+                </CardContent>
+                <CardFooter>
+                  <Button type="submit" className="w-40" disabled={isLoading}>
+                    {isLoading ? "Signing up..." : "Sign up"}
+                  </Button>
+                </CardFooter>
+              </form>
+            </Card>
+          </TabsContent>
+        </Tabs>
+      )}
     </div>
   );
 }

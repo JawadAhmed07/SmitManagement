@@ -10,6 +10,8 @@ import CoursePage from "./pagess/course";
 import TrainerPage from "./pagess/Studentspage";
 import DashboardLayout from "./layouts/dashboardlayout";
 import Adminpage from "./pagess/Adminpage";
+import { AuthContextProvider } from "./context/Auth.context";
+import Assignments from "./pagess/Assignmnets";
 
 function App() {
   return (

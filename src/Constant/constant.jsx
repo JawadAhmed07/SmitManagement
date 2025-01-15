@@ -1,7 +1,6 @@
-import { LogOut } from "lucide-react";
 
 const devUrl = "http://localhost:4000/";
-const prodUrl = "https://smitproject.onrender.com/";
+// const prodUrl = "https://smitproject.onrender.com/";
 
 export const BASE_URL = devUrl;
 

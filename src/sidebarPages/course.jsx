@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom"; // Import useNavigate for navigation
 import { CourseCard } from "@/components/CoursesComponents/CourseCard";
 import { CourseCardSkeleton } from "@/components/CoursesComponents/CourseCardSkeleton";
 import { Button } from "@/components/ui/button";
@@ -14,6 +15,8 @@ export default function CoursePage() {
   const [courses, setCourses] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+
+  const navigate = useNavigate(); // Initialize useNavigate
 
   useEffect(() => {
     const fetchCourses = async () => {
@@ -34,11 +37,17 @@ export default function CoursePage() {
     fetchCourses();
   }, []);
 
+  const handleCourseClick = (courseName) => {
+    // Navigate to the course detail page
+    navigate(`/dashboard/courses/${courseName}`);
+  };
+
   return (
     <div className="container mx-auto p-4">
       <div className="flex justify-between items-center mb-8">
         <h1 className="text-3xl font-bold">Featured Courses</h1>
 
+        {/* Add Course Dialog (Optional, can be uncommented if needed) */}
         {/* <Dialog>
           <DialogTrigger asChild>
             <Button>Add Course</Button>
@@ -62,18 +71,24 @@ export default function CoursePage() {
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {loading
-            ? Array(6).fill(0).map((_, index) => (
-                <CourseCardSkeleton key={index} />
-              ))
+            ? Array(6)
+                .fill(0)
+                .map((_, index) => <CourseCardSkeleton key={index} />)
             : courses.length > 0
             ? courses.map((course) => (
-                <CourseCard key={course._id} course={course} />
+                <CourseCard
+                  key={course._id}
+                  course={course}
+                  onClick={() => handleCourseClick(course.name)} // Add click handler
+                />
               ))
-            : <p className="col-span-full text-center text-xl text-gray-500 py-10">No courses available.</p>
-          }
+            : (
+              <p className="col-span-full text-center text-xl text-gray-500 py-10">
+                No courses available.
+              </p>
+            )}
         </div>
       )}
     </div>
   );
 }
-

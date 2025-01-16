@@ -1,15 +1,26 @@
-import { useContext, useState, useEffect } from "react";
-import { useLocation, Link } from "react-router-dom";
-import { Menu, X, ChevronDown, Users, User, BookOpenIcon } from "lucide-react";
-import { GrUserAdmin } from "react-icons/gr"; // Fixed Import
+// Sidebar.js
+import { Link, useLocation } from "react-router";
+import { useContext, useState } from "react";
+import {
+  Menu,
+  X,
+  ChevronDown,
+  Users,
+  BookOpen,
+} from "lucide-react";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { AppRoutes } from "@/Constant/constant";
 import axios from "axios";
 import Cookies from "js-cookie";
 import { useNavigate } from "react-router";
-import LoadingSpinner from "@/components/LoderComponents/loading";
-import { useAuth } from "@/context/Auth.context";
-import {Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
+import { GrUserAdmin } from "react-icons/gr";
+import { MdOutlineAssignment } from "react-icons/md";
+import { VscGitPullRequestGoToChanges } from "react-icons/vsc";
+import AuthContext from "@/context/Auth.context";
+import { PiStudent } from "react-icons/pi";
+import { FaRegUser } from "react-icons/fa";
+import { LiaChalkboardTeacherSolid } from "react-icons/lia";
 
   
 const menuItems = [
@@ -22,6 +33,22 @@ const menuItems = [
     ],
   },
   {
+    icon: FaRegUser,
+    name: "User",
+    path: "/dashboard/user",
+    subItems: [
+      { name: "User", path: "/dashboard/user" },
+    ],
+  },
+  {
+    icon: LiaChalkboardTeacherSolid,
+    name: "Trainer",
+    path: "/dashboard/trainer",
+    subItems: [
+      { name: "Trainer", path: "/dashboard/trainer" },
+    ],
+  },
+  {
     icon: Users,
     name: "Teachers",
     path: "/dashboard/teachers",
@@ -30,7 +57,7 @@ const menuItems = [
     ],
   },
   {
-    icon: BookOpenIcon,
+    icon: BookOpen,
     name: "Courses",
     path: "/dashboard/courses",
     subItems: [
@@ -38,7 +65,7 @@ const menuItems = [
     ],
   },
   {
-    icon: User,
+    icon: PiStudent,
     name: "Students",
     path: "/dashboard/students",
     subItems: [
@@ -46,7 +73,7 @@ const menuItems = [
     ],
   },
   {
-    icon: User,
+    icon: MdOutlineAssignment,
     name: "Assignment",
     path: "/dashboard/assignments",
     subItems: [
@@ -54,7 +81,7 @@ const menuItems = [
     ],
   },
   {
-    icon: User,
+    icon: VscGitPullRequestGoToChanges,
     name: "Course Request",
     path: "/dashboard/request",
     subItems: [
@@ -68,47 +95,14 @@ function Sidebar() {
   const [expandedMenu, setExpandedMenu] = useState(null);
   const location = useLocation();
   const [isLoading, setLoading] = useState(false);
-  const { user, setUser } = useAuth();
+  const { setUser } = useContext(AuthContext);
   const navigate = useNavigate();
-
-  useEffect(() => {
-    const fetchUserData = async () => {
-      try {
-        const token = Cookies.get("token");
-        if (!token) {
-          navigate("/login");
-          return;
-        }
-
-        const response = await axios.get(AppRoutes.getUser, {
-          headers: { Authorization: `Bearer ${token}` },
-        });
-        setUser(response.data.user); // Update context
-      } catch (err) {
-        console.error("Error fetching user data:", err);
-        Cookies.remove("token");
-        navigate("/login");
-      }
-    };
-
-    fetchUserData();
-  }, [navigate, setUser]);
-
-  // const handleLogout = async () => {
-  //   setLoading(true);
-  //   try {
-  //     await axios.get(AppRoutes.LogOut, {
-  //       headers: { Authorization: `Bearer ${Cookies.get("token")}` },
-  //     });
-  //     Cookies.remove("token");
-  //     setUser(null); // Clear context
-  //     navigate("/login");
-  //   } catch (err) {
-  //     console.error("Logout error:", err);
-  //   } finally {
-  //     setLoading(false);
-  //   }
-  // };
+// console.log("user ",setUser)
+  const user = {
+    name: "Admin",
+    email: "adminSystem123@mail.com",
+    avatar: "https://img.freepik.com/free-photo/handsome-man-thinking-with-concentration_23-2147805628.jpg?ga=GA1.1.518592586.1717923796&semt=ais_hybrid",
+  };
 
   const handleLogout = () => {
     setLoading(true);

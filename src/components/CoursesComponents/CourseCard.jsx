@@ -1,24 +1,32 @@
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
-import { Clock, Users } from "lucide-react";
+import { Clock, Users, BookOpen } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { EnrollmentDialog } from "./CourseEnrollDialog";
 
-export function CourseCard({ course }) {
-  // console.log("courses", course)
+export function CourseCard({ course, onClick }) {
   return (
-    <Card className="w-full max-w-sm overflow-hidden">
-      <CardHeader className="p-0">
-        {/* <div className="relative h-48 w-full">
-          <image
-            src={course.thumbnail } // Default thumbnail if none is provided
-            alt={course.title}
-            className="  object-cover"
-          />
-        </div> */}
-      </CardHeader>
+    <Card 
+      className="w-full max-w-sm overflow-hidden cursor-pointer hover:shadow-lg transition" 
+      onClick={onClick}
+    >
+      {/* <CardHeader className="p-0">
+        <div className="relative h-48 w-full bg-gray-200">
+          {course.thumbnail ? (
+            <img
+              src={course.thumbnail}
+              alt={course.title}
+              className="h-full w-full object-cover"
+            />
+          ) : (
+            <div className="flex items-center justify-center h-full text-gray-500">
+              <BookOpen className="h-10 w-10" />
+            </div>
+          )}
+        </div>
+      </CardHeader> */}
       <CardContent className="p-4">
-        <CardTitle className="text-xl font-bold my-4 mb-2">{course.title}</CardTitle>
-        <p className="text-sm text-gray-600 mb-4">{course.description}</p>
+        <CardTitle className="text-xl font-bold my-4">{course.title}</CardTitle>
+        <p className="text-sm text-gray-600 mb-4 line-clamp-3">{course.description}</p>
         <div className="flex items-center space-x-2 mb-2">
           <Clock className="h-4 w-4 text-gray-500" />
           <span className="text-sm text-gray-600">{course.duration || "N/A"}</span>

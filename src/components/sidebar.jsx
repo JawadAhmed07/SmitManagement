@@ -1,3 +1,9 @@
+<<<<<<< HEAD
+import { useContext, useState, useEffect } from "react";
+import { useLocation, Link } from "react-router-dom";
+import { Menu, X, ChevronDown, Users, User, BookOpenIcon } from "lucide-react";
+import { GrUserAdmin } from "react-icons/gr"; // Fixed Import
+=======
 // Sidebar.js
 import { Link, useLocation } from "react-router";
 import { useContext, useState } from "react";
@@ -8,17 +14,23 @@ import {
   Users,
   BookOpen,
 } from "lucide-react";
+>>>>>>> fa9ddde6436ea1b1d96e26a43cffce257b8ced5f
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { AppRoutes } from "@/Constant/constant";
 import axios from "axios";
 import Cookies from "js-cookie";
 import { useNavigate } from "react-router";
+<<<<<<< HEAD
+import LoadingSpinner from "@/components/LoderComponents/loading";
+import { useAuth } from "@/context/Auth.context";
+=======
 import { GrUserAdmin } from "react-icons/gr";
 import { MdOutlineAssignment } from "react-icons/md";
 import { VscGitPullRequestGoToChanges } from "react-icons/vsc";
 import AuthContext from "@/context/Auth.context";
 import { PiStudent } from "react-icons/pi";
+>>>>>>> fa9ddde6436ea1b1d96e26a43cffce257b8ced5f
 
   
 const menuItems = [
@@ -39,7 +51,7 @@ const menuItems = [
     ],
   },
   {
-    icon: BookOpen,
+    icon: BookOpenIcon,
     name: "Courses",
     path: "/dashboard/courses",
     subItems: [
@@ -47,7 +59,11 @@ const menuItems = [
     ],
   },
   {
+<<<<<<< HEAD
+    icon: User,
+=======
     icon: PiStudent,
+>>>>>>> fa9ddde6436ea1b1d96e26a43cffce257b8ced5f
     name: "Students",
     path: "/dashboard/students",
     subItems: [
@@ -55,7 +71,11 @@ const menuItems = [
     ],
   },
   {
+<<<<<<< HEAD
+    icon: User,
+=======
     icon: MdOutlineAssignment,
+>>>>>>> fa9ddde6436ea1b1d96e26a43cffce257b8ced5f
     name: "Assignment",
     path: "/dashboard/assignments",
     subItems: [
@@ -63,7 +83,11 @@ const menuItems = [
     ],
   },
   {
+<<<<<<< HEAD
+    icon: User,
+=======
     icon: VscGitPullRequestGoToChanges,
+>>>>>>> fa9ddde6436ea1b1d96e26a43cffce257b8ced5f
     name: "Course Request",
     path: "/dashboard/request",
     subItems: [
@@ -77,6 +101,48 @@ function Sidebar() {
   const [expandedMenu, setExpandedMenu] = useState(null);
   const location = useLocation();
   const [isLoading, setLoading] = useState(false);
+<<<<<<< HEAD
+  const { user, setUser } = useAuth();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const fetchUserData = async () => {
+      try {
+        const token = Cookies.get("token");
+        if (!token) {
+          navigate("/login");
+          return;
+        }
+
+        const response = await axios.get(AppRoutes.getUser, {
+          headers: { Authorization: `Bearer ${token}` },
+        });
+        setUser(response.data.user); // Update context
+      } catch (err) {
+        console.error("Error fetching user data:", err);
+        Cookies.remove("token");
+        navigate("/login");
+      }
+    };
+
+    fetchUserData();
+  }, [navigate, setUser]);
+
+  const handleLogout = async () => {
+    setLoading(true);
+    try {
+      await axios.get(AppRoutes.LogOut, {
+        headers: { Authorization: `Bearer ${Cookies.get("token")}` },
+      });
+      Cookies.remove("token");
+      setUser(null); // Clear context
+      navigate("/login");
+    } catch (err) {
+      console.error("Logout error:", err);
+    } finally {
+      setLoading(false);
+    }
+=======
   const { setUser } = useContext(AuthContext);
   const navigate = useNavigate();
 // console.log("user ",setUser)
@@ -84,6 +150,7 @@ function Sidebar() {
     name: "Admin",
     email: "adminSystem123@mail.com",
     avatar: "https://img.freepik.com/free-photo/handsome-man-thinking-with-concentration_23-2147805628.jpg?ga=GA1.1.518592586.1717923796&semt=ais_hybrid",
+>>>>>>> fa9ddde6436ea1b1d96e26a43cffce257b8ced5f
   };
 
   const handleLogout = () => {

@@ -1,6 +1,8 @@
 import { Button } from "@/components/ui/button";
 
 const Home = () => {
+
+ 
   return (
     <section className="text-gray-600  body-font">
       <div className="container mx-auto h-screen bg-green-200 flex px-5 py-32 items-center justify-center flex-col">

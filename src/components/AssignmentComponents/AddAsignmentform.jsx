@@ -1,94 +1,129 @@
-'use client'
+import { useState } from "react";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Textarea } from "@/components/ui/textarea";
 
-import { useState } from "react"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Textarea } from "@/components/ui/textarea"
-import { Label } from "@/components/ui/label"
-import { Loader2 } from 'lucide-react'
-import { useToast } from "@/hooks/use-toast"
+export function AddAssignmentForm() {
+  const [formData, setFormData] = useState({
+    title: "",
+    description: "",
+    dueDate: "",
+    batch: "",
+    points: "",
+  });
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
+  const [success, setSuccess] = useState(false);
 
-
-export function AssignmentForm({ onAssignmentAdded }) {
-  const [isLoading, setIsLoading] = useState(false)
-  const { toast } = useToast()
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
 
   const handleSubmit = async (e) => {
-    e.preventDefault()
-    setIsLoading(true)
-
-    const formData = new FormData(e.currentTarget)
-    const assignmentData = {
-      title: formData.get('title'),
-      description: formData.get('description'),
-      dueDate: formData.get('dueDate'),
-      course: formData.get('course'),
-      points: formData.get('points'),
-    }
+    e.preventDefault();
+    setLoading(true);
+    setError(null);
+    setSuccess(false);
 
     try {
-      const response = await fetch('http://localhost:4000/api/v1/assignments', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(assignmentData),
-      })
+      const response = await fetch("http://localhost:4000/api/v1/assignments", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
 
       if (!response.ok) {
-        throw new Error('Failed to add assignment')
+        const errorData = await response.json();
+        throw new Error(errorData.message || "Failed to add assignment");
       }
 
-      const newAssignment = await response.json()
-      onAssignmentAdded(newAssignment)
-      toast({
-        title: "Success",
-        description: "Assignment added successfully!",
-        variant: "success",
-      })
-    } catch (error) {
-      console.error('Error adding assignment:', error)
-      toast({
-        title: "Error",
-        description: "Failed to add assignment. Please try again.",
-        variant: "destructive",
-      })
+      setSuccess(true);
+      setFormData({
+        title: "",
+        description: "",
+        dueDate: "",
+        batch: "",
+        points: "",
+      });
+    } catch (err) {
+      setError(err.message);
     } finally {
-      setIsLoading(false)
+      setLoading(false);
     }
-  }
+  };
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-4">
+    <form
+      onSubmit={handleSubmit}
+      className=" p-4 border rounded-lg shadow-sm bg-white space-y-4"
+    >
+      {error && <p className="text-red-500">{error}</p>}
+      {success && <p className="text-green-500">Assignment added successfully!</p>}
+
       <div>
         <Label htmlFor="title">Title</Label>
-        <Input id="title" name="title" required />
+        <Input
+          id="title"
+          name="title"
+          value={formData.title}
+          onChange={handleChange}
+          placeholder="Enter assignment title"
+          required
+        />
       </div>
       <div>
         <Label htmlFor="description">Description</Label>
-        <Textarea id="description" name="description" required />
+        <Textarea
+          id="description"
+          name="description"
+          value={formData.description}
+          onChange={handleChange}
+          placeholder="Enter assignment description"
+          rows={4}
+          required
+        />
       </div>
       <div>
         <Label htmlFor="dueDate">Due Date</Label>
-        <Input id="dueDate" name="dueDate" type="datetime-local" required />
+        <Input
+          id="dueDate"
+          name="dueDate"
+          type="datetime-local"
+          value={formData.dueDate}
+          onChange={handleChange}
+          required
+        />
       </div>
       <div>
-        <Label htmlFor="course">Course</Label>
-        <Input id="course" name="course" required />
+        <Label htmlFor="batch">Batch</Label>
+        <Input
+          id="batch"
+          name="batch"
+          value={formData.batch}
+          onChange={handleChange}
+          placeholder="Enter batch name"
+          required
+        />
       </div>
       <div>
         <Label htmlFor="points">Points</Label>
-        <Input id="points" name="points" type="number" required />
+        <Input
+          id="points"
+          name="points"
+          type="number"
+          value={formData.points}
+          onChange={handleChange}
+          placeholder="Enter total points"
+          required
+        />
       </div>
-      <Button type="submit" className="w-full" disabled={isLoading}>
-        {isLoading ? (
-          <>
-            <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-            Adding Assignment...
-          </>
-        ) : (
-          'Add Assignment'
-        )}
+      <Button type="submit" className="w-full" disabled={loading}>
+        {loading ? "Adding..." : "Add Assignment"}
       </Button>
     </form>
-  )
+  );
 }
-

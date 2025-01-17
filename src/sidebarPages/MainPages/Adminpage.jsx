@@ -6,7 +6,7 @@ import { AddTrainerForm } from "@/components/TrainerComponents/AddTrainerForm"
 export default function AdminPage() {
   return (
     <div className="container mx-auto ">
-      <h1 className="text-3xl font-bold mb-6">Management System</h1>
+      <h1 className="text-3xl font-bold mb-6">Admin Management System</h1>
       <Tabs defaultValue="course" className="w-full">
         <TabsList className="grid w-full grid-cols-3">
           <TabsTrigger value="course">Add Course</TabsTrigger>

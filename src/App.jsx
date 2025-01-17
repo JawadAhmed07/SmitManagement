@@ -11,11 +11,11 @@ import TrainerPage from "./sidebarPages/Studentspage";
 import DashboardLayout from "./layouts/dashboardlayout";
 import Adminpage from "./sidebarPages/MainPages/Adminpage";
 // import { AuthContextProvider } from "./context/Auth.context";
-import Assignments from "./sidebarPages/Assignmnets";
 import CourseRequests from "./sidebarPages/Requests";
 import User from "./sidebarPages/MainPages/User";
 import Trainer from "./sidebarPages/MainPages/Trainer";
 import CourseDetail from "./sidebarPages/CourseDetailPage";
+import { AssignmentsList } from "./sidebarPages/Assignments";
 
 function App() {
   return (
@@ -36,9 +36,9 @@ function App() {
           />
           <Route path="teachers" element={<TeacherPage />} />
           <Route path="courses" element={<CoursePage />} />
-          <Route path="courses/:courseName" element={<CourseDetail />} /> {/* Dynamic route */}
+          <Route path="courses/:courseId" element={<CourseDetail />} /> {/* Dynamic route */}
           <Route path="students" element={<TrainerPage />} />
-          <Route path="Assignments" element={<Assignments />} />
+          <Route path="Assignments" element={<AssignmentsList />} />
           <Route path="admin" element={<Adminpage />} />
           <Route path="user" element={<User />} />
           <Route path="trainer" element={<Trainer />} />

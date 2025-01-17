@@ -2,8 +2,10 @@ import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/componen
 import { Clock, Users, BookOpen } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { EnrollmentDialog } from "./CourseEnrollDialog";
+import { Button } from "../ui/button";
 
 export function CourseCard({ course, onClick }) {
+
   return (
     <Card 
       className="w-full max-w-sm overflow-hidden cursor-pointer hover:shadow-lg transition" 
@@ -56,7 +58,14 @@ export function CourseCard({ course, onClick }) {
         <div className="text-sm text-gray-600">
           Trainer: <span className="font-semibold">{course?.trainerName || "Unknown"}</span>
         </div>
-        <EnrollmentDialog courseName={course.title} />
+        <a
+          href={`/dashboard/courses/${course._id}`} // Dynamic route to course details
+           >
+          <Button>
+
+          Course Detail
+          </Button>
+        </a>
       </CardFooter>
     </Card>
   );

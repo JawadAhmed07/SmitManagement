@@ -6,7 +6,7 @@ import { Badge } from "@/components/ui/badge";
 import { EnrollmentDialog } from "@/components/CoursesComponents/CourseEnrollDialog";
 
 const CourseDetail = () => {
-  const { courseName } = useParams();
+  const { courseId } = useParams(); // Fetch courseId from route params
   const [course, setCourse] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -14,7 +14,7 @@ const CourseDetail = () => {
   useEffect(() => {
     const fetchCourseDetails = async () => {
       try {
-        const response = await fetch(`http://localhost:4000/api/v1/course/available/${courseName}`);
+        const response = await fetch(`http://localhost:4000/api/v1/course/available/${courseId}`);
         if (!response.ok) {
           throw new Error("Failed to fetch course details");
         }
@@ -28,7 +28,7 @@ const CourseDetail = () => {
     };
 
     fetchCourseDetails();
-  }, [courseName]);
+  }, [courseId]); // Dependency is now courseId
 
   if (loading) {
     return <p className="text-center mt-10">Loading course details...</p>;

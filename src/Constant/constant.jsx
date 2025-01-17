@@ -1,15 +1,16 @@
-
 const devUrl = "http://localhost:4000/";
-// const prodUrl = "https://smitproject.onrender.com/";
+const prodUrl = "https://smitproject.onrender.com/";
 
-export const BASE_URL = devUrl;
+// Use the environment variable to set the base URL
+export const BASE_URL =
+  process.env.NODE_ENV === "production" ? prodUrl : devUrl;
 
 export const AppRoutes = {
   login: BASE_URL + "api/v1/user/login",
   register: BASE_URL + "api/v1/user/register",
-  LogOut: BASE_URL + "api/v1/user/logout",
+  logout: BASE_URL + "api/v1/user/logout",
   getMyInfo: BASE_URL + "api/v1/user/profile",
-  //   getCourses: BASE_URL + "course",
-  //   getStudents: BASE_URL + "students",
-  //   addCourse: BASE_URL + "course",
+  getCourses: BASE_URL + "api/v1/course",
+  getTrainers: BASE_URL + "api/v1/trainers",
+  addCourse: BASE_URL + "api/v1/course",
 };

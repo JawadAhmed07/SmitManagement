@@ -21,9 +21,9 @@ export const AuthContextProvider = ({ children }) => {
           Authorization: `Bearer ${Cookies.get("token")}`,
         },
       });
-      setUser(res.data.data); // Assume the user info is in `res.data.data`
+      setUser(res.data.data); // Assume user data is in `res.data.data`
     } catch (err) {
-      console.error("Error fetching user info:", err);
+      console.error("Error fetching user info:", err.message);
       Cookies.remove("token");
       setUser(null);
     } finally {
@@ -37,35 +37,12 @@ export const AuthContextProvider = ({ children }) => {
     if (token) {
       getUser();
     } else {
-      setLoading(false); // No token means no need to fetch
+      setLoading(false); // No token, no need to fetch user
     }
   }, []);
 
-  // ProtectedRoute Logic
-  const ProtectedRoute = ({ children, requiredRole }) => {
-    const location = useLocation();
-
-    if (loading) {
-      // Show spinner while loading user data
-      return <LoadingSpinner />;
-    }
-
-    if (!user) {
-      // Redirect to login if not authenticated
-      return <Navigate to="/login" replace state={{ from: location }} />;
-    }
-
-    if (requiredRole && user.role !== requiredRole) {
-      // Redirect unauthorized roles
-      return <Navigate to="/" replace />;
-    }
-
-    // Render the child components if all checks pass
-    return children;
-  };
-
   return (
-    <AuthContext.Provider value={{ user, setUser, loading, ProtectedRoute }}>
+    <AuthContext.Provider value={{ user, setUser, loading }}>
       {loading ? <LoadingSpinner /> : children}
     </AuthContext.Provider>
   );
@@ -74,11 +51,34 @@ export const AuthContextProvider = ({ children }) => {
 // Custom Hook for easier access
 export const useAuth = () => {
   const context = useContext(AuthContext);
-  if (context === undefined) {
-    throw new Error('useAuth must be used within an AuthProvider');
+  if (!context) {
+    throw new Error("useAuth must be used within an AuthProvider");
   }
   return context;
 };
 
+// ProtectedRoute Component
+export const ProtectedRoute = ({ children, requiredRole }) => {
+  const { user, loading } = useAuth();
+  const location = useLocation();
+
+  if (loading) {
+    // Show spinner while loading user data
+    return <LoadingSpinner />;
+  }
+
+  if (!user) {
+    // Redirect to login if not authenticated
+    return <Navigate to="/login" replace state={{ from: location }} />;
+  }
+
+  if (requiredRole && user.role !== requiredRole) {
+    // Redirect unauthorized roles
+    return <Navigate to="/" replace />;
+  }
+
+  // Render child components if all checks pass
+  return children;
+};
 
 export default AuthContext;

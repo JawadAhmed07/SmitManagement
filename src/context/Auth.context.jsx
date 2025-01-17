@@ -77,8 +77,25 @@ export const ProtectedRoute = ({ children, requiredRole }) => {
     return <Navigate to="/" replace />;
   }
 
-  // Render child components if all checks pass
-  return children;
+    // Render the child components if all checks pass
+    return children;
+  };
+
+  return (
+    <AuthContext.Provider value={{ user, setUser, loading, ProtectedRoute }}>
+      {loading ? <LoadingSpinner /> : children}
+    </AuthContext.Provider>
+  );
 };
+
+// Custom Hook for easier access
+export const useAuth = () => {
+  const context = useContext(AuthContext);
+  if (context === undefined) {
+    throw new Error('useAuth must be used within an AuthProvider');
+  }
+  return context;
+};
+
 
 export default AuthContext;

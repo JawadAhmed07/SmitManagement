@@ -1,3 +1,13 @@
+// Sidebar.js
+import { Link, useLocation } from "react-router";
+import { useContext, useState } from "react";
+import {
+  Menu,
+  X,
+  ChevronDown,
+  Users,
+  BookOpen,
+} from "lucide-react";
 import { useContext, useState, useEffect } from "react";
 import { useLocation, Link } from "react-router-dom";
 import { Menu, X, ChevronDown, Users, User, BookOpenIcon } from "lucide-react";
@@ -11,6 +21,15 @@ import { AppRoutes } from "@/Constant/constant";
 import axios from "axios";
 import Cookies from "js-cookie";
 import { useNavigate } from "react-router";
+import { GrUserAdmin } from "react-icons/gr";
+import { MdOutlineAssignment } from "react-icons/md";
+import { VscGitPullRequestGoToChanges } from "react-icons/vsc";
+import AuthContext from "@/context/Auth.context";
+import { PiStudent } from "react-icons/pi";
+import { FaRegUser } from "react-icons/fa";
+import { LiaChalkboardTeacherSolid } from "react-icons/lia";
+
+  
 import LoadingSpinner from "@/components/LoderComponents/loading";
 import { useAuth } from "@/context/Auth.context";
 
@@ -22,13 +41,45 @@ const menuItems = [
     subItems: [{ name: "Admin", path: "/dashboard/admin" }],
   },
   {
+    icon: FaRegUser,
+    name: "User",
+    path: "/dashboard/user",
+    subItems: [
+      { name: "User", path: "/dashboard/user" },
+    ],
+  },
+  {
+    icon: LiaChalkboardTeacherSolid,
+    name: "Trainer",
+    path: "/dashboard/trainer",
+    subItems: [
+      { name: "Trainer", path: "/dashboard/trainer" },
+    ],
+  },
+  {
+    icon: FaRegUser,
+    name: "User",
+    path: "/dashboard/user",
+    subItems: [
+      { name: "User", path: "/dashboard/user" },
+    ],
+  },
+  {
+    icon: LiaChalkboardTeacherSolid,
+    name: "Trainer",
+    path: "/dashboard/trainer",
+    subItems: [
+      { name: "Trainer", path: "/dashboard/trainer" },
+    ],
+  },
+  {
     icon: Users,
     name: "Teachers",
     path: "/dashboard/teachers",
     subItems: [{ name: "Teachers", path: "/dashboard/teachers" }],
   },
   {
-    icon: BookOpenIcon,
+    icon: BookOpen,
     name: "Courses",
     path: "/dashboard/courses",
     subItems: [{ name: "Courses", path: "/dashboard/courses" }],
@@ -85,6 +136,14 @@ function Sidebar() {
 
     fetchUserData();
   }, [navigate, setUser]);
+  const { setUser } = useContext(AuthContext);
+  const navigate = useNavigate();
+// console.log("user ",setUser)
+  const user = {
+    name: "Admin",
+    email: "adminSystem123@mail.com",
+    avatar: "https://img.freepik.com/free-photo/handsome-man-thinking-with-concentration_23-2147805628.jpg?ga=GA1.1.518592586.1717923796&semt=ais_hybrid",
+  };
 
   const handleLogout = () => {
     setLoading(true);

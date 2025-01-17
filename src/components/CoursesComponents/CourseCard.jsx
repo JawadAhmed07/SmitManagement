@@ -7,8 +7,8 @@ import { Button } from "../ui/button";
 export function CourseCard({ course, onClick }) {
 
   return (
-    <Card 
-      className="w-full max-w-sm overflow-hidden cursor-pointer hover:shadow-lg transition" 
+    <Card
+      className="w-full max-w-sm overflow-hidden cursor-pointer hover:shadow-lg transition"
       onClick={onClick}
     >
       {/* <CardHeader className="p-0">
@@ -58,14 +58,12 @@ export function CourseCard({ course, onClick }) {
         <div className="text-sm text-gray-600">
           Trainer: <span className="font-semibold">{course?.trainerName || "Unknown"}</span>
         </div>
-        <a
-          href={`/dashboard/courses/${course._id}`} // Dynamic route to course details
-           >
-          <Button>
 
-          Course Detail
-          </Button>
-        </a>
+        <Button>
+
+          Apply Now
+        </Button>
+
       </CardFooter>
     </Card>
   );

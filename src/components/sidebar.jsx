@@ -45,7 +45,8 @@ const menuItems = [
     name: "Trainer",
     path: "/dashboard/trainer",
     subItems: [
-      { name: "Trainer", path: "/dashboard/trainer" },
+      { name: "Add", path: "/dashboard/trainer" },
+      { name: "Classes", path: "/dashboard/trainer/classes" },
     ],
   },
   {

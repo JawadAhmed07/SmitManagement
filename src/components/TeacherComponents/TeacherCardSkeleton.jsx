@@ -1,7 +1,7 @@
 import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card"
 import { Skeleton } from "@/components/ui/skeleton"
 
-export function TrainerCardSkeleton() {
+export function TeacherCardSkeleton() {
   return (
     <Card className="flex flex-col justify-between">
       <CardHeader className="flex-grow space-y-2">

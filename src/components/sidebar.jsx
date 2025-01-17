@@ -136,14 +136,14 @@ function Sidebar() {
 
     fetchUserData();
   }, [navigate, setUser]);
-  const { setUser } = useContext(AuthContext);
-  const navigate = useNavigate();
-// console.log("user ",setUser)
-  const user = {
-    name: "Admin",
-    email: "adminSystem123@mail.com",
-    avatar: "https://img.freepik.com/free-photo/handsome-man-thinking-with-concentration_23-2147805628.jpg?ga=GA1.1.518592586.1717923796&semt=ais_hybrid",
-  };
+//   const { setUser } = useContext(AuthContext);
+  // const navigate = useNavigate();
+// // console.log("user ",setUser)
+//   const user = {
+//     name: "Admin",
+//     email: "adminSystem123@mail.com",
+//     avatar: "https://img.freepik.com/free-photo/handsome-man-thinking-with-concentration_23-2147805628.jpg?ga=GA1.1.518592586.1717923796&semt=ais_hybrid",
+  // };
 
   const handleLogout = () => {
     setLoading(true);

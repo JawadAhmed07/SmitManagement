@@ -1,16 +1,14 @@
 // Sidebar.js
 import { Link, useLocation } from "react-router";
-import { useContext, useState } from "react";
+import {  useEffect, useState } from "react";
 import {
   Menu,
   X,
   ChevronDown,
-  Users,
-  BookOpen,
+  Users,BookOpen,
 } from "lucide-react";
-import { useContext, useState, useEffect } from "react";
-import { useLocation, Link } from "react-router-dom";
-import { Menu, X, ChevronDown, Users, User, BookOpenIcon } from "lucide-react";
+
+
 import { GrUserAdmin } from "react-icons/gr";
 import { MdOutlineAssignment } from "react-icons/md";
 import { VscGitPullRequestGoToChanges } from "react-icons/vsc";
@@ -21,16 +19,11 @@ import { AppRoutes } from "@/Constant/constant";
 import axios from "axios";
 import Cookies from "js-cookie";
 import { useNavigate } from "react-router";
-import { GrUserAdmin } from "react-icons/gr";
-import { MdOutlineAssignment } from "react-icons/md";
-import { VscGitPullRequestGoToChanges } from "react-icons/vsc";
-import AuthContext from "@/context/Auth.context";
-import { PiStudent } from "react-icons/pi";
 import { FaRegUser } from "react-icons/fa";
 import { LiaChalkboardTeacherSolid } from "react-icons/lia";
 
   
-import LoadingSpinner from "@/components/LoderComponents/loading";
+// import LoadingSpinner from "@/components/LoderComponents/loading";
 import { useAuth } from "@/context/Auth.context";
 
 const menuItems = [

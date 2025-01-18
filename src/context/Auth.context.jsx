@@ -86,16 +86,15 @@ export const ProtectedRoute = ({ children, requiredRole }) => {
       {loading ? <LoadingSpinner /> : children}
     </AuthContext.Provider>
   );
-};
 
-// Custom Hook for easier access
-export const useAuth = () => {
-  const context = useContext(AuthContext);
-  if (context === undefined) {
-    throw new Error('useAuth must be used within an AuthProvider');
-  }
-  return context;
-};
+// // Custom Hook for easier access
+// export const useAuth = () => {
+//   const context = useContext(AuthContext);
+//   if (context === undefined) {
+//     throw new Error('useAuth must be used within an AuthProvider');
+//   }
+//   return context;
+// };
 
 
 export default AuthContext;

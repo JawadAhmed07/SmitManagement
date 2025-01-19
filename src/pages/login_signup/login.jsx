@@ -15,7 +15,7 @@ import { useContext, useState } from "react";
 import Cookies from "js-cookie";
 import axios from "axios";
 import { AppRoutes } from "../../Constant/constant";
-import { useAuth } from "@/context/Auth.context";
+// import { useAuth } from "@/context/Auth.context";
 import { useNavigate } from "react-router";
 import LoadingSpinner from "../../components/LoderComponents/loading";
 
@@ -23,7 +23,7 @@ export default function Login() {
   const [isLoading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const navigate = useNavigate();
-  const { user, setUser } = useAuth();
+  // const { user, setUser } = useAuth();
 
 
   // Handle login
@@ -52,7 +52,7 @@ export default function Login() {
       console.log("Login response:", res.data);
 
       Cookies.set("token", res?.data?.data?.token);
-      setUser(res?.data?.data?.user);
+      // setUser(res?.data?.data?.user);
       navigate("/dashboard") ;
     } catch (err) {
       console.error(
@@ -91,7 +91,7 @@ export default function Login() {
       console.log("Signup response:", res.data);
 
       Cookies.set("token", res?.data?.data?.token);
-      setUser(res?.data?.data?.user);
+      // setUser(res?.data?.data?.user);
       setLoading(false);
       console.log("Signup successful, navigating to /admin");
       navigate("/dashboard");

@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react"
 import { Button } from "@/components/ui/button"
-import { AssignmentRow } from "@/components/AssignmentComponents/AssignmentCard"
 import { Dialog, DialogTrigger, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog"
 import { AddAssignmentForm } from "@/components/AssignmentComponents/AddAsignmentform"
 import { AssignmentCardSkeleton } from "@/components/AssignmentComponents/AssignmentSkeleton"
+import { AssignmentRow } from "@/components/AssignmentComponents/AssignmentCard"
+import { AssignmentFilters } from "@/components/AssignmentComponents/AssignmenetFilter"
+import { ProgressChart } from "@/components/AssignmentComponents/ProgressChart"
 
 // Component to fetch and display assignments
 export function AssignmentsList() {
@@ -47,6 +49,8 @@ export function AssignmentsList() {
           </DialogContent>
         </Dialog>
       </div>
+      <AssignmentFilters/>
+      {/* <ProgressChart/> */}
 
       {loading ? (
         // Skeleton loading state

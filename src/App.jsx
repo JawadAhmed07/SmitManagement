@@ -14,7 +14,7 @@ import CourseRequests from "./sidebarPages/Requests";
 import User from "./sidebarPages/MainPages/User";
 import Trainer from "./sidebarPages/MainPages/TrainerSubPages/Trainer";
 import CourseDetail from "./sidebarPages/CourseDetailPage";
-import { AssignmentsList } from "./sidebarPages/Assignments";
+import { AssignmentsList } from "./sidebarPages/MainPages/TrainerSubPages/Assignments";
 import Classes from "./sidebarPages/MainPages/TrainerSubPages/Classes";
 import StudentPage from "./sidebarPages/Studentspage";
 
@@ -40,7 +40,7 @@ function App() {
           <Route path="courses/:courseId" element={<CourseDetail />} /> {/* Dynamic route */}
           <Route path="students" element={<StudentPage />} />
 
-          <Route path="Assignments" element={<AssignmentsList />} />
+          <Route path="trainer/assignments" element={<AssignmentsList />} />
           <Route path="admin" element={<Adminpage />} />
           <Route path="user" element={<User />} />
           <Route path="trainer" element={<Trainer />} />

@@ -1,13 +1,13 @@
 // Sidebar.js
 import { Link, useLocation } from "react-router";
-import {  useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import {
   Menu,
   X,
   ChevronDown,
-  Users,BookOpen,
+  Users,
+  BookOpen,
 } from "lucide-react";
-
 
 import { GrUserAdmin } from "react-icons/gr";
 import { MdOutlineAssignment } from "react-icons/md";
@@ -22,10 +22,6 @@ import { useNavigate } from "react-router";
 import { FaRegUser } from "react-icons/fa";
 import { LiaChalkboardTeacherSolid } from "react-icons/lia";
 
-  
-// import LoadingSpinner from "@/components/LoderComponents/loading";
-import { useAuth } from "@/context/Auth.context";
-
 const menuItems = [
   {
     icon: GrUserAdmin,
@@ -33,30 +29,23 @@ const menuItems = [
     path: "/dashboard/admin",
     subItems: [{ name: "Admin", path: "/dashboard/admin" }],
   },
-  {
-    icon: FaRegUser,
-    name: "User",
-    path: "/dashboard/user",
-    subItems: [
-      { name: "User", path: "/dashboard/user" },
-    ],
-  },
-  {
-    icon: LiaChalkboardTeacherSolid,
-    name: "Trainer",
-    path: "/dashboard/trainer",
-    subItems: [
-      { name: "Trainer", path: "/dashboard/trainer" },
-    ],
-  },
-  {
-    icon: FaRegUser,
-    name: "User",
-    path: "/dashboard/user",
-    subItems: [
-      { name: "User", path: "/dashboard/user" },
-    ],
-  },
+  // {
+  //   icon: FaRegUser,
+  //   name: "User",
+  //   path: "/dashboard/user",
+  //   subItems: [
+  //     { name: "User", path: "/dashboard/user" },
+  //   ],
+  // },
+ 
+  // {
+  //   icon: FaRegUser,
+  //   name: "User",
+  //   path: "/dashboard/user",
+  //   subItems: [
+  //     { name: "User", path: "/dashboard/user" },
+  //   ],
+  // },
   {
     icon: LiaChalkboardTeacherSolid,
     name: "Trainer",
@@ -64,6 +53,7 @@ const menuItems = [
     subItems: [
       { name: "Add", path: "/dashboard/trainer" },
       { name: "Classes", path: "/dashboard/trainer/classes" },
+      { name: "Assignments", path: "/dashboard/trainer/assignments" },
     ],
   },
   {
@@ -103,41 +93,15 @@ function Sidebar() {
   const [expandedMenu, setExpandedMenu] = useState(null);
   const location = useLocation();
   const [isLoading, setLoading] = useState(false);
-  const { user, setUser } = useAuth();
   const navigate = useNavigate();
 
   axios.defaults.withCredentials = true;
 
-  useEffect(() => {
-    const fetchUserData = async () => {
-      try {
-        const token = Cookies.get("token");
-        if (!token) {
-          navigate("/login");
-          return;
-        }
-
-        const response = await axios.get(AppRoutes.getMyInfo, {
-          headers: { Authorization: `Bearer ${token}` },
-        });
-        setUser(response.data.user); // Update context
-      } catch (err) {
-        console.error("Error fetching user data:", err);
-        Cookies.remove("token");
-        navigate("/login");
-      }
-    };
-
-    fetchUserData();
-  }, [navigate, setUser]);
-//   const { setUser } = useContext(AuthContext);
-  // const navigate = useNavigate();
-// // console.log("user ",setUser)
-//   const user = {
-//     name: "Admin",
-//     email: "adminSystem123@mail.com",
-//     avatar: "https://img.freepik.com/free-photo/handsome-man-thinking-with-concentration_23-2147805628.jpg?ga=GA1.1.518592586.1717923796&semt=ais_hybrid",
-  // };
+  const dummyUser = {
+    name: "Admin",
+    email: "adminSystem123@mail.com",
+    avatar: "https://img.freepik.com/free-photo/handsome-man-thinking-with-concentration_23-2147805628.jpg",
+  };
 
   const handleLogout = () => {
     setLoading(true);
@@ -148,7 +112,6 @@ function Sidebar() {
       .then(() => {
         setLoading(false);
         Cookies.remove("token");
-        setUser(null);
         navigate("/login");
       })
       .catch((err) => {
@@ -237,30 +200,24 @@ function Sidebar() {
           className={`mt-20 p-4 ${isOpen ? "border-t border-indigo-600" : ""}`}
         >
           <div className="flex items-center">
-            {user ? (
-              <>
-                <Avatar>
-                  <AvatarImage
-                    src={user.avatar || "https://via.placeholder.com/150"}
-                    alt={user.name || "User"}
-                  />
-                  <AvatarFallback>
-                    {user.name
-                      .split(" ")
-                      .map((n) => n[0])
-                      .join("")
-                      .toUpperCase()}
-                  </AvatarFallback>
-                </Avatar>
-                {isOpen && (
-                  <div className="ml-3">
-                    <p className="text-sm font-medium">{user.name}</p>
-                    <p className="text-xs text-gray-400">{user.email}</p>
-                  </div>
-                )}
-              </>
-            ) : (
-              <div className="text-gray-400">Loading user data...</div>
+            <Avatar>
+              <AvatarImage
+                src={dummyUser.avatar || "https://via.placeholder.com/150"}
+                alt={dummyUser.name || "User"}
+              />
+              <AvatarFallback>
+                {dummyUser.name
+                  .split(" ")
+                  .map((n) => n[0])
+                  .join("")
+                  .toUpperCase()}
+              </AvatarFallback>
+            </Avatar>
+            {isOpen && (
+              <div className="ml-3">
+                <p className="text-sm font-medium">{dummyUser.name}</p>
+                <p className="text-xs text-gray-400">{dummyUser.email}</p>
+              </div>
             )}
           </div>
           {isOpen && (

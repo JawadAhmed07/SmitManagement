@@ -1,8 +1,8 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { AddAssignmentForm } from "@/components/AssignmentComponents/AddAsignmentform";
 import  { AddResourceForm } from "@/components/TrainerComponent.jsx/Add Resources";
 import { TrainerAnnouncementForm } from "@/components/TrainerComponent.jsx/TrainerAnnouncement";
+import { AddAssignmentForm } from "@/components/AssignmentComponents/AddAsignmentform";
 
 export default function Trainer() {
   return (

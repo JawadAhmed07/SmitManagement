@@ -7,7 +7,7 @@ import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { useToast } from '@/hooks/use-toast';
 
-export function AddTrainerForm() {
+export function AddTeacherForm() {
   const [formData, setFormData] = useState({
     trainerName: '',
     email: '',

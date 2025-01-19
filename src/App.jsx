@@ -7,15 +7,16 @@ import Login from "./pages/login_signup/login";
 import RoleCards from "./pages/select/select";
 import TeacherPage from "./sidebarPages/teacherpage";
 import CoursePage from "./sidebarPages/course";
-import TrainerPage from "./sidebarPages/Studentspage";
 import DashboardLayout from "./layouts/dashboardlayout";
 import Adminpage from "./sidebarPages/MainPages/Adminpage";
 // import { AuthContextProvider } from "./context/Auth.context";
 import CourseRequests from "./sidebarPages/Requests";
 import User from "./sidebarPages/MainPages/User";
-import Trainer from "./sidebarPages/MainPages/Trainer";
+import Trainer from "./sidebarPages/MainPages/TrainerSubPages/Trainer";
 import CourseDetail from "./sidebarPages/CourseDetailPage";
-import { AssignmentsList } from "./sidebarPages/Assignments";
+import { AssignmentsList } from "./sidebarPages/MainPages/TrainerSubPages/Assignments";
+import Classes from "./sidebarPages/MainPages/TrainerSubPages/Classes";
+import StudentPage from "./sidebarPages/Studentspage";
 
 function App() {
   return (
@@ -37,11 +38,14 @@ function App() {
           <Route path="teachers" element={<TeacherPage />} />
           <Route path="courses" element={<CoursePage />} />
           <Route path="courses/:courseId" element={<CourseDetail />} /> {/* Dynamic route */}
-          <Route path="students" element={<TrainerPage />} />
-          <Route path="Assignments" element={<AssignmentsList />} />
+          <Route path="students" element={<StudentPage />} />
+
+          <Route path="trainer/assignments" element={<AssignmentsList />} />
           <Route path="admin" element={<Adminpage />} />
           <Route path="user" element={<User />} />
           <Route path="trainer" element={<Trainer />} />
+          <Route path="trainer/classes" element={<Classes />} />
+            
           <Route path="request" element={<CourseRequests />} />
         </Route>
 

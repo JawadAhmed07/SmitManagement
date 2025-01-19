@@ -23,17 +23,32 @@ const menuItems = [
     path: "/dashboard/admin",
     subItems: [{ name: "Admin", path: "/dashboard/admin" }],
   },
-  {
-    icon: FaRegUser,
-    name: "User",
-    path: "/dashboard/user",
-    subItems: [{ name: "User", path: "/dashboard/user" }],
-  },
+  // {
+  //   icon: FaRegUser,
+  //   name: "User",
+  //   path: "/dashboard/user",
+  //   subItems: [
+  //     { name: "User", path: "/dashboard/user" },
+  //   ],
+  // },
+ 
+  // {
+  //   icon: FaRegUser,
+  //   name: "User",
+  //   path: "/dashboard/user",
+  //   subItems: [
+  //     { name: "User", path: "/dashboard/user" },
+  //   ],
+  // },
   {
     icon: LiaChalkboardTeacherSolid,
     name: "Trainer",
     path: "/dashboard/trainer",
-    subItems: [{ name: "Trainer", path: "/dashboard/trainer" }],
+    subItems: [
+      { name: "Add", path: "/dashboard/trainer" },
+      { name: "Classes", path: "/dashboard/trainer/classes" },
+      { name: "Assignments", path: "/dashboard/trainer/assignments" },
+    ],
   },
   {
     icon: Users,
@@ -73,6 +88,11 @@ function Sidebar() {
     };
     fetchUserData();
   }, [navigate]);
+  // const dummyUser = {
+  //   name: "Admin",
+  //   email: "adminSystem123@mail.com",
+  //   avatar: "https://img.freepik.com/free-photo/handsome-man-thinking-with-concentration_23-2147805628.jpg",
+  // };
 
   const handleLogout = () => {
     setLoading(true);

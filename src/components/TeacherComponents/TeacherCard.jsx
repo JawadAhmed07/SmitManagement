@@ -4,7 +4,7 @@ import { Card } from "../ui/card";
 import { Avatar, AvatarImage, AvatarFallback } from "../ui/avatar";
 import { Folder, User } from "lucide-react";
 
-export default function TrainerCard({
+export default function TeacherCard({
     trainerName,
     email,
     age,

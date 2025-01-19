@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
-import { TrainerCardSkeleton } from "@/components/TrainerComponents/TrainerCardSkeleton";
-import TrainerCard from "@/components/TrainerComponents/TrainerCard";
+import TeacherCard from "@/components/TeacherComponents/TeacherCard";
+import { TeacherCardSkeleton } from "@/components/TeacherComponents/TeacherCardSkeleton";
 
 function TeacherPage() {
     const [trainers, setTrainers] = useState([]);
@@ -46,9 +46,9 @@ function TeacherPage() {
                 {loading
                     ? Array(3)
                         .fill(0)
-                        .map((_, index) => <TrainerCardSkeleton key={index} />)
+                        .map((_, index) => <TeacherCardSkeleton key={index} />)
                     : trainers.map((trainer, index) => (
-                        <TrainerCard
+                        <TeacherCard
                             key={index}
                             trainerName={trainer.trainerName}
                             email={trainer.email}

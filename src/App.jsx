@@ -27,71 +27,29 @@ function App() {
   console.log("token=>", Cookies.get("token"));
 
   return (
-    <Routes>
-      {/* Public Routes */}
-      <Route path="/" element={<Home />} />
-      <Route
-        path="/login"
-        element={user ? <Navigate to="/dashboard/user" /> : <Login />}
-      />
+    <Route
+      path="/dashboard"
+      element={user ? <DashboardLayout /> : <Navigate to="/login" />}
+    >
+      <Route index element={<Navigate to="teachers" replace />} />
+      <Route path="teachers" element={<TeacherPage />} />
+      <Route path="courses" element={<CoursePage />} />
+      <Route path="courses/:courseId" element={<CourseDetail />} />
 
-      {/* Dashboard Routes */}
-      <Route
-        path="/dashboard"
-        element={user ? <DashboardLayout /> : <Navigate to="/dashboard" />}
-      >
-        {/* Admin Sub-Routes */}
-        <Route index element={<Navigate to="teachers" replace />} />
-        <Route path="teachers" element={<TeacherPage />} />
-        <Route path="courses" element={<CoursePage />} />
-        <Route path="courses/:courseId" element={<CourseDetail />} />{" "}
-        {/* Dynamic route */}
-        <Route path="students" element={<StudentPage />} />
-        <Route path="trainer" element={<Trainer />} />
-        <Route path="trainer/assignments" element={<AssignmentsList />} />
-        <Route path="trainer/classes" element={<Classes />} />
-        <Route path="admin" element={<Adminpage />} />
-        <Route path="request" element={<CourseRequests />} />
-        <Route
-          path="user"
-          element={
-            user ? <StudentPage /> : <Navigate to="/dashboard/students" />
-          }
-        />
+      <Route path="user">
+        <Route index element={<StudentPage />} />
+        <Route path="resources" element={<ClassResourcesPage />} />
       </Route>
-      <Routes>
-        {/* Public Routes */}
-        <Route path="/" element={<Home />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/select" element={<RoleCards />} />
 
-        {/* Protected Routes for Admin/Trainer */}
-        <Route path="/dashboard" element={<DashboardLayout />}>
-          {/* Admin Sub-Routes */}
-          <Route
-            index
-            element={<Navigate to="/dashboard/teachers" replace />}
-          />
-          <Route path="teachers" element={<TeacherPage />} />
-          <Route path="courses" element={<CoursePage />} />
-          <Route path="courses/:courseId" element={<CourseDetail />} /> {/* Dynamic route */}
-          <Route path="students" element={<StudentPage />} />
+      <Route path="trainer">
+        <Route index element={<Trainer />} />
+        <Route path="assignments" element={<AssignmentsList />} />
+        <Route path="classes" element={<Classes />} />
+      </Route>
 
-          <Route path="trainer/assignments" element={<AssignmentsList />} />
-          <Route path="admin" element={<Adminpage />} />
-
-          <Route path="user" element={<User />} />
-          <Route path="user/resources" element={<ClassResourcesPage />} />
-
-          <Route path="trainer" element={<Trainer />} />
-          <Route path="trainer/classes" element={<Classes />} />
-            
-          <Route path="request" element={<CourseRequests />} />
-        </Route>
-
-      {/* Fallback Route */}
-      <Route path="*" element={<Navigate to="/" replace />} />
-    </Routes>
+      <Route path="admin" element={<Adminpage />} />
+      <Route path="request" element={<CourseRequests />} />
+    </Route>
   );
 }
 

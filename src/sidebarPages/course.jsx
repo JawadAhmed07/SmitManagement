@@ -16,7 +16,6 @@ export default function CoursePage() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  const navigate = useNavigate(); // Initialize useNavigate
 
   useEffect(() => {
     const fetchCourses = async () => {
@@ -37,10 +36,7 @@ export default function CoursePage() {
     fetchCourses();
   }, []);
 
-  const handleCourseClick = (courseName) => {
-    // Navigate to the course detail page
-    navigate(`/dashboard/courses/${courseName}`);
-  };
+   
 
   return (
     <div className="container mx-auto p-4">

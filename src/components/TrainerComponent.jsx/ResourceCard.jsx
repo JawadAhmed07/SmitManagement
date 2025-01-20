@@ -3,8 +3,6 @@ import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/componen
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 
-
-
 export function ResourceCard({ resource }) {
   const typeColors = {
     video: "bg-red-100 text-red-800",
@@ -13,6 +11,10 @@ export function ResourceCard({ resource }) {
     github: "bg-purple-100 text-purple-800",
     other: "bg-gray-100 text-gray-800",
   }
+
+  // Check if the dueDate is a valid date
+  const dueDate = new Date(resource.dueDate);
+  const isValidDate = !isNaN(dueDate.getTime()); // checks for valid date
 
   return (
     <Card className="overflow-hidden transition-all hover:shadow-lg p-2">
@@ -39,11 +41,11 @@ export function ResourceCard({ resource }) {
           </div>
           <div className="flex items-center">
             <CalendarIcon className="w-4 h-4 mr-2 text-primary" />
-            <span>{new Date(resource.dueDate).toLocaleDateString()}</span>
+            <span>{isValidDate ? dueDate.toLocaleDateString() : "Invalid Date"}</span>
           </div>
           <div className="flex items-center col-span-2">
             <ClockIcon className="w-4 h-4 mr-2 text-primary" />
-            <span>{new Date(resource.dueDate).toLocaleTimeString()}</span>
+            <span>{isValidDate ? dueDate.toLocaleTimeString() : "Invalid Time"}</span>
           </div>
         </div>
       </CardContent>
@@ -65,4 +67,3 @@ export function ResourceCard({ resource }) {
     </Card>
   )
 }
-

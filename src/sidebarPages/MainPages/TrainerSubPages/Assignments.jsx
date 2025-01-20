@@ -1,7 +1,4 @@
 import { useEffect, useState } from "react"
-import { Button } from "@/components/ui/button"
-import { Dialog, DialogTrigger, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog"
-import { AddAssignmentForm } from "@/components/AssignmentComponents/AddAsignmentform"
 import { AssignmentCardSkeleton } from "@/components/AssignmentComponents/AssignmentSkeleton"
 import { AssignmentRow } from "@/components/AssignmentComponents/AssignmentCard"
 import { AssignmentFilters } from "@/components/AssignmentComponents/AssignmenetFilter"
@@ -37,17 +34,7 @@ export function AssignmentsList() {
     <div className="max-w-6xl p-4">
       <div className="flex justify-between items-center mb-6">
         <h1 className="text-3xl font-bold">Assignments</h1>
-        <Dialog>
-          <DialogTrigger asChild>
-            <Button>Add Assignment</Button>
-          </DialogTrigger>
-          <DialogContent>
-            <DialogHeader>
-              <DialogTitle>Add New Assignment</DialogTitle>
-            </DialogHeader>
-            <AddAssignmentForm />
-          </DialogContent>
-        </Dialog>
+       
       </div>
       <AssignmentFilters/>
       {/* <ProgressChart/> */}

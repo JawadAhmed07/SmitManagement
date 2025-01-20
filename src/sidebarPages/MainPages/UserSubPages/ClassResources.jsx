@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useToast } from "@/hooks/use-toast";
-import { ResourceCard } from "../TrainerComponent.jsx/ResourceCard";
+import { ResourceCard } from "../../../components/TrainerComponent.jsx/ResourceCard";
 
 export default function ClassResourcesPage() {
   const { toast } = useToast();

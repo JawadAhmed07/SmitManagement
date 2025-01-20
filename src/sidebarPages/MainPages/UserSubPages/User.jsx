@@ -7,6 +7,16 @@ import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 import { GraduationCap, Calendar, Edit, Save } from 'lucide-react';
 
+// Mock data for the user
+const mockUser = {
+  displayName: "John Doe",
+  email: "johndoe@example.com",
+  rollNumber: "123456",
+  city: "New York",
+  photoURL: "https://img.freepik.com/free-photo/handsome-smiling-young-man-standing-isolated-grey-background_171337-13635.jpg",
+};
+
+// Mock data for courses
 const courses = [
   {
     title: "Web and Mobile App Development",
@@ -50,8 +60,9 @@ const courses = [
     city: "Islamabad",
     campus: "Main",
   },
-]
+];
 
+// Mock data for attendance history
 const attendanceHistory = [
   { id: 1, date: "2023-03-15", course: "Introduction to React", status: "Present" },
   { id: 2, date: "2023-03-14", course: "Advanced JavaScript", status: "Absent" },
@@ -61,24 +72,15 @@ const attendanceHistory = [
 ];
 
 export default function User() {
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState(mockUser);
   const [isEditing, setIsEditing] = useState(false);
-  const [editedUser, setEditedUser] = useState({
-    displayName: "",
-    email: "",
-    rollNumber: "",
-    city: "",
-  });
-
-
+  const [editedUser, setEditedUser] = useState({ ...mockUser });
 
   const handleEdit = () => {
     setIsEditing(true);
   };
 
   const handleSave = () => {
-    // Here you would typically update the user's information in your backend
-    // For this example, we'll just update the local state
     setUser({ ...user, ...editedUser });
     setIsEditing(false);
   };
@@ -88,14 +90,8 @@ export default function User() {
     setEditedUser({ ...editedUser, [name]: value });
   };
 
-
-
-  if (!user) {
-    return <div className="text-center mt-8">Loading...</div>;
-  }
-
   return (
-    <div className="max-w-screen-xl  container mx-auto p-4 space-y-6">
+    <div className="max-w-screen-xl container mx-auto p-4 space-y-6">
       <Card>
         <CardHeader>
           <div className="flex items-center space-x-4">
@@ -133,14 +129,12 @@ export default function User() {
                 </div>
               ) : (
                 <>
-                  <CardTitle className="text-2xl font-bold">{user.displayName || "User"}</CardTitle>
+                  <CardTitle className="text-2xl font-bold">{user.displayName}</CardTitle>
                   <p className="text-sm text-gray-500">{user.email}</p>
-                  <p className="text-sm text-gray-500">Roll Number: {user.rollNumber || "N/A"}</p>
-                  <p className="text-sm text-gray-500">City: {user.city || "N/A"}</p>
+                  <p className="text-sm text-gray-500">Roll Number: {user.rollNumber}</p>
+                  <p className="text-sm text-gray-500">City: {user.city}</p>
                 </>
               )}
-
-           
             </div>
             <Button onClick={isEditing ? handleSave : handleEdit}>
               {isEditing ? <Save className="h-4 w-4 mr-2" /> : <Edit className="h-4 w-4 mr-2" />}
@@ -150,55 +144,51 @@ export default function User() {
         </CardHeader>
       </Card>
 
-      <Card className="p-4">
+      <Card>
         <CardHeader>
           <CardTitle className="text-xl font-semibold flex items-center">
             <GraduationCap className="mr-2" /> Enrolled Courses
           </CardTitle>
         </CardHeader>
-
-        <div className="grid lg:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-4">
-          {courses.map((course, index) => (
-            <div key={index} className="flex relative h-60 max-sm:w-full">
-              <img
-                alt={`${course.title} course`}
-                className="absolute inset-0 w-full h-full object-cover rounded-xl object-center"
-                src="https://img.freepik.com/free-psd/back-school-new-normal-banner_23-2149027689.jpg"
-              />
-              <Card className=" relative z-10 w-full border-4 border-gray-200 bg-white opacity-0 hover:opacity-100 transition-opacity duration-300">
-                <CardHeader>
-                  <CardTitle className="text-2xl font-bold">
-                    {course.title}
-                  </CardTitle>
-                </CardHeader>
-                <CardContent className="space-y-4">
-                  <div className="grid grid-cols-2 gap-4">
-                    <div>
-                      <span className="font-semibold">Batch: </span>
-                      <span className="text-gray-600">{course.batch}</span>
+        <CardContent>
+          <div className="grid lg:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-4">
+            {courses.map((course, index) => (
+              <div key={index} className="flex relative h-60 max-sm:w-full">
+                <img
+                  alt={`${course.title} course`}
+                  className="absolute inset-0 w-full h-full object-cover rounded-xl object-center"
+                  src="https://img.freepik.com/free-psd/back-school-new-normal-banner_23-2149027689.jpg"
+                />
+                <Card className="relative z-10 w-full border-4 border-gray-200 bg-white opacity-0 hover:opacity-100 transition-opacity duration-300">
+                  <CardHeader>
+                    <CardTitle className="text-2xl font-bold">{course.title}</CardTitle>
+                  </CardHeader>
+                  <CardContent className="space-y-4">
+                    <div className="grid grid-cols-2 gap-4">
+                      <div>
+                        <span className="font-semibold">Batch: </span>
+                        <span className="text-gray-600">{course.batch}</span>
+                      </div>
+                      <div>
+                        <span className="font-semibold">Roll: </span>
+                        <span className="text-gray-600">{course.roll}</span>
+                      </div>
+                      <div>
+                        <span className="font-semibold">City: </span>
+                        <span className="text-gray-600">{course.city}</span>
+                      </div>
+                      <div>
+                        <span className="font-semibold">Campus: </span>
+                        <span className="text-gray-600">{course.campus}</span>
+                      </div>
+                      <Badge className="bg-sky-100 w-fit text-sky-800 hover:bg-sky-100">ENROLLED</Badge>
                     </div>
-                    <div>
-                      <span className="font-semibold">Roll: </span>
-                      <span className="text-gray-600">{course.roll}</span>
-                    </div>
-                    <div>
-                      <span className="font-semibold">City: </span>
-                      <span className="text-gray-600">{course.city}</span>
-                    </div>
-                    <div>
-                      <span className="font-semibold">Campus: </span>
-                      <span className="text-gray-600">{course.campus}</span>
-                    </div>
-                    <Badge className="bg-sky-100 w-fit text-sky-800 hover:bg-sky-100">
-                      ENROLLED
-                    </Badge>
-                  </div>
-                </CardContent>
-              </Card>
-            </div>
-          ))}
-        </div>
-
+                  </CardContent>
+                </Card>
+              </div>
+            ))}
+          </div>
+        </CardContent>
       </Card>
 
       <Card>
@@ -213,8 +203,7 @@ export default function User() {
               <li key={record.id} className="flex justify-between items-center">
                 <span>{record.date}</span>
                 <span>{record.course}</span>
-                <span className={`font-semibold ${record.status === 'Present' ? 'text-green-600' : 'text-red-600'
-                  }`}>
+                <span className={`font-semibold ${record.status === 'Present' ? 'text-green-600' : 'text-red-600'}`}>
                   {record.status}
                 </span>
               </li>
@@ -225,4 +214,3 @@ export default function User() {
     </div>
   );
 }
-

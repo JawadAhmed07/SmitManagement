@@ -33,6 +33,7 @@ const menuItems = [
     subItems: [
       { name: "User", path: "/dashboard/user" },
       { name: "Class Resources", path: "/dashboard/user/resources" },
+      { name: "Assignmenets", path: "/dashboard/user/userAssignment" },
     ],
   },
   {
@@ -43,6 +44,7 @@ const menuItems = [
       { name: "Add", path: "/dashboard/trainer" },
       { name: "Classes", path: "/dashboard/trainer/classes" },
       { name: "Assignments", path: "/dashboard/trainer/assignments" },
+      { name: "Students", path: "/dashboard/trainer/students" },
     ],
   },
   {
@@ -56,6 +58,12 @@ const menuItems = [
     name: "Courses",
     path: "/dashboard/courses",
     subItems: [{ name: "Courses", path: "/dashboard/courses" }],
+  },
+  {
+    icon: BookOpen,
+    name: "Announcement",
+    path: "/dashboard/announcement",
+    subItems: [{ name: "Announcement", path: "/dashboard/announcement" }],
   },
 ];
 

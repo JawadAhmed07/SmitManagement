@@ -2,12 +2,22 @@ import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/componen
 import { Clock, Users, BookOpen, Layers, Briefcase } from "lucide-react"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "../ui/button"
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog"
+import { ApplyForCourse } from "./ApplyCourseForm"
+
 
 export function CourseCard({ course, onClick }) {
   return (
     <Card className="w-full max-w-sm overflow-hidden cursor-pointer hover:shadow-lg transition" onClick={onClick}>
       <CardContent className="p-4">
-        <CardTitle className="text-xl font-bold my-4">{course.title}</CardTitle>
+        <CardTitle className="text-xl font-bold my-4 uppercase font-sans">{course.title}</CardTitle>
         <p className="text-sm text-gray-600 mb-4 line-clamp-3">{course.description}</p>
         <div className="flex items-center space-x-2 mb-2">
           <Clock className="h-4 w-4 text-gray-500" />
@@ -44,7 +54,8 @@ export function CourseCard({ course, onClick }) {
         <div className="text-sm text-gray-600">
           Trainer: <span className="font-semibold">{course.trainerName}</span>
         </div>
-        <Button>Apply Now</Button>
+       <ApplyForCourse course={course}/>
+
       </CardFooter>
     </Card>
   )

@@ -7,6 +7,7 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { useToast } from "@/hooks/use-toast";
+import { Calendar } from "lucide-react";
 
 export function AddResourceForm() {
   const { toast } = useToast();
@@ -18,6 +19,7 @@ export function AddResourceForm() {
     courseName: "",
     batch: "",
     section: "",
+    dueDate: "",
   });
   const [loading, setLoading] = useState(false);
 
@@ -130,6 +132,21 @@ export function AddResourceForm() {
           value={formData.url}
           onChange={handleChange}
           placeholder="Enter resource URL"
+        />
+      </div>
+      <div className="space-y-2">
+        <Label htmlFor="dueDate" className="text-sm font-medium flex items-center">
+          <Calendar className="mr-2 h-4 w-4 text-primary" />
+          Due Date
+        </Label>
+        <Input
+          id="dueDate"
+          name="dueDate"
+          type="datetime-local"
+          value={formData.dueDate}
+          onChange={handleChange}
+          required
+          className="w-full"
         />
       </div>
       <div>

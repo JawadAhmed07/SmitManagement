@@ -8,7 +8,7 @@ import { CourseCard } from "@/components/CoursesComponents/CourseCard"
 const Home = () => {
   const [courses, setCourses] = useState([])
   const [isLoading, setIsLoading] = useState(true)
-  const [error, setError] = useState (null)
+  const [error, setError] = useState(null)
 
   useEffect(() => {
     const fetchCourses = async () => {
@@ -36,18 +36,19 @@ const Home = () => {
         <div className="container mx-auto flex justify-between items-center px-6 py-4">
           <h1 className="text-3xl font-bold uppercase shadow-lg">Saylani System</h1>
           <nav className="flex space-x-6">
-            <a href="#courses" className="hover:underline text-green-400 text-2xl">
+            <a href="#courses" className="hover:scale-110 hover:text-green-400 text-white text-2xl">
               Courses
             </a>
-            <a href="#stories" className="hover:underline text-green-400 text-2xl">
+            <a href="#stories" className="hover:scale-110 hover:text-green-400 text-white text-2xl">
               Success Stories
             </a>
-            <a href="#subscribe" className="hover:underline text-green-400 text-2xl">
+            <a href="#subscribe" className="hover:text-green-400 hover:scale-110 text-white text-2xl">
               Subscribe
             </a>
             <a href="/login">
-              <Button className="bg-white text-green-600 hover:bg-gray-200 py-2 px-6 rounded-lg">Login</Button>
+              <Button className="bg-white text-green-600  hover:bg-gray-200 py-2 px-6 rounded-lg">Login</Button>
             </a>
+            
           </nav>
         </div>
       </header>
@@ -60,14 +61,17 @@ const Home = () => {
             "url('https://res.cloudinary.com/saylani-welfare/image/upload/v1721909453/website-images/dynamic/692fbdfa-20b6-4f0b-9c59-778cca7ba0b5.jpg')",
         }}
       >
-        <div className="bg-black bg-opacity-70 absolute inset-0 flex items-center justify-center">
-          <div className="text-center text-white mt-16">
+        <div className="bg-black bg-opacity-30 absolute inset-0 flex items-center justify-center">
+          <div className="text-center text-green-400 -mt-9 ">
             <h1 className="text-6xl font-bold uppercase mb-6">Saylani Learning Management System</h1>
-            <p className="text-lg leading-relaxed mb-8">
+            <p className="text-xl leading-relaxed text-white mb-7">
               Empowering students with world-class education resources and career growth.
             </p>
             <a href="/login">
               <Button className="bg-green-500 hover:bg-green-600 px-8 py-4 rounded-lg">Get Started</Button>
+            </a>
+            <a target="_blank" href="https://saylaniwelfare.com/sponsor">
+              <Button className="bg-white mx-5  text-green-600  hover:bg-gray-200 py-2 px-6 rounded-lg">Be a Sponser</Button>
             </a>
           </div>
         </div>
@@ -84,9 +88,10 @@ const Home = () => {
           ) : (
             <div className="text-left grid grid-cols-1 md:grid-cols-4 gap-4  ">
               {courses.map((course) => (
-                <CourseCard 
+                <CourseCard
                   key={course._id}
                   course={course}
+                  // eslint-disable-next-line no-undef
                   onClick={() => handleCourseClick(course.name)} // Add click handler
                 />
               ))}
@@ -98,12 +103,17 @@ const Home = () => {
       {/* Success Stories Section */}
       <section id="stories" className="py-16 bg-gray-100">
         <div className="container mx-auto text-center">
-          <h2 className="text-3xl font-bold uppercase mb-6">Success Stories</h2>
+          <h2 className="text-4xl font-extrabold text-blue-500 uppercase mb-12">Success Stories</h2>
           <div className="relative">
             {/* Left Arrow Button */}
             <button
-              className="absolute left-0 top-1/2 transform -translate-y-1/2 bg-white shadow-md rounded-full p-2"
-              onClick={() => document.getElementById("stories-container")?.scrollBy({ left: -300, behavior: "smooth" })}
+              className="absolute left-0 top-1/2 transform -translate-y-1/2 -mx-9  bg-green-400 text-white shadow-lg rounded-full p-3 hover:bg-green-500 transition duration-300"
+              onClick={() =>
+                document.getElementById("stories-container")?.scrollBy({
+                  left: -300,
+                  behavior: "smooth", 
+                })
+              }
               aria-label="Previous story"
             >
               ◀
@@ -115,46 +125,67 @@ const Home = () => {
               className="flex space-x-6 overflow-x-scroll no-scrollbar px-4 pb-5"
               style={{ scrollBehavior: "smooth" }}
             >
-              <div className="bg-white min-w-[300px] p-6 shadow-lg rounded-lg">
-                <h3 className="text-xl font-semibold">John Doe</h3>
-                <p className="text-gray-700">
-                  "The LMS platform helped me switch careers successfully. Highly recommended!"
-                </p>
-              </div>
-              <div className="bg-white min-w-[300px] p-6 shadow-lg rounded-lg">
-                <h3 className="text-xl font-semibold">Jane Smith</h3>
-                <p className="text-gray-700">
-                  "I landed my dream job after completing the mobile app development course!"
-                </p>
-              </div>
-              <div className="bg-white min-w-[300px] p-6 shadow-lg rounded-lg">
-                <h3 className="text-xl font-semibold">Michael Brown</h3>
-                <p className="text-gray-700">
-                  "Thanks to Saylani LMS, I built a strong foundation in graphic designing!"
-                </p>
-              </div>
-              <div className="bg-white min-w-[300px] p-6 shadow-lg rounded-lg">
-                <h3 className="text-xl font-semibold">Emily Davis</h3>
-                <p className="text-gray-700">"The hands-on projects and expert guidance made learning so enjoyable."</p>
-              </div>
-              <div className="bg-white min-w-[300px] p-6 shadow-lg rounded-lg">
-                <h3 className="text-xl font-semibold">Alex Johnson</h3>
-                <p className="text-gray-700">
-                  "Saylani LMS courses helped me start my own successful freelance business."
-                </p>
-              </div>
-              <div className="bg-white min-w-[300px] p-6 shadow-lg rounded-lg">
-                <h3 className="text-xl font-semibold">Sarah Lee</h3>
-                <p className="text-gray-700">
-                  "The skills I learned through Saylani LMS courses were invaluable for my career growth."
-                </p>
-              </div>
+              {[
+                {
+                  name: "John Doe",
+                  image: "https://images.unsplash.com/photo-1530241160077-69502379a331?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fGZha2UlMjBwZXJzb258ZW58MHwxfDB8fHww",
+                  text: "The LMS platform helped me switch careers successfully. Highly recommended!",
+                },
+                {
+                  name: "Jane Smith",
+                  image: "https://images.unsplash.com/photo-1588747189888-b24581873a82?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8c3R1ZGVudHMlMjBzdWNjZXNzZnVsbHxlbnwwfDF8MHx8fDA%3D",
+                  text: "I landed my dream job after completing the mobile app development course!",
+                },
+                {
+                  name: "Michael Brown",
+                  image: "https://images.unsplash.com/photo-1588747189888-b24581873a82?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8c3R1ZGVudHMlMjBzdWNjZXNzZnVsbHxlbnwwfDF8MHx8fDA%3D",
+                  text: "Thanks to Saylani LMS, I built a strong foundation in graphic designing!",
+                },
+                {
+                  name: "Emily Davis",
+                  image: "https://images.unsplash.com/photo-1588747189888-b24581873a82?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8c3R1ZGVudHMlMjBzdWNjZXNzZnVsbHxlbnwwfDF8MHx8fDA%3D",
+                  text: "The hands-on projects and expert guidance made learning so enjoyable.",
+                },
+                {
+                  name: "Alex Johnson",
+                  image: "https://images.unsplash.com/photo-1588747189888-b24581873a82?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8c3R1ZGVudHMlMjBzdWNjZXNzZnVsbHxlbnwwfDF8MHx8fDA%3D",
+                  text: "Saylani LMS courses helped me start my own successful freelance business.",
+                },
+                {
+                  name: "Sarah Lee",
+                  image: "https://images.unsplash.com/photo-1588747189888-b24581873a82?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8c3R1ZGVudHMlMjBzdWNjZXNzZnVsbHxlbnwwfDF8MHx8fDA%3D",
+                  text: "The skills I learned through Saylani LMS courses were invaluable for my career growth.",
+                },
+              ].map((story, index) => (
+                <div
+                  key={index}
+                  className="bg-white min-w-[300px] max-w-sm p-6 shadow-lg rounded-lg transform hover:scale-105 transition duration-300"
+                >
+                  <div className="flex items-center space-x-4 mb-4">
+                    <img
+                      src={story.image}
+                      alt={`${story.name}'s profile`}
+                      className="w-16 h-16 rounded-full border-4 border-blue-500"
+                    />
+                    <div>
+                      <h3 className="text-lg font-bold text-gray-800">{story.name}</h3>
+                      <p className="text-sm text-green-400 font-semibold">Successful Student</p>
+                    </div>
+                  </div>
+                  <p className="text-gray-700 italic">"{story.text}"</p>
+                </div>
+              ))}
             </div>
 
             {/* Right Arrow Button */}
             <button
-              className="absolute right-0 top-1/2 transform -translate-y-1/2 bg-white shadow-md rounded-full p-2"
-              onClick={() => document.getElementById("stories-container")?.scrollBy({ left: 300, behavior: "smooth" })}
+              className="absolute right-0 top-1/2 transform -translate-y-1/2 bg-green-400 text-white shadow-lg rounded-full p-3 hover:bg-green-500 transition duration-300"
+              onClick={() =>
+                document.getElementById("stories-container")?.scrollBy({
+                  left: 300,
+                  behavior: "smooth",
+                })
+              }
               aria-label="Next story"
             >
               ▶
@@ -162,6 +193,7 @@ const Home = () => {
           </div>
         </div>
       </section>
+
 
       {/* Subscribe Section */}
       <section id="subscribe" className="py-16 bg-green-600 text-white">

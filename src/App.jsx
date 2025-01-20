@@ -18,6 +18,7 @@ import CourseDetail from "./sidebarPages/CourseDetailPage";
 import { AssignmentsList } from "./sidebarPages/MainPages/TrainerSubPages/Assignments";
 import Classes from "./sidebarPages/MainPages/TrainerSubPages/Classes";
 import StudentPage from "./sidebarPages/Studentspage";
+import ClassResourcesPage from "./components/UserComponents/ClassResources";
 
 function App() {
   const { user } = useContext(AuthContext);
@@ -58,6 +59,35 @@ function App() {
           }
         />
       </Route>
+      <Routes>
+        {/* Public Routes */}
+        <Route path="/" element={<Home />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/select" element={<RoleCards />} />
+
+        {/* Protected Routes for Admin/Trainer */}
+        <Route path="/dashboard" element={<DashboardLayout />}>
+          {/* Admin Sub-Routes */}
+          <Route
+            index
+            element={<Navigate to="/dashboard/teachers" replace />}
+          />
+          <Route path="teachers" element={<TeacherPage />} />
+          <Route path="courses" element={<CoursePage />} />
+          <Route path="courses/:courseId" element={<CourseDetail />} /> {/* Dynamic route */}
+          <Route path="students" element={<StudentPage />} />
+
+          <Route path="trainer/assignments" element={<AssignmentsList />} />
+          <Route path="admin" element={<Adminpage />} />
+
+          <Route path="user" element={<User />} />
+          <Route path="user/resources" element={<ClassResourcesPage />} />
+
+          <Route path="trainer" element={<Trainer />} />
+          <Route path="trainer/classes" element={<Classes />} />
+            
+          <Route path="request" element={<CourseRequests />} />
+        </Route>
 
       {/* Fallback Route */}
       <Route path="*" element={<Navigate to="/" replace />} />

@@ -24,12 +24,15 @@ const menuItems = [
     path: "/dashboard/admin",
     subItems: [{ name: "Admin", path: "/dashboard/admin" }],
   },
+
+ 
   {
     icon: FaRegUser,
     name: "User",
     path: "/dashboard/user",
     subItems: [
       { name: "User", path: "/dashboard/user" },
+      { name: "Class Resources", path: "/dashboard/user/resources" },
     ],
   },
   {
@@ -148,7 +151,7 @@ function Sidebar() {
             <div key={index}>
               <button
                 onClick={() => toggleMenu(index)}
-                className={`flex items-center w-full p-4 rounded ${
+                className={`flex items-center bg-black w-full p-4 rounded ${
                   location.pathname.startsWith(item.path)
                     ? "bg-indigo-800 text-white"
                     : "hover:bg-indigo-600 hover:text-white"

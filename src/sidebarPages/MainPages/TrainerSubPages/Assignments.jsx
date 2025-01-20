@@ -5,7 +5,7 @@ import { AddAssignmentForm } from "@/components/AssignmentComponents/AddAsignmen
 import { AssignmentCardSkeleton } from "@/components/AssignmentComponents/AssignmentSkeleton"
 import { AssignmentRow } from "@/components/AssignmentComponents/AssignmentCard"
 import { AssignmentFilters } from "@/components/AssignmentComponents/AssignmenetFilter"
-import { ProgressChart } from "@/components/AssignmentComponents/ProgressChart"
+// import { ProgressChart } from "@/components/AssignmentComponents/ProgressChart"
 
 // Component to fetch and display assignments
 export function AssignmentsList() {

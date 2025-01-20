@@ -17,6 +17,7 @@ import CourseDetail from "./sidebarPages/CourseDetailPage";
 import { AssignmentsList } from "./sidebarPages/MainPages/TrainerSubPages/Assignments";
 import Classes from "./sidebarPages/MainPages/TrainerSubPages/Classes";
 import StudentPage from "./sidebarPages/Studentspage";
+import { ClassResourcesList } from "./components/UserComponents/ClassResources";
 
 function App() {
   return (
@@ -42,7 +43,10 @@ function App() {
 
           <Route path="trainer/assignments" element={<AssignmentsList />} />
           <Route path="admin" element={<Adminpage />} />
+
           <Route path="user" element={<User />} />
+          <Route path="user/resources" element={<ClassResourcesList />} />
+
           <Route path="trainer" element={<Trainer />} />
           <Route path="trainer/classes" element={<Classes />} />
             

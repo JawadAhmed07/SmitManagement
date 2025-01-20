@@ -18,6 +18,8 @@ export function AddResourceForm() {
     courseName: "",
     batch: "",
     section: "",
+    date: new Date().toISOString().split("T")[0], // Default to current date
+    time: new Date().toLocaleTimeString(), // Default to current time
   });
   const [loading, setLoading] = useState(false);
 
@@ -35,10 +37,12 @@ export function AddResourceForm() {
     setLoading(true);
 
     try {
-      // Validate the URL before sending the data
-      const urlPattern = /^(https?:\/\/)[^\s$.?#].[^\s]*$/gm;
-      if (formData.url && !urlPattern.test(formData.url)) {
-        throw new Error("The provided URL is not valid");
+      // Validate URL if provided
+      if (formData.url) {
+        const urlPattern = /^(https?:\/\/)[^\s$.?#].[^\s]*$/gm;
+        if (!urlPattern.test(formData.url)) {
+          throw new Error("The provided URL is not valid");
+        }
       }
 
       const response = await fetch("http://localhost:4000/api/v1/resources", {
@@ -68,6 +72,8 @@ export function AddResourceForm() {
         courseName: "",
         batch: "",
         section: "",
+        date: new Date().toISOString().split("T")[0],
+        time: new Date().toLocaleTimeString(),
       });
     } catch (err) {
       toast({
@@ -129,7 +135,7 @@ export function AddResourceForm() {
           type="url"
           value={formData.url}
           onChange={handleChange}
-          placeholder="Enter resource URL"
+          placeholder="Enter resource URL (optional)"
         />
       </div>
       <div>

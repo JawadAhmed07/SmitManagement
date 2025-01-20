@@ -1,15 +1,17 @@
-"use client";
+"use client"
 
-import { useState } from "react";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Textarea } from "@/components/ui/textarea";
-import { Card, CardContent } from "@/components/ui/card";
-import { Calendar, Award, BookOpen, Clock, Users } from "lucide-react";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { useState } from "react"
+import { Button } from "@/components/ui/button"
+import { Input } from "@/components/ui/input"
+import { Label } from "@/components/ui/label"
+import { Textarea } from "@/components/ui/textarea"
+import { Card, CardContent } from "@/components/ui/card"
+import { Calendar, Award, BookOpen, Clock, Users } from "lucide-react"
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
+import { useToast } from "@/hooks/use-toast"
 
 export function AddAssignmentForm() {
+  const { toast } = useToast()
   const [formData, setFormData] = useState({
     title: "",
     description: "",
@@ -18,30 +20,26 @@ export function AddAssignmentForm() {
     section: "",
     points: "",
     courseName: "",
-  });
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
-  const [success, setSuccess] = useState(false);
+  })
+  const [loading, setLoading] = useState(false)
 
   // Mock data for batches, courses, and sections
-  const batches = ["1", "2", "3", "4"];
-  const courses = ["Web Development", "Data Science", "Mobile App Development", "Machine Learning"];
-  const sections = ["A", "B", "C", "D"];
+  const batches = ["1", "2", "3", "4"]
+  const courses = ["Web Development", "Data Science", "Mobile App Development", "Machine Learning"]
+  const sections = ["A", "B", "C", "D"]
 
   const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
-  };
+    const { name, value } = e.target
+    setFormData((prev) => ({ ...prev, [name]: value }))
+  }
 
   const handleSelectChange = (name, value) => {
-    setFormData((prev) => ({ ...prev, [name]: value }));
-  };
+    setFormData((prev) => ({ ...prev, [name]: value }))
+  }
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
-    setLoading(true);
-    setError(null);
-    setSuccess(false);
+    e.preventDefault()
+    setLoading(true)
 
     try {
       const response = await fetch("http://localhost:4000/api/v1/assignments", {
@@ -50,14 +48,19 @@ export function AddAssignmentForm() {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(formData),
-      });
+      })
 
       if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.message || "Failed to add assignment");
+        const errorData = await response.json()
+        throw new Error(errorData.message || "Failed to add assignment")
       }
 
-      setSuccess(true);
+      toast({
+        title: "Success",
+        description: "Assignment added successfully!",
+        duration: 3000,
+      })
+
       setFormData({
         title: "",
         description: "",
@@ -66,21 +69,23 @@ export function AddAssignmentForm() {
         section: "",
         points: "",
         courseName: "",
-      });
+      })
     } catch (err) {
-      setError(err.message);
+      toast({
+        title: "Error",
+        description: err instanceof Error ? err.message : "An unknown error occurred",
+        variant: "destructive",
+        duration: 3000,
+      })
     } finally {
-      setLoading(false);
+      setLoading(false)
     }
-  };
+  }
 
   return (
     <Card className="w-full">
       <CardContent className="p-6">
         <form onSubmit={handleSubmit} className="space-y-4">
-          {error && <p className="text-red-500">{error}</p>}
-          {success && <p className="text-green-500">Assignment added successfully!</p>}
-
           <div className="space-y-2">
             <Label htmlFor="title" className="text-sm font-medium">
               Title
@@ -134,10 +139,7 @@ export function AddAssignmentForm() {
                 <Users className="mr-2 h-4 w-4 text-primary" />
                 Batch
               </Label>
-              <Select
-                value={formData.batch}
-                onValueChange={(value) => handleSelectChange("batch", value)}
-              >
+              <Select value={formData.batch} onValueChange={(value) => handleSelectChange("batch", value)}>
                 <SelectTrigger className="w-full">
                   <SelectValue placeholder="Select batch" />
                 </SelectTrigger>
@@ -155,10 +157,7 @@ export function AddAssignmentForm() {
               <Label htmlFor="section" className="text-sm font-medium flex items-center">
                 Section
               </Label>
-              <Select
-                value={formData.section}
-                onValueChange={(value) => handleSelectChange("section", value)}
-              >
+              <Select value={formData.section} onValueChange={(value) => handleSelectChange("section", value)}>
                 <SelectTrigger className="w-full">
                   <SelectValue placeholder="Select section" />
                 </SelectTrigger>
@@ -194,10 +193,7 @@ export function AddAssignmentForm() {
                 <BookOpen className="mr-2 h-4 w-4 text-primary" />
                 Course Name
               </Label>
-              <Select
-                value={formData.courseName}
-                onValueChange={(value) => handleSelectChange("courseName", value)}
-              >
+              <Select value={formData.courseName} onValueChange={(value) => handleSelectChange("courseName", value)}>
                 <SelectTrigger className="w-full">
                   <SelectValue placeholder="Select course" />
                 </SelectTrigger>
@@ -218,5 +214,6 @@ export function AddAssignmentForm() {
         </form>
       </CardContent>
     </Card>
-  );
+  )
 }
+

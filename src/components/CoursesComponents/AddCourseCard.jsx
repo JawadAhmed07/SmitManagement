@@ -17,6 +17,8 @@ export function AddCourseForm() {
     description: '',
     duration: '',
     trainerName: '',
+    batch: '',
+    section: '',
   })
   const [eligibilityList, setEligibilityList] = useState([])
   const [eligibility, setEligibility] = useState('')
@@ -104,6 +106,8 @@ export function AddCourseForm() {
           description: '',
           duration: '',
           trainerName: '',
+          batch: '',
+          section: '',
         })
         setEligibilityList([])
       } else {
@@ -128,6 +132,9 @@ export function AddCourseForm() {
   return (
     <Card className="w-full">
       <form onSubmit={handleSubmit}>
+        <CardHeader>
+          <CardTitle>Add New Course</CardTitle>
+        </CardHeader>
         <CardContent className="space-y-2">
           <div className="space-y-1 py-2">
             <Label htmlFor="title">Course Title</Label>
@@ -140,6 +147,14 @@ export function AddCourseForm() {
           <div className="space-y-2">
             <Label htmlFor="duration">Duration</Label>
             <Input id="duration" name="duration" value={formFields.duration} onChange={handleChange} required />
+          </div>
+          <div className="space-y-2">
+            <Label htmlFor="batch">Batch</Label>
+            <Input id="batch" name="batch" value={formFields.batch} onChange={handleChange} required />
+          </div>
+          <div className="space-y-2">
+            <Label htmlFor="section">Section</Label>
+            <Input id="section" name="section" value={formFields.section} onChange={handleChange} required />
           </div>
           <div className="space-y-2">
             <Label htmlFor="eligibility">Eligibility</Label>

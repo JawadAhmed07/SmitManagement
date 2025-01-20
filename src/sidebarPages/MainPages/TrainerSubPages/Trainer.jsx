@@ -1,6 +1,6 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import  { AddResourceForm } from "@/components/TrainerComponent.jsx/Add Resources";
+import  { AddResourceForm } from "@/components/TrainerComponent.jsx/AddResources";
 import { TrainerAnnouncementForm } from "@/components/TrainerComponent.jsx/TrainerAnnouncement";
 import { AddAssignmentForm } from "@/components/AssignmentComponents/AddAsignmentform";
 

@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react"
 import { Button } from "@/components/ui/button"
 import { CourseCard } from "@/components/CoursesComponents/CourseCard"
-
+import img from '../../../public/image/logo_saylaniwelfare.png'
 
 const Home = () => {
   const [courses, setCourses] = useState([])
@@ -30,23 +30,24 @@ const Home = () => {
   }, [])
 
   return (
-    <div className="bg-gray-100">
+    <div className="bg-white">
       {/* Header Section */}
-      <header className="absolute top-0 left-0 w-full z-10 text-white">
+      <header className="absolute top-0 left-0 w-full z-10 text-black">
         <div className="container mx-auto flex justify-between items-center px-6 py-4">
-          <h1 className="text-3xl font-bold uppercase shadow-lg">Saylani System</h1>
-          <nav className="flex space-x-6">
-            <a href="#courses" className="hover:scale-110 hover:text-green-400 text-white text-2xl">
+          <h1 className="text-1xl w-52  "><img src={img} alt="" /></h1>
+          <nav className="flex space-x-6  text-white ">
+            
+            <a href="#courses" className="hover:scale-110 hover:text-[#80d42c] text-zinc-400 text-xl">
               Courses
             </a>
-            <a href="#stories" className="hover:scale-110 hover:text-green-400 text-white text-2xl">
+            <a href="#stories" className="hover:scale-110 hover:text-[#80d42c] text-zinc-400 text-xl">
               Success Stories
             </a>
-            <a href="#subscribe" className="hover:text-green-400 hover:scale-110 text-white text-2xl">
+            <a href="#subscribe" className="hover:text-[#80d42c] hover:scale-110 text-zinc-400 text-xl">
               Subscribe
             </a>
             <a href="/login">
-              <Button className="bg-white text-green-600  hover:bg-gray-200 py-2 px-6 rounded-lg">Login</Button>
+              <Button className="bg-white text-[#80d42c]  hover:bg-gray-200 py-2 px-6 rounded-lg">Login</Button>
             </a>
             
           </nav>
@@ -55,23 +56,23 @@ const Home = () => {
 
       {/* Hero Section */}
       <section
-        className="h-[115vh] bg-cover bg-center relative"
-        style={{
-          backgroundImage:
-            "url('https://res.cloudinary.com/saylani-welfare/image/upload/v1721909453/website-images/dynamic/692fbdfa-20b6-4f0b-9c59-778cca7ba0b5.jpg')",
-        }}
+        className="h-[90vh]  bg-cover bg-center relative"
+        // style={{
+        //   backgroundImage:
+        //     "url('')",
+        // }}
       >
-        <div className="bg-black bg-opacity-30 absolute inset-0 flex items-center justify-center">
-          <div className="text-center text-green-400 -mt-9 ">
+        <div className=" bg-opacity-30 shadow-lg absolute inset-0 flex items-center justify-center">
+          <div className="text-center text-[#80d42c] -mt-9 ">
             <h1 className="text-6xl font-bold uppercase mb-6">Saylani Learning Management System</h1>
-            <p className="text-xl leading-relaxed text-white mb-7">
+            <p className="text-xl leading-relaxed text-zinc-400 mb-7">
               Empowering students with world-class education resources and career growth.
             </p>
             <a href="/login">
-              <Button className="bg-green-500 hover:bg-green-600 px-8 py-4 rounded-lg">Get Started</Button>
+              <Button className="bg-[#80d42c] hover:tebgxt-[#80d42c] px-8 py-4 rounded-lg">Get Started</Button>
             </a>
             <a target="_blank" href="https://saylaniwelfare.com/sponsor">
-              <Button className="bg-white mx-5  text-green-600  hover:bg-gray-200 py-2 px-6 rounded-lg">Be a Sponser</Button>
+              <Button className="bg-white mx-5  text-[#80d42c]  hover:bg-gray-200 py-2 px-6 rounded-lg">Be a Sponser</Button>
             </a>
           </div>
         </div>
@@ -80,7 +81,7 @@ const Home = () => {
       {/* Courses Section */}
       <section id="courses" className="py-16 px-3 bg-white">
         <div className="container mx-auto ">
-          <h2 className="text-3xl font-bold mb-6 uppercase text-center">Our Courses</h2>
+          <h2 className="text-4xl font-extrabold text-[#80d42c] mb-6 uppercase text-center">Our Courses</h2>
           {isLoading ? (
             <p>Loading courses...</p>
           ) : error ? (
@@ -103,7 +104,7 @@ const Home = () => {
       {/* Success Stories Section */}
       <section id="stories" className="py-16 bg-gray-100">
         <div className="container mx-auto text-center">
-          <h2 className="text-4xl font-extrabold text-blue-500 uppercase mb-12">Success Stories</h2>
+          <h2 className="text-4xl font-extrabold text-[#80d42c] uppercase mb-12">Success Stories</h2>
           <div className="relative">
             {/* Left Arrow Button */}
             <button
@@ -196,7 +197,7 @@ const Home = () => {
 
 
       {/* Subscribe Section */}
-      <section id="subscribe" className="py-16 bg-green-600 text-white">
+      <section id="subscribe" className="py-16 bg-[#80d42c] text-white">
         <div className="container mx-auto text-center">
           <h2 className="text-3xl font-bold mb-4">Subscribe to Our Newsletter</h2>
           <p className="mb-8">Stay updated with the latest courses, news, and updates from Saylani LMS.</p>
@@ -207,7 +208,7 @@ const Home = () => {
               className="px-4 py-3 w-full md:w-1/3 rounded-lg text-gray-700 focus:outline-none mb-3"
               aria-label="Email for newsletter"
             />
-            <Button className="bg-green-500 w-full md:w-1/3 hover:bg-green-700 px-6 py-3 rounded-lg">Subscribe</Button>
+            <Button className="bg-white text-black w-full md:w-1/3 hover:bg-green-700 px-6 py-3 rounded-lg">Subscribe</Button>
           </div>
         </div>
       </section>

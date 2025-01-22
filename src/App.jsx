@@ -12,14 +12,14 @@ import DashboardLayout from "./layouts/dashboardlayout";
 import Adminpage from "./sidebarPages/MainPages/Adminpage";
 import { AuthContext } from "./context/Auth.context";
 import CourseRequests from "./sidebarPages/Requests";
-import User from "./sidebarPages/MainPages/User";
 import Trainer from "./sidebarPages/MainPages/TrainerSubPages/Trainer";
 import CourseDetail from "./sidebarPages/CourseDetailPage";
 import { AssignmentsList } from "./sidebarPages/MainPages/TrainerSubPages/Assignments";
 import Classes from "./sidebarPages/MainPages/TrainerSubPages/Classes";
 import StudentPage from "./sidebarPages/Studentspage";
-import ClassResourcesPage from "./components/UserComponents/ClassResources";
 import RoleCards from "./pages/select/select";
+import User from "./sidebarPages/MainPages/UserSubPages/User";
+import ClassResourcesPage from "./sidebarPages/MainPages/UserSubPages/ClassResources";
 
 function App() {
   const { user } = useContext(AuthContext);

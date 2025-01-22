@@ -18,43 +18,51 @@ import { AssignmentsList } from "./sidebarPages/MainPages/TrainerSubPages/Assign
 import Classes from "./sidebarPages/MainPages/TrainerSubPages/Classes";
 import StudentPage from "./sidebarPages/Studentspage";
 import RoleCards from "./pages/select/select";
-import User from "./sidebarPages/MainPages/UserSubPages/User";
-import ClassResourcesPage from "./sidebarPages/MainPages/UserSubPages/ClassResources";
+import student from "./sidebarPages/MainPages/StudentSubPages/Student";
+import ClassResourcesPage from "./sidebarPages/MainPages/StudentSubPages/ClassResources";
+import ClassAnnouncement from "./sidebarPages/MainPages/StudentSubPages/ClassAnnouncement";
+import Student from "./sidebarPages/MainPages/StudentSubPages/Student";
+import { ClassAssignment } from "./sidebarPages/MainPages/StudentSubPages/ClassAssignment";
 
 function App() {
-  const { user } = useContext(AuthContext);
+  const { student } = useContext(AuthContext);
 
-  console.log("user=>", user);
+  console.log("student=>", student);
   console.log("token=>", Cookies.get("token"));
 
   return (
     <Routes>
       {/* Public Routes */}
       <Route path="/" element={<Home />} />
-      <Route
+      {/* <Route
         path="/login"
-        element={user ? <Navigate to="/dashboard/user" /> : <Login />}
-      />
+        element={student ? <Navigate to="/dashboard/student" /> : <Login />}
+      /> */}
       <Route path="/select" element={<RoleCards />} />
 
       {/* Dashboard Routes */}
       <Route
         path="/dashboard"
-        element={user ? <DashboardLayout /> : <Navigate to="/login" />}
-      >
+        element={<DashboardLayout />} >
+      
         {/* Admin Sub-Routes */}
         <Route index element={<Navigate to="teachers" replace />} />
         <Route path="teachers" element={<TeacherPage />} />
         <Route path="courses" element={<CoursePage />} />
         <Route path="courses/:courseId" element={<CourseDetail />} />
         <Route path="students" element={<StudentPage />} />
+
         <Route path="trainer" element={<Trainer />} />
         <Route path="trainer/assignments" element={<AssignmentsList />} />
         <Route path="trainer/classes" element={<Classes />} />
+
         <Route path="admin" element={<Adminpage />} />
         <Route path="request" element={<CourseRequests />} />
-        <Route path="user" element={<User />} />
-        <Route path="user/resources" element={<ClassResourcesPage />} />
+
+        <Route path="student" element={<Student />} />
+        <Route path="student/resources" element={<ClassResourcesPage />} />
+        <Route path="student/classAnnouncement" element={<ClassAnnouncement />} />
+        <Route path="student/assignment" element={<ClassAssignment />} />
       </Route>
 
       {/* Fallback Route */}

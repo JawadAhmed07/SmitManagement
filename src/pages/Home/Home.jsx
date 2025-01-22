@@ -32,7 +32,7 @@ const Home = () => {
   return (
     <div className="bg-white">
       {/* Header Section */}
-      <header className="absolute top-0 left-0 w-full z-10 text-black">
+      <header className="absolute shadow-md top-0 left-0 w-full z-10 text-black">
         <div className="container mx-auto flex justify-between items-center px-6 py-4">
           <h1 className="text-1xl w-52  "><img src={img} alt="" /></h1>
           <nav className="flex space-x-6  text-white ">
@@ -56,7 +56,7 @@ const Home = () => {
 
       {/* Hero Section */}
       <section
-        className="h-[90vh]  bg-cover bg-center relative"
+        className="h-[100vh]  bg-cover bg-center relative"
         // style={{
         //   backgroundImage:
         //     "url('')",

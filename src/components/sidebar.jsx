@@ -27,12 +27,13 @@ const menuItems = [
  
   {
     icon: FaRegUser,
-    name: "User",
-    path: "/dashboard/user",
+    name: "Student",
+    path: "/dashboard/student",
     subItems: [
-      { name: "User", path: "/dashboard/user" },
-      { name: "Class Resources", path: "/dashboard/user/resources" },
-      { name: "Assignmenets", path: "/dashboard/user/userAssignment" },
+      { name: "Student", path: "/dashboard/student" },
+      { name: "Class Resources", path: "/dashboard/student/resources" },
+      { name: "Assignmenets", path: "/dashboard/student/assignment" },
+      { name: "Announcement", path: "/dashboard/student/classAnnouncement" },
     ],
   },
   {

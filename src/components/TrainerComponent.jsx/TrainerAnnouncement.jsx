@@ -1,141 +1,115 @@
-'use client'
+"use client"
 
 import { useState } from "react"
 import { Button } from "@/components/ui/button"
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-
  
 
-export function TrainerAnnouncementForm() {
-  const [formData, setFormData] = useState({
-    title: "",
-    content: "",
-    priority: "",
-    targetAudience: "",
-    expirationDate: "",
-  })
-  const [loading, setLoading] = useState(false)
-  const [error, setError] = useState(null)
-  const [success, setSuccess] = useState(false)
+export function ClassAnnouncementForm({ onSubmit } ) {
+  const [title, setTitle] = useState("")
+  const [content, setContent] = useState("")
+  const [date, setDate] = useState("")
+  const [category, setCategory] = useState("")
+  const [batch, setBatch] = useState("")
+  const [section, setSection] = useState("")
+  const [course, setCourse] = useState("")
 
-  const handleChange = (e ) => {
-    const { name, value } = e.target
-    setFormData((prev) => ({ ...prev, [name]: value }))
-  }
-
-  const handleSelectChange = (name ) => (value ) => {
-    setFormData((prev) => ({ ...prev, [name]: value }))
-  }
-
-  const handleSubmit = async (e ) => {
+  const handleSubmit = (e ) => {
     e.preventDefault()
-    setLoading(true)
-    setError(null)
-    setSuccess(false)
-
-    try {
-      const response = await fetch("/api/announcements", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
-      })
-
-      if (!response.ok) {
-        const errorData = await response.json()
-        throw new Error(errorData.message || "Failed to add announcement")
-      }
-
-      setSuccess(true)
-      setFormData({
-        title: "",
-        content: "",
-        priority: "",
-        targetAudience: "",
-        expirationDate: "",
-      })
-    } catch (err) {
-      setError(err instanceof Error ? err.message : "An unknown error occurred")
-    } finally {
-      setLoading(false)
-    }
+    onSubmit({ title, content, date, category, batch, section, course })
+    setTitle("")
+    setContent("")
+    setDate("")
+    setCategory("")
+    setBatch("")
+    setSection("")
+    setCourse("")
   }
 
   return (
-    <form
-      onSubmit={handleSubmit}
-      className="p-4 border rounded-lg shadow-sm bg-white space-y-4"
-    >
-      {error && <p className="text-red-500">{error}</p>}
-      {success && <p className="text-green-500">Announcement added successfully!</p>}
-
-      <div>
-        <Label htmlFor="title">Title</Label>
-        <Input
-          id="title"
-          name="title"
-          value={formData.title}
-          onChange={handleChange}
-          placeholder="Enter announcement title"
-          required
-        />
-      </div>
-      <div>
-        <Label htmlFor="content">Content</Label>
-        <Textarea
-          id="content"
-          name="content"
-          value={formData.content}
-          onChange={handleChange}
-          placeholder="Enter announcement content"
-          rows={4}
-          required
-        />
-      </div>
-      <div>
-        <Label htmlFor="priority">Priority</Label>
-        <Select onValueChange={handleSelectChange("priority")} value={formData.priority}>
-          <SelectTrigger>
-            <SelectValue placeholder="Select priority level" />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectItem value="low">Low</SelectItem>
-            <SelectItem value="medium">Medium</SelectItem>
-            <SelectItem value="high">High</SelectItem>
-          </SelectContent>
-        </Select>
-      </div>
-      <div>
-        <Label  htmlFor="targetAudience">Target Audience</Label>
-        <Select onValueChange={handleSelectChange("targetAudience")} value={formData.targetAudience}>
-          <SelectTrigger>
-            <SelectValue placeholder="Select target audience" />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectItem value="all">All Users</SelectItem>
-            <SelectItem value="students">Students</SelectItem>
-        
-          </SelectContent>
-        </Select>
-      </div>
-      <div>
-        <Label htmlFor="expirationDate">Expiration Date (Optional)</Label>
-        <Input
-          id="expirationDate"
-          name="expirationDate"
-          type="date"
-          value={formData.expirationDate}
-          onChange={handleChange}
-        />
-      </div>
-      <Button type="submit" className="w-full" disabled={loading}>
-        {loading ? "Adding..." : "Add Announcement"}
-      </Button>
-    </form>
+    <Card className="mb-6">
+      <CardHeader>
+        <CardTitle>Create New Announcement</CardTitle>
+      </CardHeader>
+      <CardContent>
+        <form onSubmit={handleSubmit} className="space-y-4">
+          <div className="space-y-2">
+            <Label htmlFor="title">Title</Label>
+            <Input id="title" value={title} onChange={(e) => setTitle(e.target.value)} required />
+          </div>
+          <div className="space-y-2">
+            <Label htmlFor="content">Content</Label>
+            <Textarea id="content" value={content} onChange={(e) => setContent(e.target.value)} required />
+          </div>
+          <div className="space-y-2">
+            <Label htmlFor="date">Date</Label>
+            <Input id="date" type="date" value={date} onChange={(e) => setDate(e.target.value)} required />
+          </div>
+          <div className="space-y-2">
+            <Label htmlFor="category">Category</Label>
+            <Select value={category} onValueChange={setCategory} required>
+              <SelectTrigger>
+                <SelectValue placeholder="Select a category" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="Exams">Exams</SelectItem>
+                <SelectItem value="Holidays">Holidays</SelectItem>
+                <SelectItem value="Courses">Courses</SelectItem>
+                <SelectItem value="Events">Events</SelectItem>
+              </SelectContent>
+            </Select>
+          </div>
+          <div className="space-y-2">
+            <Label htmlFor="batch">Batch</Label>
+            <Select value={batch} onValueChange={setBatch} required>
+              <SelectTrigger>
+                <SelectValue placeholder="Select a batch" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="2023A">2023A</SelectItem>
+                <SelectItem value="2023B">2023B</SelectItem>
+                <SelectItem value="2024A">2024A</SelectItem>
+                <SelectItem value="2024B">2024B</SelectItem>
+              </SelectContent>
+            </Select>
+          </div>
+          <div className="space-y-2">
+            <Label htmlFor="section">Section</Label>
+            <Select value={section} onValueChange={setSection} required>
+              <SelectTrigger>
+                <SelectValue placeholder="Select a section" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="A">A</SelectItem>
+                <SelectItem value="B">B</SelectItem>
+                <SelectItem value="C">C</SelectItem>
+                <SelectItem value="D">D</SelectItem>
+              </SelectContent>
+            </Select>
+          </div>
+          <div className="space-y-2">
+            <Label htmlFor="course">Course</Label>
+            <Select value={course} onValueChange={setCourse} required>
+              <SelectTrigger>
+                <SelectValue placeholder="Select a course" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="Mathematics">Mathematics</SelectItem>
+                <SelectItem value="Physics">Physics</SelectItem>
+                <SelectItem value="Chemistry">Chemistry</SelectItem>
+                <SelectItem value="Biology">Biology</SelectItem>
+                <SelectItem value="Computer Science">Computer Science</SelectItem>
+              </SelectContent>
+            </Select>
+          </div>
+          <Button type="submit">Create Announcement</Button>
+        </form>
+      </CardContent>
+    </Card>
   )
 }
 

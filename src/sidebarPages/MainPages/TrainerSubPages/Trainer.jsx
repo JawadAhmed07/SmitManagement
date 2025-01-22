@@ -1,8 +1,8 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import  { AddResourceForm } from "@/components/TrainerComponent.jsx/AddResources";
-import { TrainerAnnouncementForm } from "@/components/TrainerComponent.jsx/TrainerAnnouncement";
 import { AddAssignmentForm } from "@/components/AssignmentComponents/AddAsignmentform";
+import { ClassAnnouncementForm } from "@/components/TrainerComponent.jsx/TrainerAnnouncement";
 
 export default function Trainer() {
   return (
@@ -43,7 +43,7 @@ export default function Trainer() {
               <CardDescription>View and manage trainer details and activities.</CardDescription>
             </CardHeader>
             <CardContent>
-              <TrainerAnnouncementForm/>
+              <ClassAnnouncementForm/>
             </CardContent>
           </Card>
         </TabsContent>

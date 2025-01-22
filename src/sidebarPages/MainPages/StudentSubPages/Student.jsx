@@ -71,7 +71,7 @@ const attendanceHistory = [
   { id: 5, date: "2023-03-11", course: "Advanced JavaScript", status: "Present" },
 ];
 
-export default function User() {
+export default function Student() {
   const [user, setUser] = useState(mockUser);
   const [isEditing, setIsEditing] = useState(false);
   const [editedUser, setEditedUser] = useState({ ...mockUser });

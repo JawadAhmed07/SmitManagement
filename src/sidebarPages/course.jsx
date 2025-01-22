@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom"; // Import useNavigate for naviga
 import { CourseCard } from "@/components/CoursesComponents/CourseCard";
 import { CourseCardSkeleton } from "@/components/CoursesComponents/CourseCardSkeleton";
 import { Button } from "@/components/ui/button";
+import { AppRoutes } from "@/Constant/constant";
 // import {
 //   Dialog,
 //   DialogTrigger,
@@ -20,7 +21,7 @@ export default function CoursePage() {
   useEffect(() => {
     const fetchCourses = async () => {
       try {
-        const response = await fetch("http://localhost:4000/api/v1/course/available/");
+        const response = await fetch(AppRoutes.getCourses);
         if (!response.ok) {
           throw new Error("Failed to fetch courses");
         }

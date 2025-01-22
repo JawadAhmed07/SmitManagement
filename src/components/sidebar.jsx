@@ -14,7 +14,7 @@ import Cookies from "js-cookie";
 import { useNavigate } from "react-router";
 import { FaRegUser } from "react-icons/fa";
 import { LiaChalkboardTeacherSolid } from "react-icons/lia";
-// import { useAuth } from "@/context/Auth.context";
+import { AuthContext } from "@/context/Auth.context";
 
 const menuItems = [
   {
@@ -71,42 +71,23 @@ function Sidebar() {
   const [expandedMenu, setExpandedMenu] = useState(null);
   const location = useLocation();
   const [isLoading, setLoading] = useState(false);
-  const { user, setUser } =useContext
+  const { user, setUser } = useContext(AuthContext);
   const navigate = useNavigate();
 
-  useEffect(() => {
-    const fetchUserData = async () => {
-      try {
-        const response = await axios.get(AppRoutes.getMyInfo, {
-          withCredentials: true,
-        });
-        setUser(response.data.user);
-      } catch (err) {
-        console.error(
-          "Error fetching user data:",
-          err.response?.data || err.message
-        );
-      }
-    };
-    fetchUserData();
-  }, [navigate]);
-  // const dummyUser = {
-  //   name: "Admin",
-  //   email: "adminSystem123@mail.com",
-  //   avatar: "https://img.freepik.com/free-photo/handsome-man-thinking-with-concentration_23-2147805628.jpg",
-  // };
-
-  const handleLogout = () => {
+  const handleLogout = async () => {
     setLoading(true);
-    axios
-      .get(AppRoutes.logout, {
+    try {
+      await axios.get(AppRoutes.logout, {
         headers: { Authorization: `Bearer ${Cookies.get("token")}` },
-      })
-      .then(() => {
-        Cookies.remove("token");
-        navigate("/login");
-      })
-      .finally(() => setLoading(false));
+      });
+      Cookies.remove("token");
+      setUser(null);
+      navigate("/login");
+    } catch (error) {
+      console.error("Logout error:", error);
+    } finally {
+      setLoading(false);
+    }
   };
 
   const toggleMenu = (index) => {
@@ -190,10 +171,10 @@ function Sidebar() {
           </div>
           <Button
             onClick={handleLogout}
-            isLoading={isLoading}
+            disabled={isLoading}
             className="mt-4 w-full"
           >
-            Logout
+            {isLoading ? "Logging out..." : "Logout"}
           </Button>
         </div>
       </div>

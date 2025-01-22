@@ -4,6 +4,7 @@ import { useState, useEffect } from "react"
 import { Button } from "@/components/ui/button"
 import { CourseCard } from "@/components/CoursesComponents/CourseCard"
 import img from '../../../public/image/logo_saylaniwelfare.png'
+import { AppRoutes } from "@/Constant/constant"
 
 const Home = () => {
   const [courses, setCourses] = useState([])
@@ -13,7 +14,7 @@ const Home = () => {
   useEffect(() => {
     const fetchCourses = async () => {
       try {
-        const response = await fetch("http://localhost:4000/api/v1/course/available/")
+        const response = await fetch(AppRoutes.getCourses)
         if (!response.ok) {
           throw new Error("Failed to fetch courses")
         }

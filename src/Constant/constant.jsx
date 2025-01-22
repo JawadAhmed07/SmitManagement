@@ -10,7 +10,7 @@ export const AppRoutes = {
   register: BASE_URL + "api/v1/user/register",
   logout: BASE_URL + "api/v1/user/logout",
   getMyInfo: BASE_URL + "api/v1/user/profile",
-  getCourses: BASE_URL + "api/v1/course",
+  getCourses: BASE_URL + "api/v1/course/available",
   getTrainers: BASE_URL + "api/v1/trainers",
   addCourse: BASE_URL + "api/v1/course",
 };

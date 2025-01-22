@@ -23,10 +23,8 @@ export default function Login() {
   const [isLoading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const navigate = useNavigate();
-  const { setUser } = useContext(AuthContext);
+  const { setUser, getUser } = useContext(AuthContext);
 
-
-  // Handle login
   const handleLogin = async (e) => {
     e.preventDefault();
     setLoading(true);
@@ -37,34 +35,28 @@ export default function Login() {
       password: e.target.password.value,
     };
 
-    console.log("Login attempt with:", obj);
-
     if (!obj.email || !obj.password) {
       setLoading(false);
       setError("Please fill in all fields.");
-      console.log("Login error: Empty fields");
       return;
     }
 
     try {
-      console.log("Sending login request to:", AppRoutes.login);
       const res = await axios.post(AppRoutes.login, obj);
-      console.log("Login response:", res.data);
-
-      Cookies.set("token", res?.data?.data?.token);
-      setUser(res?.data?.data?.user);
-      navigate("/dashboard") ;
+      Cookies.set("token", res.data.token);
+      await getUser(); // Fetch user data after successful login
+      navigate("/dashboard");
     } catch (err) {
       console.error(
         "Login error:",
         err.response ? err.response.data : err.message
       );
-      setError("Invalid email or password.");
+      setError(err.response?.data?.message || "Invalid email or password.");
+    } finally {
       setLoading(false);
     }
   };
 
-  // Handle signup
   const handleSignup = async (e) => {
     e.preventDefault();
     setLoading(true);
@@ -76,30 +68,23 @@ export default function Login() {
       password: e.target.new.value,
     };
 
-    console.log("Signup attempt with:", obj);
-
     if (!obj.fullName || !obj.email || !obj.password) {
       setLoading(false);
       setError("Please fill in all fields.");
-      console.log("Signup error: Empty fields");
       return;
     }
 
     try {
-      console.log("Sending signup request to:", AppRoutes.register);
       const res = await axios.post(AppRoutes.register, obj);
-      console.log("Signup response:", res.data);
-
-      Cookies.set("token", res?.data?.data?.token);
-      setUser(res?.data?.data?.user);
-      setLoading(false);
-      console.log("Signup successful, navigating to /admin");
+      Cookies.set("token", res.data.token);
+      await getUser(); // Fetch user data after successful signup
       navigate("/dashboard");
     } catch (err) {
       const errorMessage =
         err.response?.data?.message || "Signup failed. Please try again.";
       console.error("Signup error:", errorMessage);
       setError(errorMessage);
+    } finally {
       setLoading(false);
     }
   };

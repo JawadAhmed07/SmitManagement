@@ -14,7 +14,6 @@ import Cookies from "js-cookie";
 import { useNavigate } from "react-router";
 import { FaRegUser } from "react-icons/fa";
 import { LiaChalkboardTeacherSolid } from "react-icons/lia";
-import { AuthContext } from "@/context/Auth.context";
 // import { useAuth } from "@/context/Auth.context";
 
 const menuItems = [
@@ -44,7 +43,6 @@ const menuItems = [
       { name: "Add", path: "/dashboard/trainer" },
       { name: "Classes", path: "/dashboard/trainer/classes" },
       { name: "Assignments", path: "/dashboard/trainer/assignments" },
-      { name: "Students", path: "/dashboard/trainer/students" },
     ],
   },
   {
@@ -72,17 +70,8 @@ function Sidebar() {
   const [expandedMenu, setExpandedMenu] = useState(null);
   const location = useLocation();
   const [isLoading, setLoading] = useState(false);
-  const { user, setUser } = useContext(AuthContext); // Use your Auth context
+  const { user, setUser } =useContext
   const navigate = useNavigate();
-
-  // Dummy user for development purposes (replace with actual user data)
-  const dummyUser = {
-    name: "Admin",
-    email: "adminSystem123@mail.com",
-    role: "admin", // Dummy role
-    avatar:
-      "https://img.freepik.com/free-photo/handsome-man-thinking-with-concentration_23-2147805628.jpg",
-  };
 
   useEffect(() => {
     const fetchUserData = async () => {
@@ -90,18 +79,21 @@ function Sidebar() {
         const response = await axios.get(AppRoutes.getMyInfo, {
           withCredentials: true,
         });
-        setUser(response.data.user.role); // Set the user data from backend
+        setUser(response.data.user);
       } catch (err) {
         console.error(
           "Error fetching user data:",
           err.response?.data || err.message
         );
-        Cookies.remove("token");
-        navigate("/login");
       }
     };
     fetchUserData();
-  }, [navigate, setUser]);
+  }, [navigate]);
+  // const dummyUser = {
+  //   name: "Admin",
+  //   email: "adminSystem123@mail.com",
+  //   avatar: "https://img.freepik.com/free-photo/handsome-man-thinking-with-concentration_23-2147805628.jpg",
+  // };
 
   const handleLogout = () => {
     setLoading(true);
@@ -119,21 +111,6 @@ function Sidebar() {
   const toggleMenu = (index) => {
     setExpandedMenu((prev) => (prev === index ? null : index));
   };
-
-  // Filter menu items based on user role
-  const getFilteredMenuItems = () => {
-    if (!user?.role) return []; // If no role, return an empty menu
-    const roleBasedMenu = {
-      admin: ["Admin", "User", "Trainer", "Teachers", "Courses"],
-      user: ["User", "Courses"],
-      trainer: ["Trainer", "Courses"],
-      teacher: ["Teachers", "Courses"],
-    };
-    const allowedMenu = roleBasedMenu[user.role] || [];
-    return menuItems.filter((item) => allowedMenu.includes(item.name));
-  };
-
-  const menuToRender = getFilteredMenuItems();
 
   return (
     <div className="flex h-screen">
@@ -155,7 +132,7 @@ function Sidebar() {
 
         {/* Navigation */}
         <nav>
-          {menuToRender.map((item, index) => (
+          {menuItems.map((item, index) => (
             <div key={index}>
               <button
                 onClick={() => toggleMenu(index)}
@@ -198,17 +175,15 @@ function Sidebar() {
         <div className="mt-auto p-4">
           <div className="flex items-center space-x-3">
             <Avatar>
-              <AvatarImage src={user?.avatar || dummyUser?.avatar} />
+              <AvatarImage src={Users?.avatar} />
               <AvatarFallback>
-                {user?.name?.charAt(0).toUpperCase() || "?"}
+                {Users?.name?.charAt(0).toUpperCase() || "?"}
               </AvatarFallback>
             </Avatar>
             {isOpen && (
               <div>
-                <p className="font-bold">{user?.name || dummyUser?.name}</p>
-                <p className="text-sm text-gray-400">
-                  {user?.email || dummyUser?.email}
-                </p>
+                <p className="font-bold">{Users?.name}</p>
+                <p className="text-sm text-gray-400">{Users?.email}</p>
               </div>
             )}
           </div>
@@ -230,4 +205,3 @@ function Sidebar() {
 }
 
 export default Sidebar;
-

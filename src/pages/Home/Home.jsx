@@ -105,7 +105,7 @@ const Home = () => {
       {/* Success Stories Section */}
       <section id="stories" className="py-16 bg-gray-100">
         <div className="container mx-auto text-center">
-          <h2 className="text-4xl font-extrabold text-[#80d42c] uppercase mb-12">Success Stories</h2>
+          <h2 className="text-4xl font-extrabold text-[#80d42c] uppercase mb-12">Success  Stories</h2>
           <div className="relative">
             {/* Left Arrow Button */}
             <button

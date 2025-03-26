@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react"
 import { Button } from "@/components/ui/button"
 import { CourseCard } from "@/components/CoursesComponents/CourseCard"
-import img from '../../../public/image/logo_saylaniwelfare.png'
+// import img from '../../assets/logo_saylaniwelfare.png'
 import { AppRoutes } from "@/Constant/constant"
 
 const Home = () => {
@@ -35,7 +35,7 @@ const Home = () => {
       {/* Header Section */}
       <header className="absolute shadow-md top-0 left-0 w-full z-10 text-black">
         <div className="container mx-auto flex justify-between items-center px-6 py-4">
-          <h1 className="text-1xl w-52  "><img src={img} alt="" /></h1>
+          {/* <h1 className="text-1xl w-52  "><img src={img} alt="" /></h1> */}
           <nav className="flex space-x-6  text-white ">
             
             <a href="#courses" className="hover:scale-110 hover:text-[#80d42c] text-zinc-400 text-xl">
